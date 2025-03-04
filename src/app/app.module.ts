@@ -9,6 +9,10 @@ import { CriarReceitaComponent } from './receitas/components/criar-receita/criar
 import { EditarReceitaComponent } from './receitas/components/editar-receita/editar-receita.component';
 import { ExcluirReceitaComponent } from './receitas/components/excluir-receita/excluir-receita.component';
 import { CabecalhoComponent } from './cabecalho/cabecalho.component';
+import { LoginComponent } from './login/components/login/login.component';
+import { BaseComponent } from './base/base.component';
+
+
 
 
 @NgModule({
@@ -18,7 +22,11 @@ import { CabecalhoComponent } from './cabecalho/cabecalho.component';
     EditarReceitaComponent,
     ExcluirReceitaComponent,
     CabecalhoComponent,
-
+    BaseComponent,
+    
+  
+  
+   
   ],
   imports: [
     BrowserModule,

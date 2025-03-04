@@ -1,0 +1,12 @@
+<div class="input-container">
+    <label  [for]="formName">{{ label }}</label>
+    <input
+    [type]="type"
+    [formControlName]="formName"
+    />
+    <div class="icon">
+        <ng-content></ng-content>
+    </div>
+
+</div>
+

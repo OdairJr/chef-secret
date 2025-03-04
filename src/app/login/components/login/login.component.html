@@ -1,0 +1,41 @@
+<main>
+    <section class="form-section">
+        <img src="/assets/imagens/ChefPrice-logo-marrom.svg">
+        <h2>Login</h2>
+
+
+        <form [formGroup]="loginform">
+        <app-primary-input formName="email" label="Email" type="email" placeholder="Digite seu email">
+          <img src="/assets/imagens/email.svg" alt="email">
+        </app-primary-input>
+
+        <app-primary-input formName="password" label="Senha" type="password" placeholder="Digite sua senha">
+          <img src="/assets/imagens/cadeado.svg" alt="senha">
+        </app-primary-input>
+           
+
+
+
+        </form>
+
+          <div  class="btn-wrapper">
+            <button class="btn-primary">Login</button>
+
+            <div class="divider">
+                 <div class="divider-line"></div> <span> OU </span><div class="divider-line"></div>
+            </div>
+           
+            <button class="btn-secundary">Cadastre-se</button>
+          </div>
+        
+    </section>
+
+
+    <section class="main-section">
+        <img src="/assets/imagens/avatar.svg" alt="avatar">
+        <h1> Cozinha por amor </h1>
+    </section>
+</main>
+
+
+
