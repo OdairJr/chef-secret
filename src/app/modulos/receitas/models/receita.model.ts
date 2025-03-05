@@ -1,4 +1,5 @@
-import { Material } from "src/app/material/models/material.model";
+// TODO - Verificar se é possível não ter dependencia entre os módulos
+import { Material } from 'src/app/modulos/material/models/material.model';
 
 export class Receita {
   id: string;

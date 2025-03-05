@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Material } from 'src/app/material/models/material.model';
-import { MaterialService } from 'src/app/material/services/material.service';
 import { ReceitaService } from '../../services/receita.service';
+
+// TODO - Verificar se é possível não ter dependencia entre os módulos
+import { Material } from 'src/app/modulos/material/models/material.model';
+import { MaterialService } from 'src/app/modulos/material/services/material.service';
 
 @Component({
   selector: 'app-adicionar-materiais',

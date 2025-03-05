@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Receita } from '../models/receita.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Material } from 'src/app/material/models/material.model';
+import { Material } from '../../material/models/material.model';
 
 @Injectable({
   providedIn: 'root'

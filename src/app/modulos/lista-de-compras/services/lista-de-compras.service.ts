@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { ListaDeCompras } from '../models/lista-de-compras.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Material } from 'src/app/material/models/material.model';
+
+// TODO - Verificar se é possível não ter dependencia entre os módulos
+import { Material } from 'src/app/modulos/material/models/material.model';
 
 @Injectable({
   providedIn: 'root'

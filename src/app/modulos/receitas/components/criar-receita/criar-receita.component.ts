@@ -3,8 +3,9 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReceitaService } from '../../services/receita.service';
 import { Router } from '@angular/router';
-import { Material } from 'src/app/material/models/material.model';
 
+// TODO - Verificar se é possível não ter dependencia entre os módulos
+import { Material } from 'src/app/modulos/material/models/material.model';
 
 @Component({
   selector: 'app-criar-receita',

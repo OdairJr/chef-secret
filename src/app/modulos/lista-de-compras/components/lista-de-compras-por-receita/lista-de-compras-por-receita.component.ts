@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Receita } from 'src/app/receitas/models/receita.model';
-import { ReceitaService } from 'src/app/receitas/services/receita.service';
+
+// TODO - Verificar se é possível não ter dependencia entre os módulos
+import { Receita } from 'src/app/modulos/receitas/models/receita.model';
+import { ReceitaService } from 'src/app/modulos/receitas/services/receita.service';
 
 @Component({
   selector: 'app-lista-de-compras-por-receita',

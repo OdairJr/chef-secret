@@ -5,36 +5,23 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CriarReceitaComponent } from './receitas/components/criar-receita/criar-receita.component';
-import { EditarReceitaComponent } from './receitas/components/editar-receita/editar-receita.component';
-import { ExcluirReceitaComponent } from './receitas/components/excluir-receita/excluir-receita.component';
-import { CabecalhoComponent } from './compartilhado/cabecalho/cabecalho.component';
-import { LoginComponent } from './login/components/login/login.component';
-import { BaseComponent } from './base/base.component';
-
-
-
+import { CabecalhoComponent } from './compartilhado/components/cabecalho/cabecalho.component';
+import { BaseComponent } from './compartilhado/components/base/base.component';
+import { LoginModule } from './modulos/login/login.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CriarReceitaComponent,
-    EditarReceitaComponent,
-    ExcluirReceitaComponent,
     CabecalhoComponent,
-    BaseComponent,
-    
-  
-  
-   
+    BaseComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
-
+    FormsModule,
+    LoginModule
   ],
   providers: [],
   bootstrap: [AppComponent]

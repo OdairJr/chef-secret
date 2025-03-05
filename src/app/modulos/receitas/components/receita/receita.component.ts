@@ -1,7 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Receita } from '../../models/receita.model';
-import { Material } from 'src/app/material/models/material.model';
 import { ReceitaService } from '../../services/receita.service';
 
 @Component({

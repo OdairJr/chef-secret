@@ -4,8 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ListaDeComprasService } from '../../services/lista-de-compras.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ReceitaService } from 'src/app/receitas/services/receita.service';
 
+// TODO - Verificar se é possível não ter dependencia entre os módulos
+import { ReceitaService } from 'src/app/modulos/receitas/services/receita.service';
 
 @Component({
   selector: 'app-criar-lista-de-compras',
