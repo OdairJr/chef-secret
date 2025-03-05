@@ -1,0 +1,17 @@
+/* Add your styles here */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 10px;
+}
+
+input {
+  margin-bottom: 10px;
+}
+
+button {
+  margin-top: 20px;
+}

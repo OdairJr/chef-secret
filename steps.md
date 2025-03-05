@@ -9,3 +9,14 @@
 ## Step 2: Delete Old Cabecalho Folder
 
 - Deleted the old `cabecalho` folder from `src/app`.
+
+## Step 3: Refactor AppRoutingModule
+
+- Updated the `AppRoutingModule` to separate the login, register, and admin register routes from the others.
+- The other routes use lazy loading and share the same base component with the header and router outlet.
+
+## Step 4: Create Cadastrar and CadastroAdmin Components
+
+- Created `CadastrarComponent` as a standalone component in `src/app/cadastrar`.
+- Created `CadastroAdminComponent` as a standalone component in `src/app/cadastro-admin`.
+- Updated the `AppRoutingModule` to include the new components.
