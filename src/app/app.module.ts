@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CriarReceitaComponent } from './receitas/components/criar-receita/criar-receita.component';
 import { EditarReceitaComponent } from './receitas/components/editar-receita/editar-receita.component';
 import { ExcluirReceitaComponent } from './receitas/components/excluir-receita/excluir-receita.component';
-import { CabecalhoComponent } from './cabecalho/cabecalho.component';
+import { CabecalhoComponent } from './compartilhado/cabecalho/cabecalho.component';
 import { LoginComponent } from './login/components/login/login.component';
 import { BaseComponent } from './base/base.component';
 
