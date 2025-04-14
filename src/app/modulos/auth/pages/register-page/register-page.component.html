@@ -1,0 +1,12 @@
+<main>
+    <section class="form-section">
+        <img src="/assets/imagens/ChefPrice-logo-marrom.svg" alt="ChefPrice Logo">
+        <h2>Registrar</h2>
+
+        <app-register-form (registerSubmit)="onRegisterSubmit($event)"></app-register-form>
+
+        <div class="btn-wrapper">
+            <button routerLink="/auth/login" class="btn-secundary">Já possui uma conta? Login</button>
+        </div>
+    </section>
+</main>

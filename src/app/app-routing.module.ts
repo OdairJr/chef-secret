@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BaseComponent } from './compartilhado/components/base/base.component';
-import { LoginComponent } from './modulos/login/components/login/login.component';
-import { CadastrarComponent } from './modulos/cadastrar/cadastrar.component';
-import { CadastroAdminComponent } from './modulos/cadastro-admin/cadastro-admin.component';
+import { authGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
-  { path: 'entrar', component: LoginComponent },
-  { path: 'cadastrar', component: CadastrarComponent },
-  { path: 'cadastro-admin', component: CadastroAdminComponent },
   {
-    path: '', component: BaseComponent, children: [
+    path: 'auth',
+    loadChildren: () => import('./modulos/auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path: '', component: BaseComponent, canActivate: [authGuard], children: [
       { path: 'materiais', loadChildren: () => import('./modulos/material/material.module').then(m => m.MaterialModule) },
       { path: 'receitas', loadChildren: () => import('./modulos/receitas/receitas.module').then(m => m.ReceirasModule) },
       { path: 'lista-de-compras', loadChildren: () => import('./modulos/lista-de-compras/lista-de-compras.module').then(m => m.ListaDeComprasModule) },
     ]
   },
-  { path: '**', redirectTo: 'entrar' },
+  { path: '**', redirectTo: 'auth/login' },
 ];
 
 @NgModule({
