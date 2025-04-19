@@ -13,6 +13,8 @@ const routes: Routes = [
       { path: 'materiais', loadChildren: () => import('./modulos/material/material.module').then(m => m.MaterialModule) },
       { path: 'receitas', loadChildren: () => import('./modulos/receitas/receitas.module').then(m => m.ReceirasModule) },
       { path: 'lista-de-compras', loadChildren: () => import('./modulos/lista-de-compras/lista-de-compras.module').then(m => m.ListaDeComprasModule) },
+      { path: 'produtos', loadChildren: () => import('./modulos/produtos/produtos.module').then(m => m.ProdutosModule) },
+      { path: 'categorias', loadChildren: () => import('./modulos/categorias/categorias.module').then(m => m.CategoriasModule) },
     ]
   },
   { path: '**', redirectTo: 'auth/login' },

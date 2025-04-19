@@ -194,6 +194,33 @@ chefprice/
 │   │   │   │   │   ├── auth.guard.ts
 │   │   │   │   ├── auth.module.ts
 │   │   │   │   ├── auth-routing.module.ts
+                categorias/
+                ├── components/
+                │   ├── categoria-card/
+                │   │   ├── categoria-card.component.ts
+                │   │   ├── categoria-card.component.html
+                │   │   ├── categoria-card.component.scss
+                │   ├── categoria-detalhes/
+                │   │   ├── categoria-detalhes.component.ts
+                │   │   ├── categoria-detalhes.component.html
+                │   │   ├── categoria-detalhes.component.scss
+                ├── pages/
+                │   ├── listagem-categorias/
+                │   │   ├── listagem-categorias.component.ts
+                │   │   ├── listagem-categorias.component.html
+                │   │   ├── listagem-categorias.component.scss
+                │   ├── cadastro-categoria/
+                │   │   ├── cadastro-categoria.component.ts
+                │   │   ├── cadastro-categoria.component.html
+                │   │   ├── cadastro-categoria.component.scss
+                │   ├── editar-categoria/
+                │   │   ├── editar-categoria.component.ts
+                │   │   ├── editar-categoria.component.html
+                │   │   ├── editar-categoria.component.scss
+                ├── services/
+                │   ├── categoria.service.ts
+                ├── categorias.module.ts
+                ├── categorias-routing.module.ts
 │   │   │   ├── usuarios/
 │   │   │   │   ├── perfil/
 │   │   │   │   ├── sessao/
