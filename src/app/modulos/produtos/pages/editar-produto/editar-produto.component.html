@@ -1,0 +1,62 @@
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Editar Produto</h1>
+    <form [formGroup]="formulario" (ngSubmit)="salvarProduto()">
+      <div class="mb-3">
+        <label for="nome" class="form-label">Nome do Produto</label>
+        <input
+          type="text"
+          id="nome"
+          class="form-control"
+          formControlName="nome"
+          placeholder="Digite o nome do produto"
+        />
+        <div *ngIf="formulario.get('nome')?.invalid && formulario.get('nome')?.touched" class="text-danger">
+          O nome é obrigatório e deve ter no máximo 100 caracteres.
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="codigoBarra" class="form-label">Código de Barras</label>
+        <input
+          type="text"
+          id="codigoBarra"
+          class="form-control"
+          formControlName="codigoBarra"
+          placeholder="Digite o código de barras"
+        />
+        <div *ngIf="formulario.get('codigoBarra')?.invalid && formulario.get('codigoBarra')?.touched" class="text-danger">
+          O código de barras é obrigatório e deve ter no máximo 100 caracteres.
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="idCategoria" class="form-label">Categoria</label>
+        <select id="idCategoria" class="form-select" formControlName="idCategoria">
+          <option value="" disabled selected>Selecione uma categoria</option>
+          <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nome }}</option>
+        </select>
+        <div *ngIf="formulario.get('idCategoria')?.invalid && formulario.get('idCategoria')?.touched" class="text-danger">
+          A categoria é obrigatória.
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="unidadeMedida" class="form-label">Unidade de Medida</label>
+        <input
+          type="text"
+          id="unidadeMedida"
+          class="form-control"
+          formControlName="unidadeMedida"
+          placeholder="Digite a unidade de medida (ex: kg, unidade, etc.)"
+        />
+        <div *ngIf="formulario.get('unidadeMedida')?.invalid && formulario.get('unidadeMedida')?.touched" class="text-danger">
+          A unidade de medida é obrigatória e deve ter no máximo 50 caracteres.
+        </div>
+      </div>
+  
+      <div class="text-end">
+        <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">Salvar</button>
+        <button type="button" class="btn btn-secondary" routerLink="/produtos">Cancelar</button>
+      </div>
+    </form>
+  </div>

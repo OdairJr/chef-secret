@@ -1,0 +1,50 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Categoria } from 'src/app/models/categoria.model';
+import { Produto } from 'src/app/models/produto.model';
+import { ProdutosService } from '../../services/produtos.service';
+import { CategoriaService } from '../../../categorias/services/categoria.service';
+
+@Component({
+  selector: 'app-cadastro-produto',
+  templateUrl: './cadastro-produto.component.html',
+  styleUrls: ['./cadastro-produto.component.css']
+})
+export class CadastroProdutoComponent implements OnInit {
+  formulario!: FormGroup;
+  categorias: Categoria[] = [];
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private produtosService: ProdutosService,
+    private categoriaService: CategoriaService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.formulario = this.formBuilder.group({
+      nome: ['', [Validators.required, Validators.maxLength(100)]],
+      codigoBarra: ['', [Validators.required, Validators.maxLength(100)]],
+      idCategoria: ['', Validators.required],
+      unidadeMedida: ['', [Validators.required, Validators.maxLength(50)]]
+    });
+
+    this.carregarCategorias();
+  }
+
+  private carregarCategorias(): void {
+    this.categoriaService.listarCategorias().subscribe((categorias) => {
+      this.categorias = categorias;
+    });
+  }
+
+  public salvarProduto(): void {
+    if (this.formulario.valid) {
+      const novoProduto: Produto = this.formulario.value;
+      this.produtosService.criarProduto(novoProduto).subscribe(() => {
+        this.router.navigate(['/produtos']);
+      });
+    }
+  }
+}

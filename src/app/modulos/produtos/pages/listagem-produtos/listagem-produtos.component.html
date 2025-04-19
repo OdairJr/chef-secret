@@ -1,0 +1,23 @@
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Lista de Produtos</h1>
+    <div class="text-end mb-3">
+        <button class="btn btn-primary" (click)="adicionarProduto()">Adicionar Novo Produto</button>
+    </div>
+    <div class="row">
+        <div class="col-md-4 mb-4" *ngFor="let produto of produtos">
+            <div class="card h-100">
+                <!-- <img [src]="produto.imagem" class="card-img-top" alt="{{ produto.nome }}"> -->
+                <div class="card-body">
+                  <h5 class="card-title text-center">{{ produto.nome }}</h5>
+                  <p class="card-text"><strong>Código de Barras:</strong> {{ produto.codigoBarra }}</p>
+                  <p class="card-text"><strong>Unidade de Medida:</strong> {{ produto.unidadeMedida }}</p>
+                  <p class="card-text"><strong>Categoria:</strong> {{ produto.idCategoria }}</p>
+                </div>
+                <div class="card-footer text-center">
+                  <button class="btn btn-warning me-2" [routerLink]="['/produtos/editar', produto.id]">Editar</button>
+                  <button class="btn btn-danger" (click)="excluirProduto(produto.id)">Excluir</button>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
