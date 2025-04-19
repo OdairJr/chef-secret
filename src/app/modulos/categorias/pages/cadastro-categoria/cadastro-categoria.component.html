@@ -1,0 +1,22 @@
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Cadastro de Categoria</h1>
+  <form [formGroup]="formulario" (ngSubmit)="salvarCategoria()">
+    <div class="mb-3">
+      <label for="nome" class="form-label">Nome da Categoria</label>
+      <input
+        type="text"
+        id="nome"
+        class="form-control"
+        formControlName="nome"
+        placeholder="Digite o nome da categoria"
+      />
+      <div *ngIf="formulario.get('nome')?.invalid && formulario.get('nome')?.touched" class="text-danger">
+        O nome é obrigatório e deve ter no máximo 50 caracteres.
+      </div>
+    </div>
+    <div class="text-end">
+      <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">Salvar</button>
+      <button type="button" class="btn btn-secondary" routerLink="/categorias">Cancelar</button>
+    </div>
+  </form>
+</div>

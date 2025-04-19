@@ -1,0 +1,20 @@
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Listagem de Categorias</h1>
+  <div class="text-end mb-3">
+    <button class="btn btn-primary" routerLink="/categorias/cadastro">Nova Categoria</button>
+  </div>
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let categoria of categorias">
+      <div class="card h-100">
+        <div class="card-body text-center">
+          <h5 class="card-title">{{ categoria.nome }}</h5>
+          <p class="card-text">ID: {{ categoria.id }}</p>
+        </div>
+        <div class="card-footer text-center">
+          <button class="btn btn-warning me-2" [routerLink]="['/categorias/editar', categoria.id]">Editar</button>
+          <button class="btn btn-danger" (click)="excluirCategoria(categoria.id)">Excluir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
