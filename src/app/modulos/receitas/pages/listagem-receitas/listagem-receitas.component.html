@@ -1,0 +1,25 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Lista de Receitas</h2>
+  <div class="text-end mb-3">
+    <button class="btn btn-primary" routerLink="/receitas/cadastro">Nova Receita</button>
+  </div>
+  <div *ngIf="erroCarregamento; else listaReceitas">
+    <p class="text-danger">{{ erroCarregamento }}</p>
+  </div>
+  <ng-template #listaReceitas>
+    <div *ngIf="receitas.length > 0; else noReceitas">
+      <div class="card mb-3" *ngFor="let receita of receitas">
+        <div class="card-body">
+          <h5 class="card-title">{{ receita.titulo }}</h5>
+          <p class="card-text"><strong>Descrição:</strong> {{ receita.descricao }}</p>
+          <p class="card-text"><strong>Rendimento:</strong> {{ receita.rendimento }}</p>
+          <p class="card-text"><strong>Tempo de Preparo:</strong> {{ receita.tempo_preparo }}</p>
+          <button class="btn btn-primary btn-sm" (click)="verDetalhes(receita.id)">Ver Detalhes</button>
+        </div>
+      </div>
+    </div>
+    <ng-template #noReceitas>
+      <p class="text-muted">Nenhuma receita encontrada.</p>
+    </ng-template>
+  </ng-template>
+</div>

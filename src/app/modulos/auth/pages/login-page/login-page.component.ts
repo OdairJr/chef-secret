@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.css']
+  styleUrls: ['./login-page.component.css'],
 })
 export class LoginPageComponent {
   constructor(private authService: AuthService, private router: Router) {}
@@ -23,8 +23,12 @@ export class LoginPageComponent {
         }
       },
       error: (err) => {
-        console.error('Erro ao realizar login:', err);
-      }
+        if (err.status === 422 && err.error?.errors?.email) {
+          alert('Erro: ' + err.error.errors.email[0]);
+        } else {
+          console.error('Erro ao realizar login:', err);
+        }
+      },
     });
   }
 }

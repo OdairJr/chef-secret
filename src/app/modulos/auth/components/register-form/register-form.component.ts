@@ -4,10 +4,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
-  styleUrls: ['./register-form.component.css']
+  styleUrls: ['./register-form.component.css'],
 })
 export class RegisterFormComponent {
-  @Output() registerSubmit = new EventEmitter<{ name: string; email: string; password: string }>();
+  @Output() registerSubmit = new EventEmitter<{
+    name: string;
+    email: string;
+    password: string;
+    password_confirmation: string;
+  }>();
   registerForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -15,6 +20,10 @@ export class RegisterFormComponent {
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      password_confirmation: [
+        '',
+        [Validators.required, Validators.minLength(6)],
+      ],
     });
   }
 

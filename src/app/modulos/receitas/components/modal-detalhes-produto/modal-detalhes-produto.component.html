@@ -1,0 +1,39 @@
+<app-modal *ngIf="mostrarModal" [title]="'Detalhes do Ingrediente'" [showFooter]="true" (closeModal)="fechar()">
+  <div modal-body>
+    <form [formGroup]="formulario">
+      <div class="mb-3">
+        <label for="quantidade" class="form-label">Quantidade</label>
+        <input
+          type="number"
+          id="quantidade"
+          class="form-control"
+          formControlName="quantidade"
+          placeholder="Digite a quantidade"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="unidade" class="form-label">Unidade</label>
+        <input
+          type="text"
+          id="unidade"
+          class="form-control"
+          formControlName="unidade"
+          placeholder="Digite a unidade (ex: kg, ml, unidade)"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="observacoes" class="form-label">Observações</label>
+        <textarea
+          id="observacoes"
+          class="form-control"
+          formControlName="observacoes"
+          placeholder="Observações (opcional)"
+        ></textarea>
+      </div>
+    </form>
+  </div>
+  <div modal-footer>
+    <button class="btn btn-primary" (click)="confirmar()" [disabled]="formulario.invalid">Confirmar</button>
+    <button class="btn btn-secondary" (click)="fechar()">Cancelar</button>
+  </div>
+</app-modal>

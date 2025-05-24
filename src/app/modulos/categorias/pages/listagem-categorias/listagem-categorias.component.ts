@@ -23,10 +23,8 @@ export class ListagemCategoriasComponent implements OnInit {
   }
 
   public excluirCategoria(id: number): void {
-    this.categoriaService.excluirCategoria(id).subscribe((sucesso) => {
-      if (sucesso) {
-        this.carregarCategorias();
-      }
+    this.categoriaService.excluirCategoria(id).subscribe(() => {
+      this.carregarCategorias();
     });
   }
 }

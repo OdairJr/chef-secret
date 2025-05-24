@@ -1,0 +1,27 @@
+<section>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Quantidade</th>
+        <th>Preço</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ingrediente of ingredientes; let i = index">
+        <td>{{ ingrediente.produto?.nome }}</td>
+        <td>{{ ingrediente.quantidade }} {{ ingrediente.unidade }}</td>
+        <td>R$ ingrediente.preco | number: '1.2-2'</td>
+        <td>
+          <button class="btn btn-warning btn-sm" (click)="editarIngrediente(i)">
+            Editar
+          </button>
+          <button class="btn btn-danger btn-sm" (click)="excluirIngrediente(i)">
+            Excluir
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

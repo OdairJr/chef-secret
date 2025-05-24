@@ -1,27 +1,35 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <div>
-        <label for="name">Nome:</label>
-        <input id="name" formControlName="name" type="text" placeholder="Digite seu nome">
-        <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched">
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="container mt-4">
+    <div class="mb-3">
+        <label for="name" class="form-label">Nome:</label>
+        <input id="name" formControlName="name" type="text" class="form-control" placeholder="Digite seu nome">
+        <div *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched" class="text-danger">
             <small>O nome deve ter pelo menos 3 caracteres</small>
         </div>
     </div>
 
-    <div>
-        <label for="email">Email:</label>
-        <input id="email" formControlName="email" type="email" placeholder="Digite seu email">
-        <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+    <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input id="email" formControlName="email" type="email" class="form-control" placeholder="Digite seu email">
+        <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="text-danger">
             <small>Email inválido</small>
         </div>
     </div>
 
-    <div>
-        <label for="password">Senha:</label>
-        <input id="password" formControlName="password" type="password" placeholder="Digite sua senha">
-        <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+    <div class="mb-3">
+        <label for="password" class="form-label">Senha:</label>
+        <input id="password" formControlName="password" type="password" class="form-control" placeholder="Digite sua senha">
+        <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="text-danger">
             <small>A senha deve ter pelo menos 6 caracteres</small>
         </div>
     </div>
 
-    <button type="submit">Registrar</button>
+    <div class="mb-3">
+      <label for="password_confirmation" class="form-label">Confirme sua Senha:</label>
+      <input id="password_confirmation" formControlName="password_confirmation" type="password" class="form-control" placeholder="Confirme sua senha">
+      <div *ngIf="registerForm.get('password_confirmation')?.invalid && registerForm.get('password_confirmation')?.touched" class="text-danger">
+          <small>A confirmação da senha deve ter pelo menos 6 caracteres</small>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Registrar</button>
 </form>

@@ -1,0 +1,92 @@
+<div class="container mt-4">
+  <h1 class="text-center mb-4">Cadastro de Receita</h1>
+  <form [formGroup]="formulario" (ngSubmit)="salvarReceita()">
+    <div class="mb-3">
+      <label for="titulo" class="form-label">Título</label>
+      <input
+        type="text"
+        id="titulo"
+        class="form-control"
+        formControlName="titulo"
+        placeholder="Digite o título da receita"
+      />
+      <div *ngIf="formulario.get('titulo')?.invalid && formulario.get('titulo')?.touched" class="text-danger">
+        O título é obrigatório.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="descricao" class="form-label">Descrição</label>
+      <textarea
+        id="descricao"
+        class="form-control"
+        formControlName="descricao"
+        placeholder="Digite a descrição da receita"
+      ></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="rendimento" class="form-label">Rendimento</label>
+      <input
+        type="text"
+        id="rendimento"
+        class="form-control"
+        formControlName="rendimento"
+        placeholder="Ex: 4 porções"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="tempo_preparo" class="form-label">Tempo de Preparo</label>
+      <input
+        type="text"
+        id="tempo_preparo"
+        class="form-control"
+        formControlName="tempo_preparo"
+        placeholder="Ex: 30 minutos"
+      />
+    </div>
+
+    <div class="d-flex justify-content-center my-4">
+      <button (click)="modal_selecao.abrirModal()" type="button" class="btn btn-success d-flex align-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+        </svg> Adicionar Material
+      </button>
+    </div>
+
+    <!-- Lista de Materiais -->
+    <div class="mb-3">
+      <h2 class="text-center">Lista de Ingredientes</h2>
+      <app-lista-ingredientes
+        [ingredientes]="ingredientes"
+        (editar)="onEditarIngrediente($event)"
+        (excluir)="onExcluirIngrediente($event)"
+      ></app-lista-ingredientes>
+    </div>
+
+    <div class="mb-3">
+      <app-lista-etapas></app-lista-etapas>
+    </div>
+
+    <div class="text-end">
+      <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">Salvar</button>
+      <button type="button" class="btn btn-secondary" routerLink="/receitas">Cancelar</button>
+    </div>
+  </form>
+</div>
+
+<app-modal-selecao-produto #modal_selecao (produtoSelecionado)="onSelecionarProduto($event)"></app-modal-selecao-produto>
+<app-modal-detalhes-produto #modal_detalhes_produto (confirmarDetalhes)="onConfirmarDetalhesIngrediente($event)"></app-modal-detalhes-produto>
+<!--
+<button class="btn btn-primary" (click)="mostrarModal = true">Abrir Modal</button>
+
+<app-modal *ngIf="mostrarModal" [title]="'Título do Modal'" [showFooter]="true" (closeModal)="mostrarModal = false">
+  <div modal-body>
+    <p>Este é o corpo do modal. Você pode personalizá-lo conforme necessário.</p>
+  </div>
+  <div modal-footer>
+    <button class="btn btn-secondary" (click)="mostrarModal = false">Fechar</button>
+    <button class="btn btn-primary">Salvar</button>
+  </div>
+</app-modal> -->

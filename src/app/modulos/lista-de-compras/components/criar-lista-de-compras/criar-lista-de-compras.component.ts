@@ -6,7 +6,7 @@ import { ListaDeComprasService } from '../../services/lista-de-compras.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 // TODO - Verificar se é possível não ter dependencia entre os módulos
-import { ReceitaService } from 'src/app/modulos/receitas/services/receita.service';
+// import { ReceitaService } from 'src/app/modulos/receitas/services/receita.service';
 
 @Component({
   selector: 'app-criar-lista-de-compras',
@@ -19,7 +19,7 @@ export class CriarListaDeComprasComponent implements OnInit {
   formularioCompras!: FormGroup;
 
   constructor(private listadecomprasservice: ListaDeComprasService,
-    private receitaservice: ReceitaService,
+    // private receitaservice: ReceitaService,
     private router: Router,
     private route: ActivatedRoute,
     private formbuilder: FormBuilder) {
@@ -60,9 +60,9 @@ export class CriarListaDeComprasComponent implements OnInit {
   }
 
   private carregarLista(id: string) {
-    this.receitaservice.listarReceitaPorId(id).subscribe(receita => {
-      this.listaDeItensCriados = this.listadecomprasservice.converterListas(receita.materiais);
-    });
+    // this.receitaservice.listarReceitaPorId(id).subscribe(receita => {
+    //   this.listaDeItensCriados = this.listadecomprasservice.converterListas(receita.materiais);
+    // });
   }
 
 

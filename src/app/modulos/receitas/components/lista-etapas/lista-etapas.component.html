@@ -1,0 +1,41 @@
+<section class="my-4">
+  <h2 class="mb-3">Etapas</h2>
+  <div class="table-responsive">
+    <table class="table table-bordered align-middle">
+      <thead class="table-light">
+        <tr>
+          <th scope="col">Descrição da Etapa</th>
+          <th scope="col" style="width: 140px;">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let etapa of etapas; let i = index">
+          <td>{{ etapa.instrucoes }}</td>
+          <td>
+            <button type="button" class="btn btn-danger btn-sm" (click)="excluirEtapa(i)">
+              <i class="bi bi-trash"></i> Excluir
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="adicionandoEtapa">
+          <td>
+            <textarea [(ngModel)]="novaEtapa" rows="2" class="form-control" placeholder="Descreva a etapa"></textarea>
+          </td>
+          <td>
+            <div class="d-flex gap-2">
+              <button type="button" class="btn btn-success btn-sm" (click)="confirmarAdicionarEtapa()">
+                <i class="bi bi-check-lg"></i> Confirmar
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" (click)="cancelarAdicionarEtapa()">
+                <i class="bi bi-x-lg"></i> Cancelar
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <button *ngIf="!adicionandoEtapa" type="button" class="btn btn-primary mt-2" (click)="adicionarEtapa()">
+    <i class="bi bi-plus-lg"></i> Adicionar etapa
+  </button>
+</section>

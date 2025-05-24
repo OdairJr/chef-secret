@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 // TODO - Verificar se é possível não ter dependencia entre os módulos
-import { Receita } from 'src/app/modulos/receitas/models/receita.model';
-import { ReceitaService } from 'src/app/modulos/receitas/services/receita.service';
+// import { Receita } from 'src/app/modulos/receitas/models/receita.model';
+// import { ReceitaService } from 'src/app/modulos/receitas/services/receita.service';
 
 @Component({
   selector: 'app-lista-de-compras-por-receita',
@@ -11,9 +11,10 @@ import { ReceitaService } from 'src/app/modulos/receitas/services/receita.servic
   styleUrls: ['./lista-de-compras-por-receita.component.css']
 })
 export class ListaDeComprasPorReceitaComponent implements OnInit {
-  listaDeReceitas: Receita[] = []
+  // listaDeReceitas: Receita[] = []
 
-  constructor(private receitaservice: ReceitaService,
+  constructor(
+    // private receitaservice: ReceitaService,
     private router: Router) {
 
   }
@@ -23,9 +24,9 @@ export class ListaDeComprasPorReceitaComponent implements OnInit {
   }
 
   private listarReceitas(): void {
-    this.receitaservice.listarReceitas().subscribe(receita => {
-      this.listaDeReceitas = receita
-    })
+    // this.receitaservice.listarReceitas().subscribe(receita => {
+    //   this.listaDeReceitas = receita
+    // })
   }
 
   public adicionarItensDaReceita(id: string) {

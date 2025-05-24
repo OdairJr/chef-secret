@@ -1,0 +1,17 @@
+<app-modal *ngIf="mostrarModal" [title]="'Selecione um Produto'" [showFooter]="false" (closeModal)="fechar()">
+  <div modal-body>
+    <div *ngIf="produtos.length === 0">
+      <p>Carregando produtos...</p>
+    </div>
+    <ul *ngIf="produtos.length > 0" class="list-group">
+      <li *ngFor="let produto of produtos" class="list-group-item">
+        <button class="btn btn-outline-primary w-100" (click)="selecionarProduto(produto)">
+          {{ produto.nome }} ({{ produto.unidade_medida }})
+        </button>
+      </li>
+    </ul>
+  </div>
+  <div modal-footer>
+    <button class="btn btn-secondary" (click)="fechar()">Fechar</button>
+  </div>
+</app-modal>

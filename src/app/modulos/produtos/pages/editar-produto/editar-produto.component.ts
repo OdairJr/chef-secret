@@ -28,9 +28,9 @@ export class EditarProdutoComponent implements OnInit {
     this.produtoId = Number(this.route.snapshot.paramMap.get('id'));
     this.formulario = this.formBuilder.group({
       nome: ['', [Validators.required, Validators.maxLength(100)]],
-      codigoBarra: ['', [Validators.required, Validators.maxLength(100)]],
-      idCategoria: ['', Validators.required],
-      unidadeMedida: ['', [Validators.required, Validators.maxLength(50)]]
+      codigo_barra: ['', [Validators.required, Validators.maxLength(100)]],
+      id_categoria: ['', Validators.required],
+      unidade_medida: ['', [Validators.required, Validators.maxLength(50)]]
     });
 
     this.carregarCategorias();

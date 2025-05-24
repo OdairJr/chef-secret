@@ -1,26 +1,36 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ReceitasRoutingModule } from './receitas-routing.module';
-import { ListaReceitasComponent } from './components/lista-receitas/lista-receitas.component';
-import { ReceitaComponent } from './components/receita/receita.component';
-import { AdicionarMateriaisComponent } from './components/adicionar-materiais/adicionar-materiais.component';
-import { FormsModule } from '@angular/forms';
-import { AnaliseDeCustosComponent } from './components/analise-de-custos/analise-de-custos.component';
-import { ReceitaDetalhesComponent } from './components/receita-detalhes/receita-detalhes.component';
+import { ListagemReceitasComponent } from './pages/listagem-receitas/listagem-receitas.component';
+import { CadastroReceitaComponent } from './pages/cadastro-receita/cadastro-receita.component';
+import { EditarReceitaComponent } from './pages/editar-receita/editar-receita.component';
+import { ModalComponent } from 'src/app/compartilhado/components/modal/modal.component';
+import { ModalSelecaoProdutoComponent } from './components/modal-selecao-produto/modal-selecao-produto.component';
+import { ModalDetalhesProdutoComponent } from './components/modal-detalhes-produto/modal-detalhes-produto.component';
+import { ListaIngredientesComponent } from './components/lista-ingredientes/lista-ingredientes.component';
+import { ListaEtapasComponent } from './components/lista-etapas/lista-etapas.component';
+
 
 @NgModule({
   declarations: [
-    ListaReceitasComponent,
-    ReceitaComponent,
-    AdicionarMateriaisComponent,
-    AnaliseDeCustosComponent,
-    ReceitaDetalhesComponent
+    ListagemReceitasComponent,
+    CadastroReceitaComponent,
+    EditarReceitaComponent,
+    ModalComponent,
+    ModalSelecaoProdutoComponent,
+    ModalDetalhesProdutoComponent,
+    ListaIngredientesComponent,
+    ListaEtapasComponent
   ],
   imports: [
     CommonModule,
-    ReceitasRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    ReceitasRoutingModule
   ]
 })
-export class ReceirasModule { }
+export class ReceitasModule { }
