@@ -16,8 +16,7 @@ export class LoginPageComponent {
     this.authService.login(email, password).subscribe({
       next: (loginSuccess) => {
         if (loginSuccess) {
-          alert('Login bem-sucedido!');
-          this.router.navigate(['/materiais']);
+          this.router.navigate(['/receitas']);
         } else {
           console.log('Credenciais inválidas.');
         }

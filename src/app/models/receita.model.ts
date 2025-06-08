@@ -1,4 +1,4 @@
-import { Produto } from "./produto.model";
+import { Material } from "./material.model";
 
 export interface Receita {
   id: number;
@@ -21,7 +21,7 @@ export interface Etapa {
 
 export interface Ingrediente {
   id_produto: number;
-  produto?: Produto;
+  produto?: Material;
   quantidade: number;
   unidade: string;
   observacoes?: string; // Campo opcional

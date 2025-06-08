@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ReceitasService } from '../../services/receitas.service';
 import { Ingrediente, Receita } from 'src/app/models/receita.model';
-import { Produto } from 'src/app/models/produto.model';
+import { Material } from 'src/app/models/material.model';
 import { ViewChild } from '@angular/core';
 import { ModalDetalhesProdutoComponent } from '../../components/modal-detalhes-produto/modal-detalhes-produto.component';
 
@@ -53,7 +53,7 @@ export class CadastroReceitaComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
 
-  onSelecionarProduto(produto: Produto) {
+  onSelecionarProduto(produto: Material) {
     this.ingredienteSendoAdicionado = {
       id_produto: produto.id,
       produto: produto,

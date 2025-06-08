@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BaseComponent } from './compartilhado/components/base/base.component';
 import { authGuard } from './core/guards/auth.guard';
+import { EmailConfirmadoComponent } from './modulos/usuario/pages/email-confirmado/email-confirmado.component';
 
 const routes: Routes = [
   {
@@ -9,8 +10,11 @@ const routes: Routes = [
     loadChildren: () => import('./modulos/auth/auth.module').then(m => m.AuthModule)
   },
   {
+    path: 'email-confirmado',
+    component: EmailConfirmadoComponent
+  },
+  {
     path: '', component: BaseComponent, canActivate: [authGuard], children: [
-      { path: 'materiais', loadChildren: () => import('./modulos/material/material.module').then(m => m.MaterialModule) },
       { path: 'receitas', loadChildren: () => import('./modulos/receitas/receitas.module').then(m => m.ReceitasModule) },
       { path: 'lista-de-compras', loadChildren: () => import('./modulos/lista-de-compras/lista-de-compras.module').then(m => m.ListaDeComprasModule) },
       { path: 'produtos', loadChildren: () => import('./modulos/produtos/produtos.module').then(m => m.ProdutosModule) },

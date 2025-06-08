@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutosService } from '../../services/produtos.service';
 import { CategoriaService } from '../../../categorias/services/categoria.service';
-import { Produto } from 'src/app/models/produto.model';
+import { Material } from 'src/app/models/material.model';
 import { Categoria } from 'src/app/models/categoria.model';
 
 @Component({
@@ -53,7 +53,7 @@ export class EditarProdutoComponent implements OnInit {
 
   public salvarProduto(): void {
     if (this.formulario.valid) {
-      const produtoAtualizado: Produto = {
+      const produtoAtualizado: Material = {
         id: this.produtoId,
         ...this.formulario.value
       };

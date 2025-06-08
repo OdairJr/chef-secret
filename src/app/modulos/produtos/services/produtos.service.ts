@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Produto } from 'src/app/models/produto.model';
+import { Material } from 'src/app/models/material.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { API_ENDPOINTS } from 'src/app/config/api.config';
@@ -12,20 +12,20 @@ export class ProdutosService {
     private http: HttpClient
   ) {}
 
-  public listarProdutos(): Observable<Produto[]> {
-    return this.http.get<Produto[]>(API_ENDPOINTS.produtos());
+  public listarProdutos(): Observable<Material[]> {
+    return this.http.get<Material[]>(API_ENDPOINTS.produtos());
   }
 
-  public obterProdutoPorId(id: number): Observable<Produto | undefined> {
-    return this.http.get<Produto>(API_ENDPOINTS.produtoById(id));
+  public obterProdutoPorId(id: number): Observable<Material | undefined> {
+    return this.http.get<Material>(API_ENDPOINTS.produtoById(id));
   }
 
-  public criarProduto(produto: Produto): Observable<Produto> {
-    return this.http.post<Produto>(API_ENDPOINTS.produtos(), produto);
+  public criarProduto(produto: Material): Observable<Material> {
+    return this.http.post<Material>(API_ENDPOINTS.produtos(), produto);
   }
 
-  public editarProduto(produto: Produto): Observable<Produto | undefined> {
-    return this.http.put<Produto>(
+  public editarProduto(produto: Material): Observable<Material | undefined> {
+    return this.http.put<Material>(
       API_ENDPOINTS.produtoById(produto.id),
       produto
     );

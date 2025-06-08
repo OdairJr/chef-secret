@@ -1,99 +1,75 @@
-import { ItemDaLista } from './../models/itens-da-lista.model';
 import { Injectable } from '@angular/core';
-import { ListaDeCompras } from '../models/lista-de-compras.model';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-// TODO - Verificar se é possível não ter dependencia entre os módulos
-import { Material } from 'src/app/modulos/material/models/material.model';
+import { Observable, of } from 'rxjs';
+import { ListaDeCompras } from 'src/app/models/lista-de-compras.model';
+import { Material } from 'src/app/models/material.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ListaDeComprasService {
+  constructor() {}
 
-
-   valorTotal:number = 0;
-
-
-  public resumoDaCompra?: {
-    valorTotal: number,
-    valorPorItem: {
-      valorDoItem: number,
-      idDoItem: string
-    }[]
-  };
-
-  public listaDeComprasCriada?: ListaDeCompras;
-  public itensDalista?: ItemDaLista;
-  public comprarLista?: ListaDeCompras;
-  public itensParaComprar: Material[] = [];
-
-  constructor(private httpclient: HttpClient) { }
-
-  public listarListasDeCompras(): Observable<ListaDeCompras[]> {
-    return this.httpclient.get<ListaDeCompras[]>("http://localhost:3000/lista-de-compras")
+  criarLista(lista: Partial<ListaDeCompras>): Observable<ListaDeCompras> {
+    const listas = this.getLocalListas();
+    const novaLista: ListaDeCompras = {
+      ...lista,
+      id: this.gerarId(),
+      itens: lista.itens || [],
+    } as ListaDeCompras;
+    listas.push(novaLista);
+    this.setLocalListas(listas);
+    return of(novaLista);
   }
 
-  public listarListasDeComprasPorId(id: string): Observable<ListaDeCompras> {
-    return this.httpclient.get<ListaDeCompras>("http://localhost:3000/lista-de-compras/" + id)
+  listarListas(): Observable<ListaDeCompras[]> {
+    const listas = this.getLocalListas();
+    return of(listas);
   }
 
-  public criarListaDeCompras(listaDeCompras: ListaDeCompras, itensDaCompra: ItemDaLista[]): Observable<ListaDeCompras> {
-    listaDeCompras.itens = itensDaCompra;
-
-    return this.httpclient.post<ListaDeCompras>("http://localhost:3000/lista-de-compras", listaDeCompras)
+  buscarListaPorId(id: string): Observable<ListaDeCompras> {
+    const listas = this.getLocalListas();
+    const lista = listas.find((l) => l.id === id);
+    return of(lista as ListaDeCompras);
   }
 
-  public excluirLista(id:string):Observable<ListaDeCompras[]>{
-    return this.httpclient.delete<ListaDeCompras[]>(`http://localhost:3000/lista-de-compras/"${id}`)
-  }
-
-
-  public converterListas(materiaisDaReceita: Material[]): ItemDaLista[] {
-    return materiaisDaReceita.map(item => {
-      return {
-        id: item.id,
-        nomeItem: item.nome,
-        quantidade: 0,
-        marca: item.marca,
-        valor: 0,
-        categoria: item.categoria,
-        precoItemCalculado: 0,
-        calculoTotal: item.valor
-      };
-    });
-  }
-
-
-  public calcularPrecoTotalItem(quantidade: number ,valor:number): number {
-    let itemCalculado = quantidade * valor;
-     return  +itemCalculado.toFixed(2);
-   }
-  public calcularTotal(listasDeCompras:ItemDaLista[]): number {
-    let calculoTotal =0;
-    listasDeCompras.forEach(item => {
-      calculoTotal += this.calcularPrecoTotalItem(item.quantidade ,item.valor);
-
-    })
-    this.valorTotal = calculoTotal ;
-    return +calculoTotal.toFixed(2);
-  }
-
-  public salvarListaDeComprasNoHistorico(listafinalizada:ItemDaLista[],nomeDaLista:string): Observable<ListaDeCompras> {
-
-    const listaFormatada = {
-      nomeDaLista:nomeDaLista,
-      itens: listafinalizada,
-      valorTotal: this.calcularTotal(listafinalizada)
+  atualizarLista(
+    id: string,
+    lista: Partial<ListaDeCompras>
+  ): Observable<ListaDeCompras> {
+    const listas = this.getLocalListas();
+    const idx = listas.findIndex((l) => l.id === id);
+    if (idx !== -1) {
+      listas[idx] = { ...listas[idx], ...lista, id } as ListaDeCompras;
+      this.setLocalListas(listas);
+      return of(listas[idx]);
     }
-    return this.httpclient.post<ListaDeCompras>("http://localhost:3000/historico-de-compras", listaFormatada);
+    return of(null as any);
   }
 
-   public listarHistoricoDeCompras():Observable<ListaDeCompras[]>{
-      return this.httpclient.get<ListaDeCompras[]>("http://localhost:3000/historico-de-compras")
-   }
+  excluirLista(id: string): Observable<void> {
+    const listas = this.getLocalListas().filter((l) => l.id !== id);
+    this.setLocalListas(listas);
+    return of(undefined);
+  }
 
+  buscarMateriais(): Observable<Material[]> {
+    const materiaisStr = localStorage.getItem('materiais');
+    if (materiaisStr) {
+      return of(JSON.parse(materiaisStr));
+    }
+    return of([]);
+  }
+
+  private getLocalListas(): ListaDeCompras[] {
+    const listasStr = localStorage.getItem('listas-de-compras');
+    return listasStr ? JSON.parse(listasStr) : [];
+  }
+
+  private setLocalListas(listas: ListaDeCompras[]): void {
+    localStorage.setItem('listas-de-compras', JSON.stringify(listas));
+  }
+
+  private gerarId(): string {
+    return Math.random().toString(36).substr(2, 9);
+  }
 }
-
-

@@ -1,21 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ListarListasDeComprasComponent } from './components/listar-listas-de-compras/listar-listas-de-compras.component';
-import { CriarListaDeComprasComponent } from './components/criar-lista-de-compras/criar-lista-de-compras.component';
-import { ListaDeComprasPorReceitaComponent } from './components/lista-de-compras-por-receita/lista-de-compras-por-receita.component';
-import { ComprarListaComponent } from './components/comprar-lista/comprar-lista.component';
-import { HistoricoDeComprasComponent } from './components/historico-de-compras/historico-de-compras.component';
+import { ListarListaDeComprasComponent } from './pages/listar-lista-de-compras/listar-lista-de-compras.component';
+import { ListaDeComprasPorReceitaComponent } from './pages/lista-de-compras-por-receita/lista-de-compras-por-receita.component';
+import { ComprarListaComponent } from './pages/comprar-lista/comprar-lista.component';
+import { HistoricoDeComprasComponent } from './pages/historico-de-compras/historico-de-compras.component';
+import { FormListaDeComprasComponent } from './pages/form-lista-de-compras/form-lista-de-compras.component';
 
 const routes: Routes = [
-  {path:'', component:ListarListasDeComprasComponent},
-  {path:'criar-lista-de-compras/:id', component:CriarListaDeComprasComponent},
-  {path:'lista-por-receita', component:ListaDeComprasPorReceitaComponent},
-  {path:'comprar-lista', component:ComprarListaComponent},
-  {path:'historico-de-compras', component:HistoricoDeComprasComponent},
+  { path: '', component: ListarListaDeComprasComponent },
+  { path: 'form-lista-de-compras', component: FormListaDeComprasComponent },
+  { path: 'form-lista-de-compras/:id', component: FormListaDeComprasComponent },
+  { path: 'lista-por-receita', component: ListaDeComprasPorReceitaComponent },
+  { path: 'comprar-lista/:id', component: ComprarListaComponent },
+  { path: 'historico-de-compras', component: HistoricoDeComprasComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ListaDeComprasRoutingModule { }
+export class ListaDeComprasRoutingModule {}

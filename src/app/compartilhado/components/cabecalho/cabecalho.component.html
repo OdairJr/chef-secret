@@ -8,10 +8,24 @@
         <a class="nav-link text-primary" routerLink="/produtos">Produtos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-primary" routerLink="/compras">Lista de Compras</a>
+        <a class="nav-link text-primary" routerLink="/lista-de-compras">Lista de Compras</a>
       </li>
       <li class="nav-item">
         <a class="nav-link text-primary" routerLink="/categorias">Lista de Categorias</a>
+      </li>
+      <!-- Dropdown Menu -->
+      <li class="nav-item dropdown" style="position: relative;">
+        <a class="nav-link dropdown-toggle text-primary" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-person-circle"></i> Conta
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="userDropdown" style="right: 0; left: auto;">
+          <li>
+            <a class="dropdown-item" routerLink="/perfil">Perfil</a>
+          </li>
+          <li>
+            <button class="dropdown-item" (click)="logout()">Sair</button>
+          </li>
+        </ul>
       </li>
     </ul>
   </nav>

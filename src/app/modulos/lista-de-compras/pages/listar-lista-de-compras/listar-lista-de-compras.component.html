@@ -1,0 +1,27 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Listas de Compras</h2>
+  <div class="mb-3 d-flex gap-2">
+    <button class="btn btn-primary" routerLink="form-lista-de-compras">Nova Lista</button>
+    <button class="btn btn-secondary" routerLink="lista-por-receita">Lista por Receita</button>
+    <button class="btn btn-outline-info" routerLink="historico-de-compras">Histórico de Compras</button>
+  </div>
+  <div *ngIf="listas.length > 0; else semListas">
+    <div class="row">
+      <div class="col-md-6 mb-3" *ngFor="let lista of listas">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ lista.nomeLista }}</h5>
+            <p class="card-text"><strong>Total:</strong> R$ {{ lista.valorTotal }}</p>
+            <div class="d-flex gap-2">
+              <button class="btn btn-success btn-sm" (click)="selecionarLista(lista)">Comprar</button>
+              <button class="btn btn-danger btn-sm" (click)="excluirLista(lista.id)">Excluir</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #semListas>
+    <p class="text-muted">Nenhuma lista de compras encontrada.</p>
+  </ng-template>
+</div>
