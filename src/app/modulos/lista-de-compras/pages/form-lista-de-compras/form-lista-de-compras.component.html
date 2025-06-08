@@ -23,12 +23,14 @@
     </div>
 
     <div class="d-flex justify-content-center mb-4">
-      <a href="#">Adicionar a partir de uma receita</a>
+      <button type="button" class="btn btn-link p-0" (click)="modal_selecao_receita.abrirModal()">
+        <span class="me-1"><i class="bi bi-plus-lg"></i></span> Adicionar a partir de uma receita
+      </button>
     </div>
 
     <h5 class="mt-4">Itens da Lista</h5>
     <div class="mb-3">
-      <button type="button" class="btn btn-link p-0" (click)="modal_selecao.abrirModal()">
+      <button type="button" class="btn btn-link p-0" (click)="modal_selecao_material.abrirModal()">
         <span class="me-1"><i class="bi bi-plus-lg"></i></span> Adicionar Material
       </button>
     </div>
@@ -130,4 +132,6 @@
   </form>
 </div>
 
-<app-modal-selecao-material #modal_selecao (materialSelecionado)="onSelecionarMaterial($event)"></app-modal-selecao-material>
+<app-modal-selecao-material #modal_selecao_material (materialSelecionado)="onSelecionarMaterial($event)"></app-modal-selecao-material>
+
+<app-modal-selecao-receita #modal_selecao_receita></app-modal-selecao-receita>

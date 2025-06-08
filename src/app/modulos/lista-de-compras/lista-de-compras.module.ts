@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { ListaDeComprasRoutingModule } from './lista-de-compras-routing.module';
 import { ListarListaDeComprasComponent } from './pages/listar-lista-de-compras/listar-lista-de-compras.component';
 import { ListaDeComprasPorReceitaComponent } from './pages/lista-de-compras-por-receita/lista-de-compras-por-receita.component';
-import { ComprarListaComponent } from './pages/comprar-lista/comprar-lista.component';
 import { HistoricoDeComprasComponent } from './pages/historico-de-compras/historico-de-compras.component';
 import { CompartilhadoModule } from 'src/app/compartilhado/compartilhado.module';
 import { FormListaDeComprasComponent } from './pages/form-lista-de-compras/form-lista-de-compras.component';
@@ -14,7 +13,6 @@ import { FormListaDeComprasComponent } from './pages/form-lista-de-compras/form-
   declarations: [
     ListarListaDeComprasComponent,
     ListaDeComprasPorReceitaComponent,
-    ComprarListaComponent,
     HistoricoDeComprasComponent,
     FormListaDeComprasComponent,
   ],

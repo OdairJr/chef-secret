@@ -1,0 +1,26 @@
+<app-modal *ngIf="mostrarModal" [title]="'Selecione uma Receita'" [showFooter]="false" (closeModal)="fechar()">
+  <div modal-body>
+    <div class="mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Buscar receita..."
+        [(ngModel)]="busca"
+        (input)="filtrarReceitas()"
+      />
+    </div>
+    <div *ngIf="receitasFiltradas.length === 0">
+      <p>Carregando receitas ou nenhuma receita encontrada...</p>
+    </div>
+    <ul *ngIf="receitasFiltradas.length > 0" class="list-group">
+      <li *ngFor="let receita of receitasFiltradas" class="list-group-item">
+        <button class="btn btn-outline-primary w-100" (click)="selecionarReceita(receita)">
+          {{ receita.titulo }}
+        </button>
+      </li>
+    </ul>
+  </div>
+  <div modal-footer>
+    <button class="btn btn-secondary" (click)="fechar()">Fechar</button>
+  </div>
+</app-modal>
