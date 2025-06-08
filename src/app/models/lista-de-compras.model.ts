@@ -5,4 +5,5 @@ export interface ListaDeCompras {
   nomeLista?: string;
   itens?: ItemDaLista[];
   valorTotal: number;
+  notasFiscais?: File[];
 }

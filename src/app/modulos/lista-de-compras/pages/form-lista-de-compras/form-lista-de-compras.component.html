@@ -103,6 +103,28 @@
       </table>
     </div>
 
+    <h5 class="mt-4">Notas Fiscais</h5>
+    <div class="mb-3">
+      <label for="notaFiscal" class="form-label">Adicionar Nota Fiscal</label>
+      <input
+        type="file"
+        id="notaFiscal"
+        class="form-control"
+        (change)="onNotaFiscalSelecionada($event)"
+        accept="image/*"
+      />
+      <div class="mt-2">
+        <ul>
+          <li *ngFor="let nota of notasFiscais">
+            {{ nota.name }}
+            <button type="button" class="btn btn-sm btn-danger ms-2" (click)="removerNotaFiscal(nota)">
+              Remover
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
     <button type="submit" class="btn btn-primary">Salvar Lista</button>
     <button type="button" class="btn btn-secondary ms-2" (click)="cancelar()">Cancelar</button>
   </form>

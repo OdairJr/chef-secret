@@ -13,6 +13,7 @@ import { Material } from 'src/app/models/material.model';
 export class FormListaDeComprasComponent implements OnInit {
   formularioCompras!: FormGroup;
   listaId: string | null = null;
+  notasFiscais: File[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,6 +24,7 @@ export class FormListaDeComprasComponent implements OnInit {
     this.formularioCompras = this.formBuilder.group({
       nomeLista: ['', [Validators.required, Validators.maxLength(30)]],
       itens: this.formBuilder.array([]),
+      notasFiscais: [[]],
     });
   }
 
@@ -54,9 +56,11 @@ export class FormListaDeComprasComponent implements OnInit {
       return;
     }
 
+    debugger;
     const lista = {
       nomeLista: this.formularioCompras.value.nomeLista,
       itens: this.formularioCompras.value.itens,
+      notasFiscais: this.notasFiscais,
     };
 
     if (this.listaId) {
@@ -99,5 +103,16 @@ export class FormListaDeComprasComponent implements OnInit {
 
   cancelar(): void {
     this.router.navigate(['/lista-de-compras']);
+  }
+
+  onNotaFiscalSelecionada(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      Array.from(input.files).forEach((file) => this.notasFiscais.push(file));
+    }
+  }
+
+  removerNotaFiscal(nota: File): void {
+    this.notasFiscais = this.notasFiscais.filter((n) => n !== nota);
   }
 }
