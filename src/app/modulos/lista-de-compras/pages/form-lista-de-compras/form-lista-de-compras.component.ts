@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ListaDeComprasService } from '../../services/lista-de-compras.service';
 import { ItemDaLista } from 'src/app/models/itens-da-lista.model';
 import { Material } from 'src/app/models/material.model';
+import { Ingrediente, Receita } from 'src/app/models/receita.model';
 
 @Component({
   selector: 'app-form-lista-de-compras',
@@ -114,5 +115,18 @@ export class FormListaDeComprasComponent implements OnInit {
 
   removerNotaFiscal(nota: File): void {
     this.notasFiscais = this.notasFiscais.filter((n) => n !== nota);
+  }
+
+  onSelecionarReceita(receita: Receita): void {
+    debugger;
+    if (receita.ingredientes && Array.isArray(receita.ingredientes)) {
+      receita.ingredientes.forEach((ingrediente: Ingrediente) => {
+        this.adicionarItem({
+          materialRelacionado: ingrediente.produto,
+          quantidade: ingrediente.quantidade,
+          valor: 0,
+        });
+      });
+    }
   }
 }
