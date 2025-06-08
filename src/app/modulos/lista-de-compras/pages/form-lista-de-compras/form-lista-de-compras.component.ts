@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListaDeComprasService } from '../../services/lista-de-compras.service';
 import { ItemDaLista } from 'src/app/models/itens-da-lista.model';
@@ -12,7 +12,6 @@ import { Material } from 'src/app/models/material.model';
 })
 export class FormListaDeComprasComponent implements OnInit {
   formularioCompras!: FormGroup;
-  listaDeItensCriados: ItemDaLista[] = [];
   listaId: string | null = null;
 
   constructor(
@@ -23,6 +22,7 @@ export class FormListaDeComprasComponent implements OnInit {
   ) {
     this.formularioCompras = this.formBuilder.group({
       nomeLista: ['', [Validators.required, Validators.maxLength(30)]],
+      itens: this.formBuilder.array([]),
     });
   }
 
@@ -35,49 +35,64 @@ export class FormListaDeComprasComponent implements OnInit {
     });
   }
 
+  get itens(): FormArray {
+    return this.formularioCompras.get('itens') as FormArray;
+  }
+
   private carregarLista(id: string): void {
     this.listaDeComprasService.buscarListaPorId(id).subscribe((lista) => {
       if (lista) {
         this.formularioCompras.patchValue({ nomeLista: lista.nomeLista });
-        this.listaDeItensCriados = lista.itens || [];
+        lista.itens?.forEach((item) => this.adicionarItem(item));
       }
     });
   }
 
   public salvarLista(): void {
+    if (this.formularioCompras.invalid) {
+      this.formularioCompras.markAllAsTouched();
+      return;
+    }
+
+    const lista = {
+      nomeLista: this.formularioCompras.value.nomeLista,
+      itens: this.formularioCompras.value.itens,
+    };
+
     if (this.listaId) {
       this.listaDeComprasService
-        .atualizarLista(this.listaId, {
-          nomeLista: this.formularioCompras.value.nomeLista,
-          itens: this.listaDeItensCriados,
-        })
+        .atualizarLista(this.listaId, lista)
         .subscribe(() => {
           this.router.navigate(['/compras']);
         });
     } else {
-      this.listaDeComprasService
-        .criarLista({
-          nomeLista: this.formularioCompras.value.nomeLista,
-          itens: this.listaDeItensCriados,
-        })
-        .subscribe(() => {
-          this.router.navigate(['/compras']);
-        });
+      this.listaDeComprasService.criarLista(lista).subscribe(() => {
+        this.router.navigate(['/compras']);
+      });
     }
   }
 
   public removerItem(index: number): void {
-    this.listaDeItensCriados.splice(index, 1);
+    this.itens.removeAt(index);
   }
 
-  public adicionarItem(item: ItemDaLista): void {
-    this.listaDeItensCriados.push(item);
+  public adicionarItem(item: Partial<ItemDaLista> = {}): void {
+    const itemForm = this.formBuilder.group({
+      comprado: [item.comprado || false],
+      materialRelacionado: [item.materialRelacionado || null],
+      quantidade: [
+        item.quantidade || 1,
+        [Validators.required, Validators.min(1)],
+      ],
+      valor: [item.valor || 0, [Validators.required, Validators.min(0)]],
+    });
+    this.itens.push(itemForm);
   }
 
-  onSelecionarMaterial(material: Material) {
+  onSelecionarMaterial(material: Material): void {
     this.adicionarItem({
       materialRelacionado: material,
-      quantidade: 0,
+      quantidade: 1,
       valor: 0,
     });
   }

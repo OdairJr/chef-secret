@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <form [formGroup]="formularioCompras">
+  <form [formGroup]="formularioCompras" (ngSubmit)="salvarLista()">
     <div class="mb-3">
       <label for="nomeLista" class="form-label">Nome da lista</label>
       <input
@@ -8,7 +8,7 @@
         class="form-control"
         formControlName="nomeLista"
         placeholder="Digite o nome da lista"
-      >
+      />
       <div
         *ngIf="formularioCompras.get('nomeLista')?.errors && formularioCompras.get('nomeLista')?.touched"
         class="invalid-feedback d-block"
@@ -27,7 +27,7 @@
         <span class="me-1"><i class="bi bi-plus-lg"></i></span> Adicionar Material
       </button>
     </div>
-    <div *ngIf="listaDeItensCriados.length > 0" class="mb-3">
+    <div formArrayName="itens" *ngIf="itens.controls.length > 0" class="mb-3">
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -39,24 +39,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of listaDeItensCriados; let i = index">
+          <tr *ngFor="let item of itens.controls; let i = index" [formGroupName]="i">
             <td>
               <input
-              type="checkbox"
-              [(ngModel)]="item.comprado"
-              name="comprado{{i}}"
-              aria-label="Item comprado"
+                type="checkbox"
+                formControlName="comprado"
+                aria-label="Item comprado"
               />
             </td>
-            <td>{{ item.materialRelacionado.nome }}</td>
+            <td>{{ item.value.materialRelacionado?.nome }}</td>
             <td>
               <input
                 type="number"
                 class="form-control form-control-sm"
-                [(ngModel)]="item.quantidade"
-                name="quantidade{{i}}"
+                formControlName="quantidade"
                 min="1"
-                required
                 style="max-width: 100px;"
               />
             </td>
@@ -64,10 +61,8 @@
               <input
                 type="number"
                 class="form-control form-control-sm"
-                [(ngModel)]="item.valor"
-                name="valor{{i}}"
+                formControlName="valor"
                 min="1"
-                required
                 style="max-width: 100px;"
               />
             </td>
