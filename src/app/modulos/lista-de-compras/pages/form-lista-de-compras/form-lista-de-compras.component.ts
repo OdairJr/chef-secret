@@ -63,11 +63,11 @@ export class FormListaDeComprasComponent implements OnInit {
       this.listaDeComprasService
         .atualizarLista(this.listaId, lista)
         .subscribe(() => {
-          this.router.navigate(['/compras']);
+          this.router.navigate(['/lista-de-compras']);
         });
     } else {
       this.listaDeComprasService.criarLista(lista).subscribe(() => {
-        this.router.navigate(['/compras']);
+        this.router.navigate(['/lista-de-compras']);
       });
     }
   }
