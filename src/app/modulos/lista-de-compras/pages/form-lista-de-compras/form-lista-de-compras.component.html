@@ -13,7 +13,12 @@
         *ngIf="formularioCompras.get('nomeLista')?.errors && formularioCompras.get('nomeLista')?.touched"
         class="invalid-feedback d-block"
       >
-        Dê um nome para esta lista.
+        <span *ngIf="formularioCompras.get('nomeLista')?.errors?.['required']">
+          O nome da lista é obrigatório.
+        </span>
+        <span *ngIf="formularioCompras.get('nomeLista')?.errors?.['maxLength']">
+          O nome da lista deve ter no máximo 30 caracteres.
+        </span>
       </div>
     </div>
 
@@ -56,15 +61,37 @@
                 min="1"
                 style="max-width: 100px;"
               />
+              <div
+                *ngIf="item.get('quantidade')?.errors && item.get('quantidade')?.touched"
+                class="invalid-feedback d-block"
+              >
+                <span *ngIf="item.get('quantidade')?.errors?.['required']">
+                  A quantidade é obrigatória.
+                </span>
+                <span *ngIf="item.get('quantidade')?.errors?.['min']">
+                  A quantidade deve ser maior que 0.
+                </span>
+              </div>
             </td>
             <td>
               <input
                 type="number"
                 class="form-control form-control-sm"
                 formControlName="valor"
-                min="1"
+                min="0"
                 style="max-width: 100px;"
               />
+              <div
+                *ngIf="item.get('valor')?.errors && item.get('valor')?.touched"
+                class="invalid-feedback d-block"
+              >
+                <span *ngIf="item.get('valor')?.errors?.['required']">
+                  O valor é obrigatório.
+                </span>
+                <span *ngIf="item.get('valor')?.errors?.['min']">
+                  O valor deve ser maior ou igual a 0.
+                </span>
+              </div>
             </td>
             <td>
               <button type="button" class="btn btn-danger btn-sm" (click)="removerItem(i)">
