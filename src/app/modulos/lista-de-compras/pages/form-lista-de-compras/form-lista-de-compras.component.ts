@@ -5,6 +5,8 @@ import { ListaDeComprasService } from '../../services/lista-de-compras.service';
 import { ItemDaLista } from 'src/app/models/itens-da-lista.model';
 import { Material } from 'src/app/models/material.model';
 import { Ingrediente, Receita } from 'src/app/models/receita.model';
+import { ProdutosService } from 'src/app/modulos/produtos/services/produtos.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-form-lista-de-compras',
@@ -20,7 +22,8 @@ export class FormListaDeComprasComponent implements OnInit {
     private formBuilder: FormBuilder,
     private listaDeComprasService: ListaDeComprasService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private produtosService: ProdutosService
   ) {
     this.formularioCompras = this.formBuilder.group({
       nomeLista: ['', [Validators.required, Validators.maxLength(30)]],
@@ -57,7 +60,6 @@ export class FormListaDeComprasComponent implements OnInit {
       return;
     }
 
-    debugger;
     const lista = {
       nomeLista: this.formularioCompras.value.nomeLista,
       itens: this.formularioCompras.value.itens,
@@ -117,16 +119,33 @@ export class FormListaDeComprasComponent implements OnInit {
     this.notasFiscais = this.notasFiscais.filter((n) => n !== nota);
   }
 
-  onSelecionarReceita(receita: Receita): void {
-    debugger;
+  async onSelecionarReceita(receita: Receita) {
     if (receita.ingredientes && Array.isArray(receita.ingredientes)) {
-      receita.ingredientes.forEach((ingrediente: Ingrediente) => {
-        this.adicionarItem({
-          materialRelacionado: ingrediente.produto,
-          quantidade: ingrediente.quantidade,
-          valor: 0,
-        });
-      });
+      for (const ingrediente of receita.ingredientes) {
+        const material = await this.buscarMaterialPorId(ingrediente.id_produto);
+        if (material) {
+          this.adicionarItem({
+            materialRelacionado: material,
+            quantidade: 1,
+            valor: 0,
+          });
+        }
+      }
+    }
+  }
+
+  private async buscarMaterialPorId(
+    id: number
+  ): Promise<Material | null | undefined> {
+    try {
+      const material = await firstValueFrom(
+        this.produtosService.obterProdutoPorId(id)
+      );
+
+      return material;
+    } catch (error) {
+      console.error(`Erro ao buscar material com ID ${id}:`, error);
+      return null;
     }
   }
 }

@@ -4,7 +4,7 @@
       <tr>
         <th>Nome</th>
         <th>Quantidade</th>
-        <th>Preço</th>
+        <th>Observações</th>
         <th>Ações</th>
       </tr>
     </thead>
@@ -12,7 +12,7 @@
       <tr *ngFor="let ingrediente of ingredientes; let i = index">
         <td>{{ ingrediente.produto?.nome }}</td>
         <td>{{ ingrediente.quantidade }} {{ ingrediente.unidade }}</td>
-        <td>R$ ingrediente.preco | number: '1.2-2'</td>
+        <td>{{ ingrediente.observacoes }}</td>
         <td>
           <button class="btn btn-warning btn-sm" (click)="editarIngrediente(i)">
             Editar

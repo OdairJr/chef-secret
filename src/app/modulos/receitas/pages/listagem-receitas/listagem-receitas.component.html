@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <h2 class="mb-4">Lista de Receitas</h2>
   <div class="text-end mb-3">
-    <button class="btn btn-primary" routerLink="/receitas/cadastro">Nova Receita</button>
+    <button class="btn btn-primary" routerLink="/receitas/nova-receita">Nova Receita</button>
   </div>
   <div *ngIf="erroCarregamento; else listaReceitas">
     <p class="text-danger">{{ erroCarregamento }}</p>

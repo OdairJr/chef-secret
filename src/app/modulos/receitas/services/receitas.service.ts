@@ -14,7 +14,7 @@ export class ReceitasService {
     return this.http.get<Receita[]>(API_ENDPOINTS.receitas());
   }
 
-  public obterReceitaPorId(id: number): Observable<Receita | undefined> {
+  public obterReceitaPorId(id: number): Observable<Receita> {
     return this.http.get<Receita>(API_ENDPOINTS.receitaById(id));
   }
 
@@ -22,7 +22,7 @@ export class ReceitasService {
     return this.http.post<Receita>(API_ENDPOINTS.receitas(), receita);
   }
 
-  public editarReceita(receita: Receita): Observable<Receita | undefined> {
+  public editarReceita(receita: Receita): Observable<Receita> {
     return this.http.put<Receita>(
       API_ENDPOINTS.receitaById(receita.id),
       receita

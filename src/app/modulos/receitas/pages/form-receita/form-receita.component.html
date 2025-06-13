@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <h1 class="text-center mb-4">Cadastro de Receita</h1>
+  <h1 class="text-center mb-4">{{ receitaId ? 'Editar Receita' : 'Cadastrar Receita' }}</h1>
   <form [formGroup]="formulario" (ngSubmit)="salvarReceita()">
     <div class="mb-3">
       <label for="titulo" class="form-label">Nome da Receita</label>
@@ -67,7 +67,6 @@
       </button>
     </div>
 
-    <!-- Lista de Materiais -->
     <div class="mb-3">
       <h2 class="text-center">Lista de Ingredientes</h2>
       <app-lista-ingredientes
@@ -76,10 +75,6 @@
         (excluir)="onExcluirIngrediente($event)"
       ></app-lista-ingredientes>
     </div>
-
-    <!-- <div class="mb-3">
-      <app-lista-etapas></app-lista-etapas>
-    </div> -->
 
     <div class="row align-items-end mt-4">
       <div class="col-4">
@@ -118,15 +113,3 @@
 
 <app-modal-selecao-material #modal_selecao (materialSelecionado)="onSelecionarProduto($event)"></app-modal-selecao-material>
 <app-modal-detalhes-produto #modal_detalhes_produto (confirmarDetalhes)="onConfirmarDetalhesIngrediente($event)"></app-modal-detalhes-produto>
-<!--
-<button class="btn btn-primary" (click)="mostrarModal = true">Abrir Modal</button>
-
-<app-modal *ngIf="mostrarModal" [title]="'Título do Modal'" [showFooter]="true" (closeModal)="mostrarModal = false">
-  <div modal-body>
-    <p>Este é o corpo do modal. Você pode personalizá-lo conforme necessário.</p>
-  </div>
-  <div modal-footer>
-    <button class="btn btn-secondary" (click)="mostrarModal = false">Fechar</button>
-    <button class="btn btn-primary">Salvar</button>
-  </div>
-</app-modal> -->
