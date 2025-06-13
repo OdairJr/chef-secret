@@ -34,7 +34,12 @@ export class ListagemReceitasComponent implements OnInit {
     });
   }
 
-  verDetalhes(id: number): void {
+  verDetalhes(id?: number): void {
+    if (!id) {
+      console.error('ID da receita não fornecido para ver detalhes.');
+      return;
+    }
+
     this.router.navigate(['/receitas', 'editar-receita', id]);
   }
 }

@@ -59,6 +59,11 @@
       />
     </div>
 
+    <div class="mb-3">
+      <h2 class="text-center">Tags</h2>
+      <app-tag-selector (tagsSelecionadas)="onTagsSelecionadas($event)"></app-tag-selector>
+    </div>
+
     <div class="d-flex justify-content-center my-4">
       <button (click)="modal_selecao.abrirModal()" type="button" class="btn btn-success d-flex align-items-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">

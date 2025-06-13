@@ -1,28 +1,47 @@
 import { Material } from "./material.model";
+import { Usuario } from "./usuario.model";
 
 export interface Receita {
-  id: number;
-  updated_at?: string;
-  created_at?: string;
-  id_usuario: number;
-
+  id?: number;
+  id_usuario?: number;
   titulo: string;
   descricao: string;
   rendimento: string;
   tempo_preparo: string;
-  etapas: Etapa[];
+  updated_at?: string;
+  created_at?: string;
+  usuario?: Usuario;
+  tags: ReceitaTag[];
+  imagens: string[];
+  // etapas: Etapa[];
   ingredientes: Ingrediente[];
 }
 
+export interface ReceitaTag {
+  id: number;
+  nome: string;
+  pivot: Pivot;
+}
+
+export interface Pivot {
+  id_receita: string;
+  id_tag: string;
+}
+
 export interface Etapa {
-  numero_etapa: number;
+  id: number;
+  id_receita: string;
+  numero_etapa: number; // Alterado para string conforme o exemplo fornecido
   instrucoes: string;
 }
 
 export interface Ingrediente {
+  id: number;
+  id_receita: number;
   id_produto: number;
-  produto?: Material;
-  quantidade: number;
+  quantidade: string; // Alterado para string conforme o exemplo fornecido
   unidade: string;
-  observacoes?: string; // Campo opcional
+  observacoes?: string;
+  produto?: Material;
 }
+

@@ -7,7 +7,7 @@ import { Etapa } from 'src/app/models/receita.model';
   styleUrls: ['./lista-etapas.component.css'],
 })
 export class ListaEtapasComponent {
-  etapas: Etapa[] = [];
+  // etapas: Etapa[] = [];
   adicionandoEtapa = false;
   novaEtapa = '';
 
@@ -17,13 +17,13 @@ export class ListaEtapasComponent {
   }
 
   confirmarAdicionarEtapa() {
-    if (this.novaEtapa.trim()) {
-      const numero_etapa = this.etapas.length + 1;
-      this.etapas.push({
-        numero_etapa,
-        instrucoes: this.novaEtapa.trim(),
-      });
-    }
+    // if (this.novaEtapa.trim()) {
+    //   const numero_etapa = this.etapas.length + 1;
+    //   this.etapas.push({
+    //     numero_etapa,
+    //     instrucoes: this.novaEtapa.trim(),
+    //   });
+    // }
     this.adicionandoEtapa = false;
     this.novaEtapa = '';
   }
@@ -34,8 +34,8 @@ export class ListaEtapasComponent {
   }
 
   excluirEtapa(index: number) {
-    this.etapas.splice(index, 1);
-    // Atualiza os números das etapas após exclusão
-    this.etapas.forEach((etapa, i) => etapa.numero_etapa = i + 1);
+    // this.etapas.splice(index, 1);
+    // // Atualiza os números das etapas após exclusão
+    // this.etapas.forEach((etapa, i) => etapa.numero_etapa = i + 1);
   }
 }

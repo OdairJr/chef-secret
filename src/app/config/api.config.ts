@@ -12,4 +12,5 @@ export const API_ENDPOINTS = {
   getUserById: (id: number) => `/user/getUser/${id}`,
   receitas: () => `${API_URL}/api/receitas`,
   receitaById: (id: number) => `${API_URL}/api/receitas/${id}`,
+  receitaTags: () => `${API_URL}/api/receita-tags`,
 };

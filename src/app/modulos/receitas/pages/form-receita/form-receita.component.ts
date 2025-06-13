@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReceitasService } from '../../services/receitas.service';
-import { Ingrediente, Receita } from 'src/app/models/receita.model';
+import { Ingrediente, Receita, ReceitaTag } from 'src/app/models/receita.model';
 import { Material } from 'src/app/models/material.model';
 import { ModalDetalhesProdutoComponent } from '../../components/modal-detalhes-produto/modal-detalhes-produto.component';
 
@@ -16,6 +16,7 @@ export class FormReceitaComponent implements OnInit {
   receitaId: number | null = null;
   public ingredientes: Ingrediente[] = [];
   public ingredienteSendoAdicionado?: Partial<Ingrediente>;
+  public tagsSelecionadas: ReceitaTag[] = [];
 
   @ViewChild('modal_detalhes_produto')
   modalDetalhesProduto!: ModalDetalhesProdutoComponent;
@@ -45,6 +46,7 @@ export class FormReceitaComponent implements OnInit {
     this.receitasService.obterReceitaPorId(id).subscribe((receita: Receita) => {
       this.formulario.patchValue(receita);
       this.ingredientes = receita.ingredientes;
+      this.tagsSelecionadas = receita.tags || [];
     });
   }
 
@@ -53,6 +55,7 @@ export class FormReceitaComponent implements OnInit {
       const receita: Receita = {
         ...this.formulario.value,
         ingredientes: this.ingredientes,
+        tags: this.tagsSelecionadas,
       };
 
       if (this.receitaId) {
@@ -110,5 +113,9 @@ export class FormReceitaComponent implements OnInit {
 
       this.ingredienteSendoAdicionado = undefined;
     }
+  }
+
+  public onTagsSelecionadas(tags: ReceitaTag[]): void {
+    this.tagsSelecionadas = tags;
   }
 }

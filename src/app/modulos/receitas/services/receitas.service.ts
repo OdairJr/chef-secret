@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Receita } from 'src/app/models/receita.model';
+import { Receita, ReceitaTag } from 'src/app/models/receita.model';
 import { API_ENDPOINTS } from 'src/app/config/api.config';
 
 @Injectable({
@@ -23,6 +23,10 @@ export class ReceitasService {
   }
 
   public editarReceita(receita: Receita): Observable<Receita> {
+    if (!receita.id) {
+      throw new Error('Receita ID is required for editing');
+    }
+
     return this.http.put<Receita>(
       API_ENDPOINTS.receitaById(receita.id),
       receita
@@ -31,5 +35,9 @@ export class ReceitasService {
 
   public excluirReceita(id: number): Observable<void> {
     return this.http.delete<void>(API_ENDPOINTS.receitaById(id));
+  }
+
+  public listarTagsReceita(): Observable<ReceitaTag[]> {
+    return this.http.get<ReceitaTag[]>(API_ENDPOINTS.receitaTags());
   }
 }
