@@ -12,7 +12,7 @@ export interface Receita {
   created_at?: string;
   usuario?: Usuario;
   tags: ReceitaTag[];
-  imagens: string[];
+  imagens: number[];
   // etapas: Etapa[];
   ingredientes: Ingrediente[];
 }

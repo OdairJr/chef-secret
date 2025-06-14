@@ -2,7 +2,7 @@
   <button
     *ngFor="let tag of tags"
     type="button"
-    class="btn"
+    class="btn btn-sm"
     [ngClass]="{
       'btn-primary': isSelected(tag),
       'btn-outline-primary': !isSelected(tag)

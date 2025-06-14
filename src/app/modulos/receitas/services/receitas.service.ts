@@ -19,7 +19,12 @@ export class ReceitasService {
   }
 
   public criarReceita(receita: Receita): Observable<Receita> {
-    return this.http.post<Receita>(API_ENDPOINTS.receitas(), receita);
+    const receitaComTagsIds = {
+      ...receita,
+      tags: receita.tags.map((tag) => tag.id), // Mapeia para uma lista de IDs
+    };
+
+    return this.http.post<Receita>(API_ENDPOINTS.receitas(), receitaComTagsIds);
   }
 
   public editarReceita(receita: Receita): Observable<Receita> {
@@ -27,10 +32,12 @@ export class ReceitasService {
       throw new Error('Receita ID is required for editing');
     }
 
-    return this.http.put<Receita>(
-      API_ENDPOINTS.receitaById(receita.id),
-      receita
-    );
+    const receitaComTagsIds = {
+      ...receita,
+      tags: receita.tags.map((tag) => tag.id), // Mapeia para uma lista de IDs
+    };
+
+    return this.http.put<Receita>(API_ENDPOINTS.receitaById(receita.id), receitaComTagsIds);
   }
 
   public excluirReceita(id: number): Observable<void> {

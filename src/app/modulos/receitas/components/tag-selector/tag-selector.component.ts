@@ -1,17 +1,17 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ReceitasService } from '../../services/receitas.service';
 import { ReceitaTag } from 'src/app/models/receita.model';
 
 @Component({
   selector: 'app-tag-selector',
   templateUrl: './tag-selector.component.html',
-  styleUrls: ['./tag-selector.component.css']
+  styleUrls: ['./tag-selector.component.css'],
 })
 export class TagSelectorComponent implements OnInit {
-  tags: ReceitaTag[] = [];
-  selectedTags: ReceitaTag[] = [];
-
+  @Input() selectedTags: ReceitaTag[] = [];
   @Output() tagsSelecionadas = new EventEmitter<ReceitaTag[]>();
+
+  tags: ReceitaTag[] = [];
 
   constructor(private receitasService: ReceitasService) {}
 
@@ -28,6 +28,7 @@ export class TagSelectorComponent implements OnInit {
     } else {
       this.selectedTags.push(tag);
     }
+
     this.tagsSelecionadas.emit(this.selectedTags);
   }
 
