@@ -24,6 +24,7 @@ export class ModalDetalhesProdutoComponent {
   }
 
   public abrirModal() {
+    this.formulario.reset();
     this.mostrarModal = true;
   }
 
