@@ -6,7 +6,8 @@ import { ImagensService } from 'src/app/core/services/imagens.service';
 import { Ingrediente, Receita, ReceitaTag } from 'src/app/models/receita.model';
 import { Imagem } from 'src/app/models/imagem.model';
 import { Material } from 'src/app/models/material.model';
-import { ModalDetalhesProdutoComponent } from '../../components/modal-detalhes-produto/modal-detalhes-produto.component';
+// Importe ou defina DetalhesProduto conforme necessário
+import { ModalDetalhesProdutoComponent, DetalhesProduto } from '../../../../compartilhado/components/modal-detalhes-produto/modal-detalhes-produto.component';
 import { forkJoin, map } from 'rxjs';
 import { ProdutosService } from 'src/app/modulos/produtos/services/produtos.service';
 
@@ -147,19 +148,25 @@ export class FormReceitaComponent implements OnInit {
     this.modalDetalhesProduto.abrirModal();
   }
 
-  public onConfirmarDetalhesIngrediente(ingrediente: Omit<Ingrediente, 'produto_id'>): void {
+  public onConfirmarDetalhesIngrediente(ingrediente: DetalhesProduto): void {
     if (this.ingredienteSendoAdicionado) {
       const index = this.ingredientes.findIndex((ing) => ing.id_produto === this.ingredienteSendoAdicionado?.id_produto);
 
       if (index !== -1) {
         this.ingredientes[index] = {
-          ...this.ingredienteSendoAdicionado,
-          ...ingrediente,
+          id_produto: this.ingredienteSendoAdicionado.id_produto!,
+          produto: this.ingredienteSendoAdicionado.produto,
+          quantidade: String(ingrediente.quantidade),
+          unidade: ingrediente.unidade,
+          observacoes: ingrediente.observacoes || '',
         };
       } else {
         this.ingredientes.push({
-          ...this.ingredienteSendoAdicionado,
-          ...ingrediente,
+          id_produto: this.ingredienteSendoAdicionado.id_produto!,
+          produto: this.ingredienteSendoAdicionado.produto,
+          quantidade: String(ingrediente.quantidade),
+          unidade: ingrediente.unidade,
+          observacoes: ingrediente.observacoes || '',
         });
       }
 

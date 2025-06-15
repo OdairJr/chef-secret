@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListaDeComprasService } from '../../services/lista-de-compras.service';
-import { ItemDaLista } from 'src/app/models/itens-da-lista.model';
+import { ItemDaLista } from 'src/app/models/lista-de-compras.model';
 import { Material } from 'src/app/models/material.model';
 import { Ingrediente, Receita } from 'src/app/models/receita.model';
 import { ProdutosService } from 'src/app/modulos/produtos/services/produtos.service';
 import { firstValueFrom } from 'rxjs';
+import { ModalDetalhesProdutoComponent, DetalhesProduto } from 'src/app/compartilhado/components/modal-detalhes-produto/modal-detalhes-produto.component';
 
 @Component({
   selector: 'app-form-lista-de-compras',
@@ -14,9 +15,13 @@ import { firstValueFrom } from 'rxjs';
   styleUrls: ['./form-lista-de-compras.component.css'],
 })
 export class FormListaDeComprasComponent implements OnInit {
+  @ViewChild('modal_detalhes_produto')
+  modalDetalhesProduto!: ModalDetalhesProdutoComponent;
+
   formularioCompras!: FormGroup;
   listaId: string | null = null;
   notasFiscais: File[] = [];
+  public ingredienteSendoAdicionado?: Partial<Ingrediente>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,7 +31,7 @@ export class FormListaDeComprasComponent implements OnInit {
     private produtosService: ProdutosService
   ) {
     this.formularioCompras = this.formBuilder.group({
-      nomeLista: ['', [Validators.required, Validators.maxLength(30)]],
+      nome_lista: ['', [Validators.required, Validators.maxLength(30)]],
       itens: this.formBuilder.array([]),
       notasFiscais: [[]],
     });
@@ -48,8 +53,8 @@ export class FormListaDeComprasComponent implements OnInit {
   private carregarLista(id: string): void {
     this.listaDeComprasService.buscarListaPorId(id).subscribe((lista) => {
       if (lista) {
-        this.formularioCompras.patchValue({ nomeLista: lista.nomeLista });
-        lista.itens?.forEach((item) => this.adicionarItem(item));
+        this.formularioCompras.patchValue({ nome_lista: lista.nome_lista });
+        lista.produtos?.forEach((item) => this.adicionarItem(item));
       }
     });
   }
@@ -61,22 +66,24 @@ export class FormListaDeComprasComponent implements OnInit {
     }
 
     const lista = {
-      nomeLista: this.formularioCompras.value.nomeLista,
+      nome_lista: this.formularioCompras.value.nome_lista,
       itens: this.formularioCompras.value.itens,
       notasFiscais: this.notasFiscais,
     };
 
-    if (this.listaId) {
-      this.listaDeComprasService
-        .atualizarLista(this.listaId, lista)
-        .subscribe(() => {
-          this.router.navigate(['/lista-de-compras']);
-        });
-    } else {
-      this.listaDeComprasService.criarLista(lista).subscribe(() => {
-        this.router.navigate(['/lista-de-compras']);
-      });
-    }
+    console.log(lista);
+
+    // if (this.listaId) {
+    //   this.listaDeComprasService
+    //     .atualizarLista(this.listaId, lista)
+    //     .subscribe(() => {
+    //       this.router.navigate(['/lista-de-compras']);
+    //     });
+    // } else {
+    //   this.listaDeComprasService.criarLista(lista).subscribe(() => {
+    //     this.router.navigate(['/lista-de-compras']);
+    //   });
+    // }
   }
 
   public removerItem(index: number): void {
@@ -86,22 +93,37 @@ export class FormListaDeComprasComponent implements OnInit {
   public adicionarItem(item: Partial<ItemDaLista> = {}): void {
     const itemForm = this.formBuilder.group({
       comprado: [item.comprado || false],
-      materialRelacionado: [item.materialRelacionado || null],
-      quantidade: [
-        item.quantidade || 1,
-        [Validators.required, Validators.min(1)],
-      ],
+      produto: [item.produto || null],
+      quantidade: [item.quantidade || 1, [Validators.required, Validators.min(1)]],
       valor: [item.valor || 0, [Validators.required, Validators.min(0)]],
     });
     this.itens.push(itemForm);
   }
 
+  public atualizarItem(index: number, item: Partial<ItemDaLista>): void {
+    if (index >= 0 && index < this.itens.length) {
+      this.itens.at(index).patchValue({
+        comprado: item.comprado ?? this.itens.at(index).value.comprado,
+        produto: item.produto ?? this.itens.at(index).value.produto,
+        quantidade: item.quantidade ?? this.itens.at(index).value.quantidade,
+        valor: item.valor ?? this.itens.at(index).value.valor,
+      });
+    }
+  }
+
   onSelecionarMaterial(material: Material): void {
-    this.adicionarItem({
-      materialRelacionado: material,
-      quantidade: 1,
-      valor: 0,
-    });
+    // this.adicionarItem({
+    //   materialRelacionado: material,
+    //   quantidade: 1,
+    //   valor: 0,
+    // });
+
+    this.ingredienteSendoAdicionado = {
+      id_produto: material.id,
+      produto: material,
+    };
+
+    this.modalDetalhesProduto.abrirModal();
   }
 
   cancelar(): void {
@@ -125,7 +147,7 @@ export class FormListaDeComprasComponent implements OnInit {
         const material = await this.buscarMaterialPorId(ingrediente.id_produto);
         if (material) {
           this.adicionarItem({
-            materialRelacionado: material,
+            produto: material,
             quantidade: 1,
             valor: 0,
           });
@@ -134,18 +156,37 @@ export class FormListaDeComprasComponent implements OnInit {
     }
   }
 
-  private async buscarMaterialPorId(
-    id: number
-  ): Promise<Material | null | undefined> {
+  private async buscarMaterialPorId(id: number): Promise<Material | null | undefined> {
     try {
-      const material = await firstValueFrom(
-        this.produtosService.obterProdutoPorId(id)
-      );
+      const material = await firstValueFrom(this.produtosService.obterProdutoPorId(id));
 
       return material;
     } catch (error) {
       console.error(`Erro ao buscar material com ID ${id}:`, error);
       return null;
+    }
+  }
+
+  public onConfirmarDetalhesIngrediente(ingrediente: DetalhesProduto): void {
+    if (this.ingredienteSendoAdicionado) {
+      const index = this.itens.controls.findIndex((ctrl) => ctrl.value.produto && ctrl.value.produto.id === this.ingredienteSendoAdicionado?.id_produto);
+
+      const itemDaLista: ItemDaLista = {
+        id_produto: this.ingredienteSendoAdicionado.id_produto!,
+        produto: this.ingredienteSendoAdicionado.produto,
+        unidade: ingrediente.unidade,
+        quantidade: 0,
+        valor: 0,
+        comprado: false,
+      };
+
+      if (index !== -1) {
+        this.atualizarItem(index, itemDaLista);
+      } else {
+        this.adicionarItem(itemDaLista);
+      }
+
+      this.ingredienteSendoAdicionado = undefined;
     }
   }
 }

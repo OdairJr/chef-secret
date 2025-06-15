@@ -31,15 +31,15 @@ export interface Pivot {
 export interface Etapa {
   id: number;
   id_receita: string;
-  numero_etapa: number; // Alterado para string conforme o exemplo fornecido
+  numero_etapa: number;
   instrucoes: string;
 }
 
 export interface Ingrediente {
-  id: number;
-  id_receita: number;
+  id?: number;
+  id_receita?: number;
   id_produto: number;
-  quantidade: string; // Alterado para string conforme o exemplo fornecido
+  quantidade: string;
   unidade: string;
   observacoes?: string;
   produto?: Material;

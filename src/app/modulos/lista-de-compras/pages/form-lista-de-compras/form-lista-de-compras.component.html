@@ -1,22 +1,22 @@
 <div class="container mt-4">
   <form [formGroup]="formularioCompras" (ngSubmit)="salvarLista()">
     <div class="mb-3">
-      <label for="nomeLista" class="form-label">Nome da lista</label>
+      <label for="nome_lista" class="form-label">Nome da lista</label>
       <input
         type="text"
-        id="nomeLista"
+        id="nome_lista"
         class="form-control"
-        formControlName="nomeLista"
+        formControlName="nome_lista"
         placeholder="Digite o nome da lista"
       />
       <div
-        *ngIf="formularioCompras.get('nomeLista')?.errors && formularioCompras.get('nomeLista')?.touched"
+        *ngIf="formularioCompras.get('nome_lista')?.errors && formularioCompras.get('nome_lista')?.touched"
         class="invalid-feedback d-block"
       >
-        <span *ngIf="formularioCompras.get('nomeLista')?.errors?.['required']">
+        <span *ngIf="formularioCompras.get('nome_lista')?.errors?.['required']">
           O nome da lista é obrigatório.
         </span>
-        <span *ngIf="formularioCompras.get('nomeLista')?.errors?.['maxLength']">
+        <span *ngIf="formularioCompras.get('nome_lista')?.errors?.['maxLength']">
           O nome da lista deve ter no máximo 30 caracteres.
         </span>
       </div>
@@ -133,5 +133,6 @@
 </div>
 
 <app-modal-selecao-material #modal_selecao_material (materialSelecionado)="onSelecionarMaterial($event)"></app-modal-selecao-material>
+<app-modal-detalhes-produto #modal_detalhes_produto (confirmarDetalhes)="onConfirmarDetalhesIngrediente($event)"></app-modal-detalhes-produto>
 
 <app-modal-selecao-receita #modal_selecao_receita (receitaSelecionada)="onSelecionarReceita($event)"></app-modal-selecao-receita>

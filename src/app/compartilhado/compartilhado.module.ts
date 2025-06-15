@@ -4,16 +4,17 @@ import { ModalSelecaoMaterialComponent } from './components/modal-selecao-materi
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalComponent } from './components/modal/modal.component';
 import { ModalSelecaoReceitaComponent } from './components/modal-selecao-receita/modal-selecao-receita.component';
+import { ModalDetalhesProdutoComponent } from './components/modal-detalhes-produto/modal-detalhes-produto.component';
 
 
 
 @NgModule({
-  declarations: [ModalSelecaoMaterialComponent, ModalComponent, ModalSelecaoReceitaComponent],
+  declarations: [ModalSelecaoMaterialComponent, ModalComponent, ModalSelecaoReceitaComponent, ModalDetalhesProdutoComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule
   ],
-  exports: [ModalSelecaoMaterialComponent, ModalComponent, ModalSelecaoReceitaComponent]
+  exports: [ModalSelecaoMaterialComponent, ModalComponent, ModalSelecaoReceitaComponent, ModalDetalhesProdutoComponent]
 })
 export class CompartilhadoModule { }

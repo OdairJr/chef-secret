@@ -10,7 +10,7 @@
         (click)="selecionarLista(lista)"
       >
         <span>
-          <strong>{{ lista.nomeLista }}</strong>
+          <strong>{{ lista.nome_lista }}</strong>
           <small class="text-muted ms-2">{{ lista.data }}</small>
         </span>
         <span class="badge bg-primary rounded-pill">R$ {{ lista.valorTotal | number:'1.2-2' }}</span>
@@ -23,7 +23,7 @@
 
   <div *ngIf="listaSelecionada">
     <button class="btn btn-link mb-3" (click)="voltar()">&larr; Voltar</button>
-    <h4>{{ listaSelecionada.nomeLista }}</h4>
+    <h4>{{ listaSelecionada.nome_lista }}</h4>
     <p><strong>Data:</strong> {{ listaSelecionada.data }}</p>
     <!-- <p><strong>Total:</strong> R$ {{ listaSelecionada.valorTotal | number:'1.2-2' }}</p> -->
     <table class="table table-bordered mt-3">

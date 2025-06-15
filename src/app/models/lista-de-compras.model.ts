@@ -1,9 +1,19 @@
-import { ItemDaLista } from './itens-da-lista.model';
+import { Material } from './material.model';
 
 export interface ListaDeCompras {
   id: string;
-  nomeLista?: string;
-  itens?: ItemDaLista[];
-  valorTotal: number;
-  notasFiscais?: File[];
+  nome_lista: string;
+  descricao?: string;
+  produtos?: ItemDaLista[];
+}
+
+export interface ItemDaLista {
+  id_produto: number;
+  produto?: Material;
+  unidade: string;
+  quantidade: number;
+
+  // CAMPOS DA TELA
+  valor?: number;
+  comprado?: boolean;
 }

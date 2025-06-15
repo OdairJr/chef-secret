@@ -14,7 +14,7 @@ export class ListaDeComprasService {
     const novaLista: ListaDeCompras = {
       ...lista,
       id: this.gerarId(),
-      itens: lista.itens || [],
+      produtos: lista.produtos || [],
     } as ListaDeCompras;
     listas.push(novaLista);
     this.setLocalListas(listas);

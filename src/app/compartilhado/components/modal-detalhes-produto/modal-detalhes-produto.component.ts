@@ -1,7 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Ingrediente } from 'src/app/models/receita.model';
 
+export interface DetalhesProduto {
+  quantidade: number;
+  unidade: string;
+  observacoes?: string; // Campo opcional
+}
 
 @Component({
   selector: 'app-modal-detalhes-produto',
@@ -11,7 +15,7 @@ import { Ingrediente } from 'src/app/models/receita.model';
 export class ModalDetalhesProdutoComponent {
   mostrarModal: boolean = false;
   @Output() fecharModal = new EventEmitter<void>();
-  @Output() confirmarDetalhes = new EventEmitter<Omit<Ingrediente, 'produto_id'>>();
+  @Output() confirmarDetalhes = new EventEmitter<DetalhesProduto>();
 
   formulario: FormGroup;
 

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 interface ListaDeComprasMock {
   id: string;
-  nomeLista: string;
+  nome_lista: string;
   valorTotal: number;
   data: string;
   itens: {
@@ -22,7 +22,7 @@ export class HistoricoDeComprasComponent {
   historico: ListaDeComprasMock[] = [
     {
       id: '1',
-      nomeLista: 'Supermercado Março',
+      nome_lista: 'Supermercado Março',
       valorTotal: 210.75,
       data: '2024-03-10',
       itens: [
@@ -32,7 +32,7 @@ export class HistoricoDeComprasComponent {
     },
     {
       id: '2',
-      nomeLista: 'Churrasco Família',
+      nome_lista: 'Churrasco Família',
       valorTotal: 350.00,
       data: '2024-02-20',
       itens: [

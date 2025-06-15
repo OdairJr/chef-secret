@@ -10,8 +10,8 @@
       <div class="col-md-6 mb-3" *ngFor="let lista of listas">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">{{ lista.nomeLista }}</h5>
-            <p class="card-text"><strong>Total:</strong> R$ {{ lista.valorTotal }}</p>
+            <h5 class="card-title">{{ lista.nome_lista }}</h5>
+            <p class="card-text"><strong>Total:</strong> R$ ?? </p>
             <div class="d-flex gap-2">
               <button class="btn btn-success btn-sm" (click)="selecionarLista(lista)">Comprar</button>
               <button class="btn btn-danger btn-sm" (click)="excluirLista(lista.id)">Excluir</button>

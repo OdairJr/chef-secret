@@ -37,7 +37,7 @@
   "lista-de-compras": [
     {
       "id": "e6d5",
-      "nomeLista": "Mercado março",
+      "nome_lista": "Mercado março",
       "itens": [
         {
           "nomeItem": "feijao",
@@ -49,7 +49,7 @@
     },
     {
       "id": "5aff",
-      "nomeLista": "lista teste 3",
+      "nome_lista": "lista teste 3",
       "itens": [
         {
           "id": "64f0",
@@ -73,7 +73,7 @@
     },
     {
       "id": "1bdf",
-      "nomeLista": "lasanha ",
+      "nome_lista": "lasanha ",
       "itens": [
         {
           "id": "64f0",
@@ -94,7 +94,7 @@
     },
     {
       "id": "065b",
-      "nomeLista": "lasanha3",
+      "nome_lista": "lasanha3",
       "itens": [
         {
           "id": "64f0",
@@ -118,7 +118,7 @@
     },
     {
       "id": "c062",
-      "nomeLista": "teste 6",
+      "nome_lista": "teste 6",
       "itens": [
         {
           "id": "64f0",
@@ -148,7 +148,7 @@
     },
     {
       "id": "43a7",
-      "nomeLista": "TESTANDO HISTORICO",
+      "nome_lista": "TESTANDO HISTORICO",
       "itens": [
         {
           "id": "64f0",
