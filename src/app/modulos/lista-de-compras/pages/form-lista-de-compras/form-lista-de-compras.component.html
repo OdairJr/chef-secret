@@ -34,7 +34,7 @@
         <span class="me-1"><i class="bi bi-plus-lg"></i></span> Adicionar Material
       </button>
     </div>
-    <div formArrayName="itens" *ngIf="itens.controls.length > 0" class="mb-3">
+    <div *ngIf="itens.length > 0" class="mb-3">
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -46,54 +46,29 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of itens.controls; let i = index" [formGroupName]="i">
+          <tr *ngFor="let item of itens; let i = index">
             <td>
               <input
                 type="checkbox"
-                formControlName="comprado"
                 aria-label="Item comprado"
               />
             </td>
-            <td>{{ item.value.materialRelacionado?.nome }}</td>
+            <td>{{ item.produto?.nome }}</td>
             <td>
               <input
                 type="number"
                 class="form-control form-control-sm"
-                formControlName="quantidade"
                 min="1"
                 style="max-width: 100px;"
               />
-              <div
-                *ngIf="item.get('quantidade')?.errors && item.get('quantidade')?.touched"
-                class="invalid-feedback d-block"
-              >
-                <span *ngIf="item.get('quantidade')?.errors?.['required']">
-                  A quantidade é obrigatória.
-                </span>
-                <span *ngIf="item.get('quantidade')?.errors?.['min']">
-                  A quantidade deve ser maior que 0.
-                </span>
-              </div>
             </td>
             <td>
               <input
                 type="number"
                 class="form-control form-control-sm"
-                formControlName="valor"
                 min="0"
                 style="max-width: 100px;"
               />
-              <div
-                *ngIf="item.get('valor')?.errors && item.get('valor')?.touched"
-                class="invalid-feedback d-block"
-              >
-                <span *ngIf="item.get('valor')?.errors?.['required']">
-                  O valor é obrigatório.
-                </span>
-                <span *ngIf="item.get('valor')?.errors?.['min']">
-                  O valor deve ser maior ou igual a 0.
-                </span>
-              </div>
             </td>
             <td>
               <button type="button" class="btn btn-danger btn-sm" (click)="removerItem(i)">

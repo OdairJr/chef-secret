@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListaDeComprasService } from '../../services/lista-de-compras.service';
 import { ItemDaLista } from 'src/app/models/lista-de-compras.model';
@@ -21,6 +21,7 @@ export class FormListaDeComprasComponent implements OnInit {
   formularioCompras!: FormGroup;
   listaId: string | null = null;
   notasFiscais: File[] = [];
+  itens: ItemDaLista[] = [];
   public ingredienteSendoAdicionado?: Partial<Ingrediente>;
 
   constructor(
@@ -32,7 +33,6 @@ export class FormListaDeComprasComponent implements OnInit {
   ) {
     this.formularioCompras = this.formBuilder.group({
       nome_lista: ['', [Validators.required, Validators.maxLength(30)]],
-      itens: this.formBuilder.array([]),
       notasFiscais: [[]],
     });
   }
@@ -46,15 +46,11 @@ export class FormListaDeComprasComponent implements OnInit {
     });
   }
 
-  get itens(): FormArray {
-    return this.formularioCompras.get('itens') as FormArray;
-  }
-
   private carregarLista(id: string): void {
     this.listaDeComprasService.buscarListaPorId(id).subscribe((lista) => {
       if (lista) {
         this.formularioCompras.patchValue({ nome_lista: lista.nome_lista });
-        lista.produtos?.forEach((item) => this.adicionarItem(item));
+        this.itens = lista.produtos || [];
       }
     });
   }
@@ -67,7 +63,7 @@ export class FormListaDeComprasComponent implements OnInit {
 
     const lista = {
       nome_lista: this.formularioCompras.value.nome_lista,
-      itens: this.formularioCompras.value.itens,
+      itens: this.itens,
       notasFiscais: this.notasFiscais,
     };
 
@@ -87,37 +83,19 @@ export class FormListaDeComprasComponent implements OnInit {
   }
 
   public removerItem(index: number): void {
-    this.itens.removeAt(index);
+    this.itens.splice(index, 1);
   }
 
   public adicionarItem(item: Partial<ItemDaLista> = {}): void {
-    const itemForm = this.formBuilder.group({
-      comprado: [item.comprado || false],
-      produto: [item.produto || null],
-      quantidade: [item.quantidade || 1, [Validators.required, Validators.min(1)]],
-      valor: [item.valor || 0, [Validators.required, Validators.min(0)]],
-    });
-    this.itens.push(itemForm);
-  }
-
-  public atualizarItem(index: number, item: Partial<ItemDaLista>): void {
-    if (index >= 0 && index < this.itens.length) {
-      this.itens.at(index).patchValue({
-        comprado: item.comprado ?? this.itens.at(index).value.comprado,
-        produto: item.produto ?? this.itens.at(index).value.produto,
-        quantidade: item.quantidade ?? this.itens.at(index).value.quantidade,
-        valor: item.valor ?? this.itens.at(index).value.valor,
-      });
-    }
+    this.itens.push({
+      comprado: false,
+      quantidade: 1,
+      valor: 0,
+      ...item,
+    } as ItemDaLista);
   }
 
   onSelecionarMaterial(material: Material): void {
-    // this.adicionarItem({
-    //   materialRelacionado: material,
-    //   quantidade: 1,
-    //   valor: 0,
-    // });
-
     this.ingredienteSendoAdicionado = {
       id_produto: material.id,
       produto: material,
@@ -169,7 +147,7 @@ export class FormListaDeComprasComponent implements OnInit {
 
   public onConfirmarDetalhesIngrediente(ingrediente: DetalhesProduto): void {
     if (this.ingredienteSendoAdicionado) {
-      const index = this.itens.controls.findIndex((ctrl) => ctrl.value.produto && ctrl.value.produto.id === this.ingredienteSendoAdicionado?.id_produto);
+      const index = this.itens.findIndex((item) => item.produto?.id === this.ingredienteSendoAdicionado?.id_produto);
 
       const itemDaLista: ItemDaLista = {
         id_produto: this.ingredienteSendoAdicionado.id_produto!,
@@ -181,7 +159,7 @@ export class FormListaDeComprasComponent implements OnInit {
       };
 
       if (index !== -1) {
-        this.atualizarItem(index, itemDaLista);
+        this.itens[index] = itemDaLista;
       } else {
         this.adicionarItem(itemDaLista);
       }
