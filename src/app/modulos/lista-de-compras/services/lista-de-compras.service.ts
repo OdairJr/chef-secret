@@ -1,20 +1,50 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { ListaDeCompras } from 'src/app/models/lista-de-compras.model';
 import { Material } from 'src/app/models/material.model';
+import { API_ENDPOINTS } from 'src/app/config/api.config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ListaDeComprasService {
-  constructor() {}
+  constructor(private http: HttpClient) {}
+
+  // criarLista(lista: Partial<ListaDeCompras>): Observable<ListaDeCompras> {
+  //   return this.http.post<ListaDeCompras>(API_ENDPOINTS.listaDeCompras(), lista);
+  // }
+
+  // listarListas(): Observable<ListaDeCompras[]> {
+  //   return this.http.get<ListaDeCompras[]>(API_ENDPOINTS.listaDeCompras());
+  // }
+
+  // buscarListaPorId(id: string): Observable<ListaDeCompras> {
+  //   return this.http.get<ListaDeCompras>(`${API_ENDPOINTS.listaDeCompras()}/${id}`);
+  // }
+
+  // atualizarLista(
+  //   id: string,
+  //   lista: Partial<ListaDeCompras>
+  // ): Observable<ListaDeCompras> {
+  //   return this.http.put<ListaDeCompras>(`${API_ENDPOINTS.listaDeCompras()}/${id}`, lista);
+  // }
+
+  // excluirLista(id: string): Observable<void> {
+  //   return this.http.delete<void>(`${API_ENDPOINTS.listaDeCompras()}/${id}`);
+  // }
+
+  // buscarMateriais(): Observable<Material[]> {
+  //   const materiaisUrl = 'http://localhost:3000/materiais';
+  //   return this.http.get<Material[]>(materiaisUrl);
+  // }
 
   criarLista(lista: Partial<ListaDeCompras>): Observable<ListaDeCompras> {
     const listas = this.getLocalListas();
     const novaLista: ListaDeCompras = {
       ...lista,
       id: this.gerarId(),
-      produtos: lista.produtos || [],
+      itens: lista.itens || [],
     } as ListaDeCompras;
     listas.push(novaLista);
     this.setLocalListas(listas);

@@ -2,23 +2,18 @@
   <form [formGroup]="formularioCompras" (ngSubmit)="salvarLista()">
     <div class="mb-3">
       <label for="nome_lista" class="form-label">Nome da lista</label>
-      <input
-        type="text"
-        id="nome_lista"
-        class="form-control"
-        formControlName="nome_lista"
-        placeholder="Digite o nome da lista"
-      />
-      <div
-        *ngIf="formularioCompras.get('nome_lista')?.errors && formularioCompras.get('nome_lista')?.touched"
-        class="invalid-feedback d-block"
-      >
-        <span *ngIf="formularioCompras.get('nome_lista')?.errors?.['required']">
-          O nome da lista é obrigatório.
-        </span>
-        <span *ngIf="formularioCompras.get('nome_lista')?.errors?.['maxLength']">
-          O nome da lista deve ter no máximo 30 caracteres.
-        </span>
+      <input type="text" id="nome_lista" class="form-control" formControlName="nome_lista" placeholder="Digite o nome da lista" />
+      <div *ngIf="formularioCompras.get('nome_lista')?.errors && formularioCompras.get('nome_lista')?.touched" class="invalid-feedback d-block">
+        <span *ngIf="formularioCompras.get('nome_lista')?.errors?.['required']"> O nome da lista é obrigatório. </span>
+        <span *ngIf="formularioCompras.get('nome_lista')?.errors?.['maxLength']"> O nome da lista deve ter no máximo 30 caracteres. </span>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="descricao" class="form-label">Descrição</label>
+      <textarea id="descricao" class="form-control" formControlName="descricao" rows="3" placeholder="Digite uma descrição para a lista (opcional)"></textarea>
+      <div *ngIf="formularioCompras.get('descricao')?.errors && formularioCompras.get('descricao')?.touched" class="invalid-feedback d-block">
+        <span *ngIf="formularioCompras.get('descricao')?.errors?.['maxLength']"> A descrição deve ter no máximo 200 caracteres. </span>
       </div>
     </div>
 
@@ -48,10 +43,7 @@
         <tbody>
           <tr *ngFor="let item of itens; let i = index">
             <td>
-              <input
-                type="checkbox"
-                aria-label="Item comprado"
-              />
+              <input type="checkbox" aria-label="Item comprado" />
             </td>
             <td>{{ item.produto?.nome }}</td>
             <td>
@@ -59,21 +51,16 @@
                 type="number"
                 class="form-control form-control-sm"
                 min="1"
-                style="max-width: 100px;"
+                style="max-width: 100px"
+                [(ngModel)]="item.quantidade"
+                [ngModelOptions]="{ standalone: true }"
               />
             </td>
             <td>
-              <input
-                type="number"
-                class="form-control form-control-sm"
-                min="0"
-                style="max-width: 100px;"
-              />
+              <input type="number" class="form-control form-control-sm" min="0" style="max-width: 100px" [(ngModel)]="item.valor" [ngModelOptions]="{standalone: true}" />
             </td>
             <td>
-              <button type="button" class="btn btn-danger btn-sm" (click)="removerItem(i)">
-                <i class="bi bi-trash"></i>Remover
-              </button>
+              <button type="button" class="btn btn-danger btn-sm" (click)="removerItem(i)"><i class="bi bi-trash"></i>Remover</button>
             </td>
           </tr>
         </tbody>
@@ -83,20 +70,12 @@
     <h5 class="mt-4">Notas Fiscais</h5>
     <div class="mb-3">
       <label for="notaFiscal" class="form-label">Adicionar Nota Fiscal</label>
-      <input
-        type="file"
-        id="notaFiscal"
-        class="form-control"
-        (change)="onNotaFiscalSelecionada($event)"
-        accept="image/*"
-      />
+      <input type="file" id="notaFiscal" class="form-control" (change)="onNotaFiscalSelecionada($event)" accept="image/*" />
       <div class="mt-2">
         <ul>
           <li *ngFor="let nota of notasFiscais">
             {{ nota.name }}
-            <button type="button" class="btn btn-sm btn-danger ms-2" (click)="removerNotaFiscal(nota)">
-              Remover
-            </button>
+            <button type="button" class="btn btn-sm btn-danger ms-2" (click)="removerNotaFiscal(nota)">Remover</button>
           </li>
         </ul>
       </div>

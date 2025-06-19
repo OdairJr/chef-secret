@@ -14,4 +14,5 @@ export const API_ENDPOINTS = {
   receitaById: (id: number) => `${API_URL}/api/receitas/${id}`,
   receitaTags: () => `${API_URL}/api/receita-tags`,
   imagens: () => `${API_URL}/api/imagens`,
+  listaDeCompras: () => `${API_URL}/api/listas-compra`,
 };

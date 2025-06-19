@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export interface DetalhesProduto {
   quantidade: number;
-  unidade: string;
-  observacoes?: string; // Campo opcional
+  unidade_medida: string;
+  observacao?: string; // Campo opcional
 }
 
 @Component({
@@ -22,8 +22,8 @@ export class ModalDetalhesProdutoComponent {
   constructor(private fb: FormBuilder) {
     this.formulario = this.fb.group({
       quantidade: [null, [Validators.required, Validators.min(0.01)]],
-      unidade: ['', Validators.required],
-      observacoes: ['']
+      unidade_medida: ['', Validators.required],
+      observacao: ['']
     });
   }
 

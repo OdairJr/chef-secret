@@ -6,7 +6,7 @@ import { ItemDaLista } from 'src/app/models/lista-de-compras.model';
 import { Material } from 'src/app/models/material.model';
 import { Ingrediente, Receita } from 'src/app/models/receita.model';
 import { ProdutosService } from 'src/app/modulos/produtos/services/produtos.service';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, forkJoin, map } from 'rxjs';
 import { ModalDetalhesProdutoComponent, DetalhesProduto } from 'src/app/compartilhado/components/modal-detalhes-produto/modal-detalhes-produto.component';
 
 @Component({
@@ -33,6 +33,7 @@ export class FormListaDeComprasComponent implements OnInit {
   ) {
     this.formularioCompras = this.formBuilder.group({
       nome_lista: ['', [Validators.required, Validators.maxLength(30)]],
+      descricao: ['', [Validators.required, Validators.maxLength(30)]],
       notasFiscais: [[]],
     });
   }
@@ -46,11 +47,42 @@ export class FormListaDeComprasComponent implements OnInit {
     });
   }
 
+  private carregarInformacoesDosProdutos(produtos: ItemDaLista[]): void {
+    debugger
+    const requisicoes = produtos.map((produto) =>
+      this.produtosService.obterProdutoPorId(produto.id_produto).pipe(
+        map((produto) => ({
+          ...produto,
+          produto,
+        }))
+      )
+    );
+
+    forkJoin(requisicoes).subscribe((ingredientesComProdutos) => {
+      this.itens = ingredientesComProdutos.map((ingredienteComProduto, idx) => {
+        // Recupera o produto original da lista para pegar id_produto e unidade
+        const original = produtos[idx];
+        return {
+          ...original,
+          produto: ingredienteComProduto.produto,
+          id_produto: original.id_produto,
+          unidade_medida: original.unidade_medida,
+          quantidade: original.quantidade,
+          valor: original.valor,
+          comprado: original.comprado,
+        } as ItemDaLista;
+      });
+    });
+  }
+
   private carregarLista(id: string): void {
     this.listaDeComprasService.buscarListaPorId(id).subscribe((lista) => {
       if (lista) {
-        this.formularioCompras.patchValue({ nome_lista: lista.nome_lista });
-        this.itens = lista.produtos || [];
+        debugger
+        this.formularioCompras.patchValue({ nome_lista: lista.nome_lista, descricao: lista.descricao });
+        this.itens = lista.itens || [];
+
+        this.carregarInformacoesDosProdutos(lista.itens!);
       }
     });
   }
@@ -63,23 +95,22 @@ export class FormListaDeComprasComponent implements OnInit {
 
     const lista = {
       nome_lista: this.formularioCompras.value.nome_lista,
+      descricao: this.formularioCompras.value.descricao,
       itens: this.itens,
-      notasFiscais: this.notasFiscais,
+      // notasFiscais: this.notasFiscais,
     };
 
-    console.log(lista);
+    // console.log(JSON.stringify(lista));
 
-    // if (this.listaId) {
-    //   this.listaDeComprasService
-    //     .atualizarLista(this.listaId, lista)
-    //     .subscribe(() => {
-    //       this.router.navigate(['/lista-de-compras']);
-    //     });
-    // } else {
-    //   this.listaDeComprasService.criarLista(lista).subscribe(() => {
-    //     this.router.navigate(['/lista-de-compras']);
-    //   });
-    // }
+    if (this.listaId) {
+      this.listaDeComprasService.atualizarLista(this.listaId, lista).subscribe(() => {
+        this.router.navigate(['/lista-de-compras']);
+      });
+    } else {
+      this.listaDeComprasService.criarLista(lista).subscribe(() => {
+        this.router.navigate(['/lista-de-compras']);
+      });
+    }
   }
 
   public removerItem(index: number): void {
@@ -152,8 +183,9 @@ export class FormListaDeComprasComponent implements OnInit {
       const itemDaLista: ItemDaLista = {
         id_produto: this.ingredienteSendoAdicionado.id_produto!,
         produto: this.ingredienteSendoAdicionado.produto,
-        unidade: ingrediente.unidade,
-        quantidade: 0,
+        unidade_medida: ingrediente.unidade_medida,
+        quantidade: ingrediente.quantidade,
+        observacao: ingrediente.observacao,
         valor: 0,
         comprado: false,
       };

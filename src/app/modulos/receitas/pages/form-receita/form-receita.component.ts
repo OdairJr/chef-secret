@@ -157,16 +157,16 @@ export class FormReceitaComponent implements OnInit {
           id_produto: this.ingredienteSendoAdicionado.id_produto!,
           produto: this.ingredienteSendoAdicionado.produto,
           quantidade: String(ingrediente.quantidade),
-          unidade: ingrediente.unidade,
-          observacoes: ingrediente.observacoes || '',
+          unidade: ingrediente.unidade_medida,
+          observacoes: ingrediente.observacao || '',
         };
       } else {
         this.ingredientes.push({
           id_produto: this.ingredienteSendoAdicionado.id_produto!,
           produto: this.ingredienteSendoAdicionado.produto,
           quantidade: String(ingrediente.quantidade),
-          unidade: ingrediente.unidade,
-          observacoes: ingrediente.observacoes || '',
+          unidade: ingrediente.unidade_medida,
+          observacoes: ingrediente.observacao || '',
         });
       }
 
