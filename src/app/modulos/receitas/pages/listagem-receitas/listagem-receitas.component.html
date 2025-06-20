@@ -1,23 +1,45 @@
 <div class="container mt-4">
-  <h2 class="mb-4">Lista de Receitas</h2>
-  <div class="text-end mb-3">
-    <button class="btn btn-primary" routerLink="/receitas/nova-receita">Nova Receita</button>
+  <h2 class="titulo-principal mb-4">Lista de Receitas</h2>
+
+  <div class="text-center mb-3">
+    <button class="btn btn-salvar" routerLink="/receitas/nova-receita"><i class="bi bi-plus-lg"></i> Criar Receita</button>
   </div>
+
   <div *ngIf="erroCarregamento; else listaReceitas">
     <p class="text-danger">{{ erroCarregamento }}</p>
   </div>
+
   <ng-template #listaReceitas>
     <div *ngIf="receitas.length > 0; else noReceitas">
-      <div class="card mb-3" *ngFor="let receita of receitas">
-        <div class="card-body">
-          <h5 class="card-title">{{ receita.titulo }}</h5>
-          <p class="card-text"><strong>Descrição:</strong> {{ receita.descricao }}</p>
-          <p class="card-text"><strong>Rendimento:</strong> {{ receita.rendimento }}</p>
-          <p class="card-text"><strong>Tempo de Preparo:</strong> {{ receita.tempo_preparo }}</p>
-          <button class="btn btn-primary btn-sm" (click)="verDetalhes(receita.id)">Ver Detalhes</button>
+      <div class="row g-4">
+        <div class="col-md-6" *ngFor="let receita of receitas">
+          <div class="card box-card h-100">
+            <div class="card-body d-flex flex-row align-items-center">
+              <img
+                [src]="'https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg'"
+                alt="Imagem da Receita"
+                class="img-thumbnail me-3 receita-img"
+              />
+              <div class="flex-grow-1">
+                <h5 class="fw-bold text-primary">{{ receita.titulo }}</h5>
+                <p class="card-text"><strong>Descrição:</strong> {{ receita.descricao }}</p>
+                <p class="card-text"><strong>Rendimento:</strong> {{ receita.rendimento }}</p>
+                <p class="mb-2"><strong>Venda:</strong> R$ ?? Un.</p>
+                <div class="d-flex gap-2">
+                  <button class="btn btn-sm btn-outline-primary" (click)="verDetalhes(receita.id)">
+                    <i class="bi bi-eye"></i>
+                  </button>
+                  <button class="btn btn-sm btn-outline-danger" (click)="deletarReceita(receita.id)">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
     <ng-template #noReceitas>
       <p class="text-muted">Nenhuma receita encontrada.</p>
     </ng-template>

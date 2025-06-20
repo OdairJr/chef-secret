@@ -2,9 +2,9 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Nome</th>
+        <th>Material</th>
         <th>Quantidade</th>
-        <th>Observações</th>
+        <th>Custo</th>
         <th>Ações</th>
       </tr>
     </thead>
@@ -12,14 +12,16 @@
       <tr *ngFor="let ingrediente of ingredientes; let i = index">
         <td>{{ ingrediente.produto?.nome }}</td>
         <td>{{ ingrediente.quantidade }} {{ ingrediente.unidade }}</td>
-        <td>{{ ingrediente.observacoes }}</td>
+        <td>{{ ingrediente.produto?.preco_padrao ?? 0 | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
         <td>
-          <button class="btn btn-warning btn-sm" (click)="editarIngrediente(i)">
-            Editar
-          </button>
-          <button class="btn btn-danger btn-sm" (click)="excluirIngrediente(i)">
-            Excluir
-          </button>
+          <div class="d-flex gap-2">
+            <button class="btn btn-sm btn-outline-primary" (click)="editarIngrediente(i)">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-danger" (click)="excluirIngrediente(i)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
         </td>
       </tr>
     </tbody>

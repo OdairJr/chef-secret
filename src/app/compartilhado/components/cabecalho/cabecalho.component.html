@@ -1,32 +1,63 @@
-<header class="bg-light py-3">
-  <nav class="container">
-    <ul class="nav justify-content-center">
-      <li class="nav-item">
-        <a class="nav-link text-primary" routerLink="/receitas">Receitas</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-primary" routerLink="/produtos">Produtos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-primary" routerLink="/lista-de-compras">Lista de Compras</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-primary" routerLink="/categorias">Lista de Categorias</a>
-      </li>
-      <!-- Dropdown Menu -->
-      <li class="nav-item dropdown" style="position: relative;">
-        <a class="nav-link dropdown-toggle text-primary" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="bi bi-person-circle"></i> Conta
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="userDropdown" style="right: 0; left: auto;">
-          <li>
-            <a class="dropdown-item" routerLink="/perfil">Perfil</a>
-          </li>
-          <li>
-            <button class="dropdown-item" (click)="logout()">Sair</button>
-          </li>
-        </ul>
-      </li>
-    </ul>
+<header class="header-chefprice">
+  <div class="text-center my-3">
+    <img src="/assets/imagens/ChefPrice-logo-marrom.svg" alt="ChefPrice" class="logo-header" />
+  </div>
+
+  <!-- Menu em abas -->
+  <nav class="nav nav-tabs justify-content-center border-0 menu-tabs">
+    <a
+      class="nav-link"
+      routerLink="/receitas"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Receitas
+    </a>
+
+    <a
+      class="nav-link"
+      routerLink="/produtos"
+      routerLinkActive="active"
+    >
+      Produtos
+    </a>
+
+    <a
+      class="nav-link"
+      routerLink="/lista-de-compras"
+      routerLinkActive="active"
+    >
+      Lista de Compras
+    </a>
+
+    <a
+      class="nav-link"
+      routerLink="/categorias"
+      routerLinkActive="active"
+    >
+      Lista de Categorias
+    </a>
+
+    <!-- Dropdown Conta -->
+    <div class="nav-item dropdown">
+      <a
+        class="nav-link dropdown-toggle"
+        href="#"
+        id="userDropdown"
+        role="button"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <i class="bi bi-person-circle"></i> Conta
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+        <li>
+          <a class="dropdown-item" routerLink="/perfil">Perfil</a>
+        </li>
+        <li>
+          <button class="dropdown-item" (click)="logout()">Sair</button>
+        </li>
+      </ul>
+    </div>
   </nav>
 </header>

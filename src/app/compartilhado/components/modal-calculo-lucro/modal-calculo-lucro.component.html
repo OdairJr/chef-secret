@@ -1,0 +1,26 @@
+<app-modal *ngIf="mostrarModal" [title]="'Detalhamento da Receita'" [showFooter]="false" (closeModal)="fechar()">
+  <div modal-body class="modal-detalhamento-receita">
+    <h5 class="text-center mb-3 fw-bold">{{ receita?.titulo }}</h5>
+
+    <p><strong>Porcentagem de lucro:</strong> {{ 0 }}%</p>
+    <p><strong>Rendimento da receita:</strong> {{ receita?.rendimento }}</p>
+
+    <hr />
+
+    <div class="linha-dado" *ngFor="let item of detalhesReceita">
+      <span>{{ item.label }}</span>
+      <span [ngClass]="item.highlight ? 'text-danger' : ''">{{ item.valor }}</span>
+    </div>
+
+    <hr />
+
+    <div class="linha-dado fw-bold fs-5 mt-3">
+      <span>Lucro Total</span>
+      <span class="text-dark">{{ 0 | currency:'BRL' }}</span>
+    </div>
+
+    <div class="text-center mt-4">
+      <button class="btn btn-cancelar" (click)="fechar()">Fechar</button>
+    </div>
+  </div>
+</app-modal>

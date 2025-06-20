@@ -9,28 +9,23 @@ import { CabecalhoComponent } from './compartilhado/components/cabecalho/cabecal
 import { BaseComponent } from './compartilhado/components/base/base.component';
 import { LoginModule } from './modulos/login/login.module';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+import { LOCALE_ID } from '@angular/core';
+
+registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CabecalhoComponent,
-    BaseComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    FormsModule,
-    LoginModule
-  ],
+  declarations: [AppComponent, CabecalhoComponent, BaseComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, ReactiveFormsModule, FormsModule, LoginModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
     },
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

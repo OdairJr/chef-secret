@@ -1,24 +1,36 @@
-/* Add your styles here */
-header {
-  background-color: #f8f9fa;
-  padding: 10px;
+.logo-header {
+  max-height: 80px;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+.header-chefprice {
+  background-color: #f8f5f3;
+  border-bottom: 1px solid #ddd;
 }
 
-li {
-  display: inline;
-  margin-right: 10px;
-}
+.menu-tabs {
+  .nav-link {
+    color: #985e5b;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background-color: transparent;
 
-a {
-  text-decoration: none;
-  color: #007bff;
-}
+    &:hover {
+      background-color: rgba(152, 94, 91, 0.1);
+    }
 
-a:hover {
-  text-decoration: underline;
+    &.active {
+      border-bottom: 3px solid #985e5b;
+      color: #985e5b;
+      font-weight: 600;
+    }
+  }
+
+  .dropdown-toggle::after {
+    margin-left: 0.35em;
+  }
+
+  .dropdown-menu {
+    font-size: 0.95rem;
+  }
 }

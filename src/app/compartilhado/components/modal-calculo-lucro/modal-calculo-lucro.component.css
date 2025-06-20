@@ -1,0 +1,24 @@
+.modal-detalhamento-receita {
+  font-size: 0.95rem;
+
+  .linha-dado {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted #ccc;
+    padding: 0.3rem 0;
+
+    &:last-child {
+      border: none;
+    }
+  }
+
+  .btn-cancelar {
+    background-color: transparent;
+    color: #985e5b;
+    border: 1px solid #985e5b;
+
+    &:hover {
+      background-color: #f6eaea;
+    }
+  }
+}

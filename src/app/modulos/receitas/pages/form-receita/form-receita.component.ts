@@ -85,15 +85,19 @@ export class FormReceitaComponent implements OnInit {
     });
   }
 
-  public salvarReceita(): void {
-    if (this.formulario.valid && this.receitaOriginal) {
-      const receitaAtualizada: Receita = {
+  public construirObjetoReceita(): Receita {
+    return {
         ...this.receitaOriginal, // Preserva os valores originais
         ...this.formulario.value, // Sobrescreve apenas os campos editados
         ingredientes: this.ingredientes,
         tags: this.tagsSelecionadas,
         imagens: this.imagens.map((img) => img.id), // Apenas os IDs das imagens
-      };
+      }
+    }
+
+  public salvarReceita(): void {
+    if (this.formulario.valid && this.receitaOriginal) {
+      const receitaAtualizada = this.construirObjetoReceita();
 
       if (this.receitaId) {
         this.receitasService.editarReceita(receitaAtualizada).subscribe(() => {

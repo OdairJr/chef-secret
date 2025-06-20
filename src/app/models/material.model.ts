@@ -12,6 +12,7 @@ export interface Material {
   quantidade: number | null;
   categoria: Categoria;
   imagens: Imagem[];
+  preco_padrao: number;
 }
 
 export interface Imagem {

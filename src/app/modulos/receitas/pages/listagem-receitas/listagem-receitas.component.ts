@@ -42,4 +42,22 @@ export class ListagemReceitasComponent implements OnInit {
 
     this.router.navigate(['/receitas', 'editar-receita', id]);
   }
+
+  deletarReceita(id?: number): void {
+    // if (!id) {
+    //   console.error('ID da receita não fornecido para deletar.');
+    //   return;
+    // }
+
+    // this.receitasService.deletarReceita(id).subscribe({
+    //   next: () => {
+    //     this.carregarReceitas();
+    //   },
+    //   error: (erro) => {
+    //     console.error('Erro ao deletar receita:', erro);
+    //     this.erroCarregamento =
+    //       'Não foi possível deletar a receita. Tente novamente mais tarde.';
+    //   },
+    // });
+  }
 }
