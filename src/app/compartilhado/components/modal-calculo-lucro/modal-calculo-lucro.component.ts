@@ -20,6 +20,12 @@ export class ModalCalculoLucroComponent {
     this.cdr.markForCheck();
   }
 
+  public fechar() {
+    this.mostrarModal = false;
+    this.fecharModal.emit();
+    this.cdr.markForCheck();
+  }
+
   public get calcularCustoDosMateriais(): number {
     return (
       this.receita?.ingredientes.reduce((total, ingrediente) => {
@@ -89,13 +95,7 @@ export class ModalCalculoLucroComponent {
   public get calcularLucroTotal(): number {
     const rendimento = this.receita?.rendimento ? parseFloat(this.receita.rendimento) : 1;
 
-    debugger
     return (this.calcularValorSugeridoVenda * rendimento) - this.calcularCustoTotalReceita;
   }
 
-  fechar() {
-    this.mostrarModal = false;
-    this.fecharModal.emit();
-    this.cdr.markForCheck();
-  }
 }
