@@ -15,10 +15,10 @@
         <td>{{ ingrediente.produto?.preco_padrao ?? 0 | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
         <td>
           <div class="d-flex gap-2">
-            <button class="btn btn-sm btn-outline-primary" (click)="editarIngrediente(i)">
+            <button type="button" class="btn btn-sm btn-outline-primary" (click)="editarIngrediente(i)">
               <i class="bi bi-pencil-square"></i>
             </button>
-            <button class="btn btn-sm btn-outline-danger" (click)="excluirIngrediente(i)">
+            <button type="button" class="btn btn-sm btn-outline-danger" (click)="excluirIngrediente(i)">
               <i class="bi bi-trash"></i>
             </button>
           </div>

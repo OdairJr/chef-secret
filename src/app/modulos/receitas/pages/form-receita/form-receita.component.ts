@@ -98,7 +98,7 @@ export class FormReceitaComponent implements OnInit {
     }
 
   public salvarReceita(): void {
-    if (this.formulario.valid && this.receitaOriginal) {
+    if (this.formulario.valid) {
       const receitaAtualizada = this.construirObjetoReceita();
 
       if (this.receitaId) {
@@ -142,7 +142,11 @@ export class FormReceitaComponent implements OnInit {
   onEditarIngrediente(index: number): void {
     const ingrediente = this.ingredientes[index];
     this.ingredienteSendoAdicionado = { ...ingrediente };
-    this.modalDetalhesProduto.abrirModal();
+    this.modalDetalhesProduto.abrirModal({
+      quantidade: Number(ingrediente.quantidade),
+      unidade_medida: ingrediente.unidade,
+      observacao: ingrediente.observacoes || '',
+    });
   }
 
   onSelecionarProduto(produto: Material): void {

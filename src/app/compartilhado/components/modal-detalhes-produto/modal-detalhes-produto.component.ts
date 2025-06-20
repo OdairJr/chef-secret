@@ -27,8 +27,16 @@ export class ModalDetalhesProdutoComponent {
     });
   }
 
-  public abrirModal() {
-    this.formulario.reset();
+  public abrirModal(detalhes?: DetalhesProduto) {
+    if (detalhes) {
+      this.formulario.setValue({
+        quantidade: detalhes.quantidade,
+        unidade_medida: detalhes.unidade_medida,
+        observacao: detalhes.observacao ?? ''
+      });
+    } else {
+      this.formulario.reset();
+    }
     this.mostrarModal = true;
   }
 
