@@ -9,48 +9,18 @@ import { Receita } from 'src/app/models/receita.model';
 })
 export class ModalCalculoLucroComponent {
   @Output() fecharModal = new EventEmitter<void>();
-
   mostrarModal: boolean = false;
-  detalhesReceita = [
-    { label: 'Custo dos materiais', valor: 'R$33,12' },
-    { label: 'Custos adicionais', valor: 'R$9,94' },
-    { label: 'Custo por unidade', valor: 'R$2,87' },
-    { label: 'Custo total da receita', valor: 'R$43,06' },
-    {
-      label: 'Valor sugerido de venda',
-      valor: 'R$8,61',
-      highlight: true,
-    },
-  ];
-
   public receita?: Receita;
 
-  /**
-   *
-   */
   constructor(private cdr: ChangeDetectorRef) {}
 
   public abrirModal(receita: Receita) {
     this.receita = receita;
-
-    this.detalhesReceita = [
-      { label: 'Custo dos materiais', valor: `R$${this.calcularCustoDosMateriais.toFixed(2)}` },
-      { label: 'Custos adicionais', valor: `R$${this.calcularCustoAdicionais.toFixed(2)}` },
-      { label: 'Custo por unidade', valor: `R$${this.calcularCustoPorUnidade.toFixed(2)}` },
-      { label: 'Custo total da receita', valor: `R$${this.calcularCustoTotalReceita.toFixed(2)}` },
-      {
-        label: 'Valor sugerido de venda',
-        valor: `R$${this.calcularValorSugeridoVenda.toFixed(2)}`,
-        highlight: true,
-      },
-    ];
-
     this.mostrarModal = true;
-
     this.cdr.markForCheck();
   }
 
-  private get calcularCustoDosMateriais(): number {
+  public get calcularCustoDosMateriais(): number {
     return (
       this.receita?.ingredientes.reduce((total, ingrediente) => {
         return total + Number(ingrediente.quantidade) * (ingrediente.produto?.preco_padrao ?? 0);

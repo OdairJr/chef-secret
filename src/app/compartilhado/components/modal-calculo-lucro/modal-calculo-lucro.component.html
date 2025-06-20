@@ -7,15 +7,31 @@
 
     <hr />
 
-    <div class="linha-dado" *ngFor="let item of detalhesReceita">
-      <span>{{ item.label }}</span>
-      <span [ngClass]="item.highlight ? 'text-danger' : ''">{{ item.valor }}</span>
+    <div class="linha-dado">
+      <span>Custo dos materiais</span>
+      <span>{{ calcularCustoDosMateriais | currency:'BRL' }}</span>
+    </div>
+    <div class="linha-dado">
+      <span>Custos adicionais</span>
+      <span>{{ calcularCustoAdicionais | currency:'BRL' }}</span>
+    </div>
+    <div class="linha-dado">
+      <span>Custo por unidade</span>
+      <span>{{ calcularCustoPorUnidade | currency:'BRL' }}</span>
+    </div>
+    <div class="linha-dado">
+      <span>Custo total da receita</span>
+      <span>{{ calcularCustoTotalReceita | currency:'BRL' }}</span>
+    </div>
+    <div class="linha-dado text-danger">
+      <span>Valor sugerido de venda</span>
+      <span>{{ calcularValorSugeridoVenda | currency:'BRL' }}</span>
     </div>
 
     <hr />
 
     <div class="linha-dado fw-bold fs-5 mt-3">
-      <span>Lucro Total {{calcularLucroTotal }} </span>
+      <span>Lucro Total</span>
       <span class="text-dark">{{ calcularLucroTotal | currency:'BRL' }}</span>
     </div>
 
