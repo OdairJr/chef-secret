@@ -2,7 +2,7 @@
   <div modal-body class="modal-detalhamento-receita">
     <h5 class="text-center mb-3 fw-bold">{{ receita?.titulo }}</h5>
 
-    <p><strong>Porcentagem de lucro:</strong> {{ 0 }}%</p>
+    <p><strong>Porcentagem de lucro:</strong> {{ receita?.lucroEsperado }}%</p>
     <p><strong>Rendimento da receita:</strong> {{ receita?.rendimento }}</p>
 
     <hr />
@@ -15,8 +15,8 @@
     <hr />
 
     <div class="linha-dado fw-bold fs-5 mt-3">
-      <span>Lucro Total</span>
-      <span class="text-dark">{{ 0 | currency:'BRL' }}</span>
+      <span>Lucro Total {{calcularLucroTotal }} </span>
+      <span class="text-dark">{{ calcularLucroTotal | currency:'BRL' }}</span>
     </div>
 
     <div class="text-center mt-4">
