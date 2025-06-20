@@ -6,7 +6,7 @@ type InputTypes = "text" | "password" | "email";
 @Component({
   selector: 'app-primary-input',
   templateUrl: './primary-input.component.html',
-  styleUrls: ['./primary-input.component.css']
+  styleUrls: ['./primary-input.component.scss']
 })
 export class PrimaryInputComponent {
 @Input() type:InputTypes = "text";

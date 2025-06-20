@@ -5,7 +5,7 @@ import { CategoriaService } from '../../services/categoria.service';
 @Component({
   selector: 'app-listagem-categorias',
   templateUrl: './listagem-categorias.component.html',
-  styleUrls: ['./listagem-categorias.component.css']
+  styleUrls: ['./listagem-categorias.component.scss']
 })
 export class ListagemCategoriasComponent implements OnInit {
   categorias: Categoria[] = [];

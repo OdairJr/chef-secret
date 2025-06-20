@@ -9,7 +9,7 @@ import { CategoriaService } from '../../../categorias/services/categoria.service
 @Component({
   selector: 'app-cadastro-produto',
   templateUrl: './cadastro-produto.component.html',
-  styleUrls: ['./cadastro-produto.component.css']
+  styleUrls: ['./cadastro-produto.component.scss']
 })
 export class CadastroProdutoComponent implements OnInit {
   formulario!: FormGroup;

@@ -4,7 +4,7 @@ import { Ingrediente } from 'src/app/models/receita.model';
 @Component({
   selector: 'app-lista-ingredientes',
   templateUrl: './lista-ingredientes.component.html',
-  styleUrls: ['./lista-ingredientes.component.css'],
+  styleUrls: ['./lista-ingredientes.component.scss'],
 })
 export class ListaIngredientesComponent {
   @Input() ingredientes: Ingrediente[] = [];

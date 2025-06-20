@@ -1,19 +1,27 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="container mt-4">
   <div class="mb-3">
-      <label for="email" class="form-label">Email:</label>
-      <input id="email" formControlName="email" type="email" class="form-control" placeholder="Digite seu email">
-      <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger">
-          <small>Email inválido</small>
-      </div>
+    <label for="email" class="form-label">Email:</label>
+    <input id="email" formControlName="email" type="email" class="form-control" placeholder="Digite seu email" />
+    <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger">
+      <small>Email inválido</small>
+    </div>
   </div>
 
   <div class="mb-3">
-      <label for="password" class="form-label">Senha:</label>
-      <input id="password" formControlName="password" type="password" class="form-control" placeholder="Digite sua senha">
-      <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
-          <small>A senha deve ter pelo menos 6 caracteres</small>
-      </div>
+    <label for="password" class="form-label">Senha:</label>
+    <input id="password" formControlName="password" type="password" class="form-control" placeholder="Digite sua senha" />
+    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
+      <small>A senha deve ter pelo menos 6 caracteres</small>
+    </div>
   </div>
 
-  <button type="submit" class="btn btn-primary w-100">Entrar</button>
+  <div class="btn-wrapper mt-3">
+    <button type="submit" class="btn btn-primary w-100">Login</button>
+  </div>
+  <div class="btn-wrapper mt-3">
+    <label>Não possui uma conta? <a routerLink="/auth/register">Cadastre-se</a></label>
+  </div>
+  <div class="text-center mt-2">
+    <a routerLink="/auth/forgot-password">Esqueceu a senha?</a>
+  </div>
 </form>

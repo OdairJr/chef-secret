@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-listagem-produtos',
   templateUrl: './listagem-produtos.component.html',
-  styleUrls: ['./listagem-produtos.component.css']
+  styleUrls: ['./listagem-produtos.component.scss']
 })
 export class ListagemProdutosComponent implements OnInit {
   produtos: Material[] = [];

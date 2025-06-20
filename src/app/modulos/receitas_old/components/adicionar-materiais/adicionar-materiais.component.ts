@@ -9,7 +9,7 @@ import { MaterialService } from 'src/app/modulos/material/services/material.serv
 @Component({
   selector: 'app-adicionar-materiais',
   templateUrl: './adicionar-materiais.component.html',
-  styleUrls: ['./adicionar-materiais.component.css']
+  styleUrls: ['./adicionar-materiais.component.scss']
 })
 export class AdicionarMateriaisComponent implements OnInit {
 

@@ -4,7 +4,7 @@ import { ReceitaService } from '../../services/receita.service';
 @Component({
   selector: 'app-analise-de-custos',
   templateUrl: './analise-de-custos.component.html',
-  styleUrls: ['./analise-de-custos.component.css']
+  styleUrls: ['./analise-de-custos.component.scss']
 })
 export class AnaliseDeCustosComponent implements OnInit {
 

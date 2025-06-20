@@ -1,0 +1,31 @@
+// Sobrescrevendo variáveis do Bootstrap
+$body-bg: #F8F5F3;
+$body-color: #333333;
+
+$primary: #985E5B;
+$secondary: #E9E4E2;
+$success: #3C8D57;
+$danger: #C0392B;
+$info: #444E79;
+$light: #ffffff;
+$dark: #222222;
+
+// Link colors
+$link-color: $info;
+$link-hover-color: darken($info, 10%);
+
+// Inputs
+$input-bg: $light;
+$input-border-color: darken($secondary, 10%);
+$input-focus-border-color: $primary;
+$input-focus-box-shadow: 0 0 0 0.2rem rgba(152, 94, 91, 0.25);
+
+// Botões
+$btn-border-radius: .25rem;
+$btn-font-weight: 500;
+
+// Títulos e fontes
+$font-family-base: 'Segoe UI', Roboto, sans-serif;
+
+// Importe apenas o necessário ou tudo do Bootstrap
+@import "bootstrap/scss/bootstrap";

@@ -6,7 +6,7 @@ import { CategoriaService } from '../../services/categoria.service';
 @Component({
   selector: 'app-cadastro-categoria',
   templateUrl: './cadastro-categoria.component.html',
-  styleUrls: ['./cadastro-categoria.component.css']
+  styleUrls: ['./cadastro-categoria.component.scss']
 })
 export class CadastroCategoriaComponent {
   public formulario: FormGroup;

@@ -10,7 +10,7 @@ export interface DetalhesProduto {
 @Component({
   selector: 'app-modal-detalhes-produto',
   templateUrl: './modal-detalhes-produto.component.html',
-  styleUrls: ['./modal-detalhes-produto.component.css']
+  styleUrls: ['./modal-detalhes-produto.component.scss']
 })
 export class ModalDetalhesProdutoComponent {
   mostrarModal: boolean = false;

@@ -5,7 +5,7 @@ import { Receita } from 'src/app/models/receita.model';
 @Component({
   selector: 'app-modal-selecao-receita',
   templateUrl: './modal-selecao-receita.component.html',
-  styleUrls: ['./modal-selecao-receita.component.css'],
+  styleUrls: ['./modal-selecao-receita.component.scss'],
 })
 export class ModalSelecaoReceitaComponent {
   receitas: Receita[] = [];

@@ -5,7 +5,7 @@ import { ReceitaService } from '../../services/receita.service';
 @Component({
   selector: 'app-lista-receitas',
   templateUrl: './lista-receitas.component.html',
-  styleUrls: ['./lista-receitas.component.css']
+  styleUrls: ['./lista-receitas.component.scss']
 })
 export class ListaReceitasComponent implements OnInit {
   public listaDeReceitas: Receita[] = [];

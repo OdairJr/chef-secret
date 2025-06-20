@@ -4,7 +4,7 @@ import { Material } from 'src/app/models/material.model';
 @Component({
   selector: 'app-produto-card',
   templateUrl: './produto-card.component.html',
-  styleUrls: ['./produto-card.component.css']
+  styleUrls: ['./produto-card.component.scss']
 })
 export class ProdutoCardComponent {
   @Input() produto!: Material;

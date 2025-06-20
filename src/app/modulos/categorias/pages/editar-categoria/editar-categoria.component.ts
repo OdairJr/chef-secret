@@ -7,7 +7,7 @@ import { Categoria } from 'src/app/models/categoria.model';
 @Component({
   selector: 'app-editar-categoria',
   templateUrl: './editar-categoria.component.html',
-  styleUrls: ['./editar-categoria.component.css']
+  styleUrls: ['./editar-categoria.component.scss']
 })
 export class EditarCategoriaComponent implements OnInit {
   formulario!: FormGroup;

@@ -6,7 +6,7 @@ import { ReceitaService } from '../../services/receita.service';
 @Component({
   selector: 'app-receita',
   templateUrl: './receita.component.html',
-  styleUrls: ['./receita.component.css']
+  styleUrls: ['./receita.component.scss']
 })
 export class ReceitaComponent {
   @Output() recarregarLista: EventEmitter<void> = new EventEmitter<void>();

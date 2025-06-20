@@ -6,7 +6,7 @@ import { Component, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-receita-detalhes',
   templateUrl: './receita-detalhes.component.html',
-  styleUrls: ['./receita-detalhes.component.css']
+  styleUrls: ['./receita-detalhes.component.scss']
 })
 export class ReceitaDetalhesComponent implements OnInit {
 

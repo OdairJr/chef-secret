@@ -5,7 +5,7 @@ import { ReceitaTag } from 'src/app/models/receita.model';
 @Component({
   selector: 'app-tag-selector',
   templateUrl: './tag-selector.component.html',
-  styleUrls: ['./tag-selector.component.css'],
+  styleUrls: ['./tag-selector.component.scss'],
 })
 export class TagSelectorComponent implements OnInit {
   @Input() selectedTags: ReceitaTag[] = [];

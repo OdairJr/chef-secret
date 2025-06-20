@@ -4,7 +4,7 @@ import { Etapa } from 'src/app/models/receita.model';
 @Component({
   selector: 'app-lista-etapas',
   templateUrl: './lista-etapas.component.html',
-  styleUrls: ['./lista-etapas.component.css'],
+  styleUrls: ['./lista-etapas.component.scss'],
 })
 export class ListaEtapasComponent {
   // etapas: Etapa[] = [];

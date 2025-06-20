@@ -16,7 +16,7 @@ interface ListaDeComprasMock {
 @Component({
   selector: 'app-historico-de-compras',
   templateUrl: './historico-de-compras.component.html',
-  styleUrls: ['./historico-de-compras.component.css']
+  styleUrls: ['./historico-de-compras.component.scss']
 })
 export class HistoricoDeComprasComponent {
   historico: ListaDeComprasMock[] = [

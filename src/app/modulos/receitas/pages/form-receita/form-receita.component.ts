@@ -14,7 +14,7 @@ import { ProdutosService } from 'src/app/modulos/produtos/services/produtos.serv
 @Component({
   selector: 'app-form-receita',
   templateUrl: './form-receita.component.html',
-  styleUrls: ['./form-receita.component.css'],
+  styleUrls: ['./form-receita.component.scss'],
 })
 export class FormReceitaComponent implements OnInit {
   formulario!: FormGroup;

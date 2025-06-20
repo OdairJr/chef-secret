@@ -12,7 +12,7 @@ import { ModalDetalhesProdutoComponent, DetalhesProduto } from 'src/app/comparti
 @Component({
   selector: 'app-form-lista-de-compras',
   templateUrl: './form-lista-de-compras.component.html',
-  styleUrls: ['./form-lista-de-compras.component.css'],
+  styleUrls: ['./form-lista-de-compras.component.scss'],
 })
 export class FormListaDeComprasComponent implements OnInit {
   @ViewChild('modal_detalhes_produto')

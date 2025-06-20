@@ -10,7 +10,7 @@ import { Material } from 'src/app/modulos/material/models/material.model';
 @Component({
   selector: 'app-criar-receita',
   templateUrl: './criar-receita.component.html',
-  styleUrls: ['./criar-receita.component.css']
+  styleUrls: ['./criar-receita.component.scss']
 })
 export class CriarReceitaComponent implements OnInit {
   public formulario: FormGroup;

@@ -9,7 +9,7 @@ import { Material } from 'src/app/modulos/material/models/material.model';
 @Component({
   selector: 'app-editar-receita',
   templateUrl: './editar-receita.component.html',
-  styleUrls: ['./editar-receita.component.css']
+  styleUrls: ['./editar-receita.component.scss']
 })
 export class EditarReceitaComponent implements OnInit {
   public formulario: FormGroup;

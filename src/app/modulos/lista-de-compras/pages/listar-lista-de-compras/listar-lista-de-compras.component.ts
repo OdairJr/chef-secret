@@ -6,7 +6,7 @@ import { ListaDeComprasService } from '../../services/lista-de-compras.service';
 @Component({
   selector: 'app-listar-lista-de-compras',
   templateUrl: './listar-lista-de-compras.component.html',
-  styleUrls: ['./listar-lista-de-compras.component.css'],
+  styleUrls: ['./listar-lista-de-compras.component.scss'],
 })
 export class ListarListaDeComprasComponent implements OnInit {
   listas: ListaDeCompras[] = [];

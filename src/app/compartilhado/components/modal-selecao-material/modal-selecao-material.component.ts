@@ -5,7 +5,7 @@ import { ProdutosService } from 'src/app/modulos/produtos/services/produtos.serv
 @Component({
   selector: 'app-modal-selecao-material',
   templateUrl: './modal-selecao-material.component.html',
-  styleUrls: ['./modal-selecao-material.component.css'],
+  styleUrls: ['./modal-selecao-material.component.scss'],
 })
 export class ModalSelecaoMaterialComponent {
   public mostrarModal: boolean = false;

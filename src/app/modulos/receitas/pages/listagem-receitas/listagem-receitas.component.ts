@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-listagem-receitas',
   templateUrl: './listagem-receitas.component.html',
-  styleUrls: ['./listagem-receitas.component.css'],
+  styleUrls: ['./listagem-receitas.component.scss'],
 })
 export class ListagemReceitasComponent implements OnInit {
   receitas: Receita[] = [];
