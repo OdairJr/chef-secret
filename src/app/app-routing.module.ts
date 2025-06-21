@@ -17,7 +17,7 @@ const routes: Routes = [
     path: '', component: BaseComponent, canActivate: [authGuard], children: [
       { path: 'receitas', loadChildren: () => import('./modulos/receitas/receitas.module').then(m => m.ReceitasModule) },
       { path: 'lista-de-compras', loadChildren: () => import('./modulos/lista-de-compras/lista-de-compras.module').then(m => m.ListaDeComprasModule) },
-      { path: 'produtos', loadChildren: () => import('./modulos/produtos/produtos.module').then(m => m.ProdutosModule) },
+      { path: 'materiais', loadChildren: () => import('./modulos/produtos/produtos.module').then(m => m.ProdutosModule) },
       { path: 'categorias', loadChildren: () => import('./modulos/categorias/categorias.module').then(m => m.CategoriasModule) },
     ]
   },

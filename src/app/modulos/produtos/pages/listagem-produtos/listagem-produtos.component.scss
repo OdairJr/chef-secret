@@ -1,0 +1,32 @@
+.tabela-materiais {
+  background-color: #fff;
+
+  th,
+  td {
+    vertical-align: middle;
+  }
+
+  td {
+    font-size: 0.95rem;
+  }
+}
+
+.table-cabecalho {
+  background-color: #985e5b;
+  color: #fff;
+
+  th {
+    border-color: #985e5b;
+  }
+}
+
+.btn-salvar {
+  background-color: #985e5b;
+  color: white;
+  font-weight: 500;
+  border: none;
+
+  &:hover {
+    background-color: darken(#985e5b, 10%);
+  }
+}

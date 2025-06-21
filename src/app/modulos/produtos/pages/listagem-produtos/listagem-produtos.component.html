@@ -1,23 +1,36 @@
 <div class="container mt-4">
-    <h1 class="text-center mb-4">Lista de Produtos</h1>
-    <div class="text-end mb-3">
-        <button class="btn btn-primary" (click)="adicionarProduto()">Adicionar Novo Produto</button>
-    </div>
-    <div class="row">
-        <div class="col-md-4 mb-4" *ngFor="let produto of produtos">
-            <div class="card h-100">
-                <!-- <img [src]="produto.imagem" class="card-img-top" alt="{{ produto.nome }}"> -->
-                <div class="card-body">
-                  <h5 class="card-title text-center">{{ produto.nome }}</h5>
-                  <p class="card-text"><strong>Código de Barras:</strong> {{ produto.codigo_barra }}</p>
-                  <p class="card-text"><strong>Unidade de Medida:</strong> {{ produto.unidade_medida }}</p>
-                  <p class="card-text"><strong>Categoria:</strong> {{ produto.categoria.nome }}</p>
-                </div>
-                <div class="card-footer text-center">
-                  <button class="btn btn-warning me-2" [routerLink]="['/produtos/editar', produto.id]">Editar</button>
-                  <button class="btn btn-danger" (click)="excluirProduto(produto.id)">Excluir</button>
-                </div>
-              </div>
-        </div>
-    </div>
+  <!-- Botão centralizado -->
+  <div class="d-flex justify-content-center mb-4">
+    <button class="btn btn-salvar" (click)="adicionarProduto()"><i class="bi bi-plus-lg"></i> Criar Material</button>
+  </div>
+
+  <!-- Tabela de materiais -->
+  <div class="table-responsive">
+    <table class="table table-bordered text-center tabela-materiais">
+      <thead class="table-cabecalho">
+        <tr>
+          <th>Material</th>
+          <th>Preço</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let produto of produtos">
+          <td>{{ produto.nome }}</td>
+          <td>{{ produto.preco_padrao | currency : "BRL" }}</td>
+          <td>
+            <button class="btn btn-sm btn-outline-primary me-2" [routerLink]="['/materiais/editar', produto.id]">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-danger me-2" (click)="excluirProduto(produto.id)">
+              <i class="bi bi-trash"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-secondary">
+              <i class="bi bi-eye"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
