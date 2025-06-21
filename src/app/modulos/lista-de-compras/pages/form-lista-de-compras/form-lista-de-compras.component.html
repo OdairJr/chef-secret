@@ -46,14 +46,17 @@
             </td>
             <td>{{ item.produto?.nome }}</td>
             <td>
-              <input
-                type="number"
-                class="form-control form-control-sm"
-                min="1"
-                style="max-width: 100px"
-                [(ngModel)]="item.quantidade"
-                [ngModelOptions]="{ standalone: true }"
-              />
+              <div class="d-flex align-items-center">
+                <input
+                  type="number"
+                  class="form-control form-control-sm"
+                  min="1"
+                  style="max-width: 100px"
+                  [(ngModel)]="item.quantidade"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+                <span class="ms-2">{{ item.produto?.unidade_medida }}</span>
+              </div>
             </td>
             <td>
               <button type="button" class="btn btn-danger btn-sm" (click)="removerItem(i)"><i class="bi bi-trash"></i>Remover</button>

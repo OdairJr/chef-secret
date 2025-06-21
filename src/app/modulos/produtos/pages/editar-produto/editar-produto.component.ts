@@ -62,9 +62,9 @@ export class EditarProdutoComponent implements OnInit {
         id: this.produtoId,
         ...this.formulario.value
       };
-      debugger
+
       this.produtosService.editarProduto(produtoAtualizado).subscribe(() => {
-        this.router.navigate(['/produtos']);
+        this.router.navigate(['/materiaiss']);
       });
     }
   }

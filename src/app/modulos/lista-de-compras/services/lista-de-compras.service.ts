@@ -18,7 +18,12 @@ export class ListaDeComprasService {
       data_conclusao: lista.data_conclusao ? new Date(lista.data_conclusao) : null,
       created_at: new Date(lista.created_at),
       updated_at: new Date(lista.updated_at),
-      itens: lista.itens,
+      itens: lista.itens
+      ? lista.itens.map((item: any) => ({
+        ...item,
+        quantidade: item.quantidade !== undefined ? Number(item.quantidade) : item.quantidade,
+        }))
+      : [],
     };
   }
 
