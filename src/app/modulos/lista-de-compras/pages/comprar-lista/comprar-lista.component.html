@@ -1,0 +1,46 @@
+<div *ngIf="formLista" class="container mt-4">
+  <h2 class="titulo-principal text-center mb-3">{{ listaDeCompras?.nome_lista }}</h2>
+
+  <!-- Tabela de materiais com campo de preço -->
+  <form [formGroup]="formLista" (ngSubmit)="onSubmit()">
+    <div class="row justify-content-center mb-4">
+      <div class="col-md-8">
+        <div class="row fw-bold mb-2 px-2">
+          <div class="col-6">Material</div>
+          <div class="col-6">Preço</div>
+        </div>
+
+        <div class="row align-items-center mb-3 px-2" *ngFor="let item of listaDeCompras?.itens; let i = index">
+          <div class="col-6 d-flex align-items-center gap-2">
+            <input type="checkbox" [formControlName]="'selecionado_' + i" />
+            <label class="form-label m-0">{{ item.produto?.nome }}</label>
+          </div>
+
+          <div class="col-6">
+            <input type="number" class="form-control input-rounded" [formControlName]="'preco_' + i" placeholder="R$" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upload da nota -->
+    <div class="d-flex justify-content-center mb-4">
+      <label class="input-upload">
+        <input type="file" (change)="onFileChange($event)" hidden />
+        <ng-container *ngIf="notaFiscalPreview; else uploadIcon">
+          <img [src]="notaFiscalPreview" class="img-fluid rounded shadow" width="200" />
+        </ng-container>
+        <ng-template #uploadIcon>
+          <i class="bi bi-cloud-arrow-up fs-2 d-block mb-2"></i>
+          Upload de nota fiscal
+        </ng-template>
+      </label>
+    </div>
+
+    <!-- Botões -->
+    <div class="text-end">
+      <button class="btn btn-cancelar mx-2" type="button" routerLink="/lista-de-compras">Cancelar</button>
+      <button class="btn btn-salvar" type="submit" [disabled]="formLista.invalid">Salvar lista</button>
+    </div>
+  </form>
+</div>

@@ -8,6 +8,7 @@ import { ListaDeComprasPorReceitaComponent } from './pages/lista-de-compras-por-
 import { HistoricoDeComprasComponent } from './pages/historico-de-compras/historico-de-compras.component';
 import { CompartilhadoModule } from 'src/app/compartilhado/compartilhado.module';
 import { FormListaDeComprasComponent } from './pages/form-lista-de-compras/form-lista-de-compras.component';
+import { ComprarListaComponent } from './pages/comprar-lista/comprar-lista.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { FormListaDeComprasComponent } from './pages/form-lista-de-compras/form-
     ListaDeComprasPorReceitaComponent,
     HistoricoDeComprasComponent,
     FormListaDeComprasComponent,
+    ComprarListaComponent,
   ],
   imports: [
     CommonModule,

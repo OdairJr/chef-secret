@@ -89,6 +89,7 @@ export class FormListaDeComprasComponent implements OnInit {
       return;
     }
 
+    debugger
     const lista = {
       nome_lista: this.formularioCompras.value.nome_lista,
       descricao: this.formularioCompras.value.descricao,

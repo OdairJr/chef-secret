@@ -1,0 +1,21 @@
+.input-upload {
+  display: inline-block;
+  width: 220px;
+  height: 220px;
+  border: 2px dashed #ccc;
+  border-radius: 0.5rem;
+  background-color: #fdfdfd;
+  color: #444;
+  text-align: center;
+  padding: 2rem 1rem;
+  cursor: pointer;
+
+  &:hover {
+    border-color: #985e5b;
+    background-color: #fef6f6;
+  }
+
+  i {
+    color: #985e5b;
+  }
+}

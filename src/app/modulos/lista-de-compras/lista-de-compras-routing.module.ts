@@ -4,6 +4,7 @@ import { ListarListaDeComprasComponent } from './pages/listar-lista-de-compras/l
 import { ListaDeComprasPorReceitaComponent } from './pages/lista-de-compras-por-receita/lista-de-compras-por-receita.component';
 import { HistoricoDeComprasComponent } from './pages/historico-de-compras/historico-de-compras.component';
 import { FormListaDeComprasComponent } from './pages/form-lista-de-compras/form-lista-de-compras.component';
+import { ComprarListaComponent } from './pages/comprar-lista/comprar-lista.component';
 
 const routes: Routes = [
   { path: '', component: ListarListaDeComprasComponent },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'form-lista-de-compras/:id', component: FormListaDeComprasComponent },
   { path: 'lista-por-receita', component: ListaDeComprasPorReceitaComponent },
   { path: 'historico-de-compras', component: HistoricoDeComprasComponent },
+  { path: 'comprar-lista/:id', component: ComprarListaComponent },
 ];
 
 @NgModule({

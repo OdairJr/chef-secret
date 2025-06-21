@@ -36,8 +36,12 @@ export class ListaDeComprasService {
   }
 
   criarLista(lista: Partial<ListaDeCompras>): Observable<ListaDeCompras> {
+    const listaFormatada = {
+      ...this.toIsoFields(lista),
+      produtos: lista.itens
+    };
     return this.http
-      .post<ListaDeCompras>(API_ENDPOINTS.listaDeCompras(), this.toIsoFields(lista))
+      .post<ListaDeCompras>(API_ENDPOINTS.listaDeCompras(), listaFormatada)
       .pipe(map(this.toDateFields));
   }
 
@@ -57,8 +61,12 @@ export class ListaDeComprasService {
     id: string,
     lista: Partial<ListaDeCompras>
   ): Observable<ListaDeCompras> {
+    const listaFormatada = {
+      ...this.toIsoFields(lista),
+      produtos: lista.itens
+    };
     return this.http
-      .put<ListaDeCompras>(`${API_ENDPOINTS.listaDeCompras()}/${id}`, this.toIsoFields(lista))
+      .put<ListaDeCompras>(`${API_ENDPOINTS.listaDeCompras()}/${id}`, listaFormatada)
       .pipe(map(this.toDateFields));
   }
 

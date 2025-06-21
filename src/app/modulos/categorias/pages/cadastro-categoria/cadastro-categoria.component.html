@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <h1 class="text-center mb-4">Cadastro de Categoria</h1>
+  <h1 class="text-center mb-4 text-primary">Cadastro de Categoria</h1>
   <form [formGroup]="formulario" (ngSubmit)="salvarCategoria()">
     <div class="mb-3">
       <label for="nome" class="form-label">Nome da Categoria</label>
@@ -15,8 +15,8 @@
       </div>
     </div>
     <div class="text-end">
-      <button type="submit" class="btn btn-primary mx-2" [disabled]="formulario.invalid">Salvar</button>
-      <button type="button" class="btn btn-secondary" routerLink="/categorias">Cancelar</button>
+      <button type="button" class="btn btn-secondary mx-2" routerLink="/categorias">Cancelar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">Salvar</button>
     </div>
   </form>
 </div>
