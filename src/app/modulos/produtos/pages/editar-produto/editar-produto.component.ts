@@ -30,7 +30,9 @@ export class EditarProdutoComponent implements OnInit {
       nome: ['', [Validators.required, Validators.maxLength(100)]],
       codigo_barra: ['', [Validators.required, Validators.maxLength(100)]],
       id_categoria: ['', Validators.required],
-      unidade_medida: ['', [Validators.required, Validators.maxLength(50)]]
+      unidade_medida: ['', [Validators.required, Validators.maxLength(50)]],
+      quantidade: [0, [Validators.required, Validators.min(0)]],
+      preco_padrao: [0, [Validators.required, Validators.min(0)]],
     });
 
     this.carregarCategorias();
@@ -46,7 +48,10 @@ export class EditarProdutoComponent implements OnInit {
   private carregarProduto(): void {
     this.produtosService.obterProdutoPorId(this.produtoId).subscribe((produto) => {
       if (produto) {
-        this.formulario.patchValue(produto);
+        this.formulario.patchValue({
+          ...produto,
+          quantidade: Number(produto.quantidade)
+        });
       }
     });
   }
