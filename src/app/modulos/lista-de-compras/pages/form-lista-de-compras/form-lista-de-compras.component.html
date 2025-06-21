@@ -36,14 +36,13 @@
             <th>#</th>
             <th>Nome</th>
             <th>Quantidade</th>
-            <th>Valor</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of itens; let i = index">
             <td>
-              <input type="checkbox" aria-label="Item comprado" />
+
             </td>
             <td>{{ item.produto?.nome }}</td>
             <td>
@@ -53,16 +52,6 @@
                 min="1"
                 style="max-width: 100px"
                 [(ngModel)]="item.quantidade"
-                [ngModelOptions]="{ standalone: true }"
-              />
-            </td>
-            <td>
-              <input
-                type="number"
-                class="form-control form-control-sm"
-                min="0"
-                style="max-width: 100px"
-                [(ngModel)]="item.valor"
                 [ngModelOptions]="{ standalone: true }"
               />
             </td>

@@ -6,6 +6,10 @@ export interface ListaDeCompras {
   descricao?: string;
   id_lista_compra_status: number;
 
+  data_conclusao?: Date | null;
+  created_at: Date;
+  updated_at: Date;
+
   itens?: ItemDaLista[];
 }
 
@@ -15,7 +19,5 @@ export interface ItemDaLista {
   unidade_medida: string;
   quantidade: number;
   observacao?: string;
-  // CAMPOS DA TELA
-  valor?: number;
   comprado?: boolean;
 }

@@ -1,20 +1,35 @@
 <div class="container mt-4">
-  <h1 class="text-center mb-4">Listagem de Categorias</h1>
-  <div class="text-end mb-3">
-    <button class="btn btn-primary" routerLink="/categorias/cadastro">Nova Categoria</button>
+  <!-- Botão centralizado -->
+  <div class="d-flex justify-content-center mb-4">
+    <button class="btn btn-salvar" routerLink="/categorias/cadastro">
+      <i class="bi bi-plus-lg"></i> Nova Categoria
+    </button>
   </div>
-  <div class="row">
-    <div class="col-md-4 mb-4" *ngFor="let categoria of categorias">
-      <div class="card h-100">
-        <div class="card-body text-center">
-          <h5 class="card-title">{{ categoria.nome }}</h5>
-          <p class="card-text">ID: {{ categoria.id }}</p>
-        </div>
-        <div class="card-footer text-center">
-          <button class="btn btn-warning me-2" [routerLink]="['/categorias/editar', categoria.id]">Editar</button>
-          <button class="btn btn-danger" (click)="excluirCategoria(categoria.id)">Excluir</button>
-        </div>
-      </div>
-    </div>
+
+  <!-- Tabela de categorias -->
+  <div class="table-responsive">
+    <table class="table table-bordered text-center tabela-materiais">
+      <thead class="table-cabecalho">
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let categoria of categorias">
+          <td>{{ categoria.id }}</td>
+          <td>{{ categoria.nome }}</td>
+          <td>
+            <button class="btn btn-sm btn-outline-primary me-2" [routerLink]="['/categorias/editar', categoria.id]">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-danger me-2" (click)="excluirCategoria(categoria.id)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

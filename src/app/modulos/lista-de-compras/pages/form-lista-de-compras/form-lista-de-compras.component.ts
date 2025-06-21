@@ -33,8 +33,7 @@ export class FormListaDeComprasComponent implements OnInit {
   ) {
     this.formularioCompras = this.formBuilder.group({
       nome_lista: ['', [Validators.required, Validators.maxLength(30)]],
-      descricao: ['', [Validators.maxLength(30)]],
-      notasFiscais: [[]],
+      descricao: ['', [Validators.maxLength(30)]]
     });
   }
 
@@ -67,7 +66,6 @@ export class FormListaDeComprasComponent implements OnInit {
           id_produto: original.id_produto,
           unidade_medida: original.unidade_medida,
           quantidade: original.quantidade,
-          valor: original.valor,
           comprado: original.comprado,
         } as ItemDaLista;
       });
@@ -155,8 +153,7 @@ export class FormListaDeComprasComponent implements OnInit {
         if (material) {
           this.adicionarItem({
             produto: material,
-            quantidade: 1,
-            valor: 0,
+            quantidade: Number(ingrediente.quantidade),
           });
         }
       }
@@ -184,7 +181,6 @@ export class FormListaDeComprasComponent implements OnInit {
         unidade_medida: ingrediente.unidade_medida,
         quantidade: ingrediente.quantidade,
         observacao: ingrediente.observacao,
-        valor: 0,
         comprado: false,
       };
 
