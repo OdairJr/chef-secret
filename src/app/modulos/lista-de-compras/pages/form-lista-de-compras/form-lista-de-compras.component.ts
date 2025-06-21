@@ -33,7 +33,7 @@ export class FormListaDeComprasComponent implements OnInit {
   ) {
     this.formularioCompras = this.formBuilder.group({
       nome_lista: ['', [Validators.required, Validators.maxLength(30)]],
-      descricao: ['', [Validators.required, Validators.maxLength(30)]],
+      descricao: ['', [Validators.maxLength(30)]],
       notasFiscais: [[]],
     });
   }
@@ -48,7 +48,6 @@ export class FormListaDeComprasComponent implements OnInit {
   }
 
   private carregarInformacoesDosProdutos(produtos: ItemDaLista[]): void {
-    debugger
     const requisicoes = produtos.map((produto) =>
       this.produtosService.obterProdutoPorId(produto.id_produto).pipe(
         map((produto) => ({
@@ -78,7 +77,6 @@ export class FormListaDeComprasComponent implements OnInit {
   private carregarLista(id: string): void {
     this.listaDeComprasService.buscarListaPorId(id).subscribe((lista) => {
       if (lista) {
-        debugger
         this.formularioCompras.patchValue({ nome_lista: lista.nome_lista, descricao: lista.descricao });
         this.itens = lista.itens || [];
 

@@ -1,0 +1,23 @@
+.lista-card {
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  background-color: #f8f9fa;
+  font-size: 0.95rem;
+
+  .nome-lista {
+    font-weight: 600;
+    color: #985e5b;
+  }
+
+  .btn-outline-danger,
+  .btn-outline-primary,
+  .btn-outline-secondary {
+    border-width: 1px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .btn-outline-danger i {
+    color: #dc3545;
+  }
+}

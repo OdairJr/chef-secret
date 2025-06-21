@@ -57,7 +57,14 @@
               />
             </td>
             <td>
-              <input type="number" class="form-control form-control-sm" min="0" style="max-width: 100px" [(ngModel)]="item.valor" [ngModelOptions]="{standalone: true}" />
+              <input
+                type="number"
+                class="form-control form-control-sm"
+                min="0"
+                style="max-width: 100px"
+                [(ngModel)]="item.valor"
+                [ngModelOptions]="{ standalone: true }"
+              />
             </td>
             <td>
               <button type="button" class="btn btn-danger btn-sm" (click)="removerItem(i)"><i class="bi bi-trash"></i>Remover</button>
@@ -81,8 +88,10 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Salvar Lista</button>
-    <button type="button" class="btn btn-secondary ms-2" (click)="cancelar()">Cancelar</button>
+    <div class="text-end">
+      <button type="button" class="btn btn-secondary mx-2" (click)="cancelar()">Cancelar</button>
+      <button type="submit" class="btn btn-primary">Salvar Lista</button>
+    </div>
   </form>
 </div>
 
