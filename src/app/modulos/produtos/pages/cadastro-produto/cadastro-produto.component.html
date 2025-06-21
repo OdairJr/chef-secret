@@ -1,32 +1,46 @@
 <div class="container mt-4">
-  <h1 class="text-center mb-4">Cadastro de Produto</h1>
+  <h1 class="text-center mb-4 text-primary">Cadastro de Material</h1>
   <form [formGroup]="formulario" (ngSubmit)="salvarProduto()">
     <div class="mb-3">
-      <label for="nome" class="form-label">Nome do Produto</label>
-      <input
-        type="text"
-        id="nome"
-        class="form-control"
-        formControlName="nome"
-        placeholder="Digite o nome do produto"
-      />
+      <label for="nome" class="form-label">Nome do Material</label>
+      <input type="text" id="nome" class="form-control" formControlName="nome" placeholder="Digite o nome do produto" />
       <div *ngIf="formulario.get('nome')?.invalid && formulario.get('nome')?.touched" class="text-danger">
         O nome é obrigatório e deve ter no máximo 100 caracteres.
       </div>
     </div>
 
-    <div class="mb-3 row">
-      <div class="col-md-4">
+    <div class="mb-3">
+      <label for="codigo_barra" class="form-label">Código de Barras</label>
+      <input type="text" id="codigo_barra" class="form-control" formControlName="codigo_barra" placeholder="Digite o código de barras" />
+      <div *ngIf="formulario.get('codigo_barra')?.invalid && formulario.get('codigo_barra')?.touched" class="text-danger">
+        O código de barras é obrigatório e deve ter no máximo 100 caracteres.
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-3">
         <label for="id_categoria" class="form-label">Categoria</label>
         <select id="id_categoria" class="form-select" formControlName="id_categoria">
           <option value="" disabled selected>Selecione uma categoria</option>
           <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nome }}</option>
         </select>
-        <div *ngIf="formulario.get('id_categoria')?.invalid && formulario.get('id_categoria')?.touched" class="text-danger">
-          A categoria é obrigatória.
+        <div *ngIf="formulario.get('id_categoria')?.invalid && formulario.get('id_categoria')?.touched" class="text-danger">A categoria é obrigatória.</div>
+      </div>
+      <div class="col-3">
+        <label for="quantidade" class="form-label">Quantidade na embalagem</label>
+        <input
+          type="number"
+          id="quantidade"
+          class="form-control"
+          formControlName="quantidade"
+          placeholder="Digite a quantidade na embalagem"
+          min="1"
+        />
+        <div *ngIf="formulario.get('quantidade')?.invalid && formulario.get('quantidade')?.touched" class="text-danger">
+          A quantidade é obrigatória e deve ser um número maior que zero.
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-3">
         <label for="unidade_medida" class="form-label">Unidade de Medida</label>
         <input
           type="text"
@@ -39,39 +53,26 @@
           A unidade de medida é obrigatória e deve ter no máximo 50 caracteres.
         </div>
       </div>
-      <div class="col-md-4">
-        <label for="quantidade_embalagem" class="form-label">Quantidade na Embalagem</label>
+      <div class="col-3">
+        <label for="preco_padrao" class="form-label">Preço Comercial</label>
         <input
           type="number"
-          id="quantidade_embalagem"
+          id="preco_padrao"
           class="form-control"
-          formControlName="quantidade_embalagem"
-          placeholder="Ex: 1000"
+          formControlName="preco_padrao"
+          placeholder="Digite o preço padrão do material"
           min="0"
+          step="0.01"
         />
-        <div *ngIf="formulario.get('quantidade_embalagem')?.invalid && formulario.get('quantidade_embalagem')?.touched" class="text-danger">
-          Informe a quantidade na embalagem.
+        <div *ngIf="formulario.get('preco_padrao')?.invalid && formulario.get('preco_padrao')?.touched" class="text-danger">
+          O preço padrão é obrigatório e deve ser um número maior ou igual a zero.
         </div>
       </div>
     </div>
 
-    <div class="mb-3">
-      <label for="codigo_barra" class="form-label">Código de Barras</label>
-      <input
-        type="text"
-        id="codigo_barra"
-        class="form-control"
-        formControlName="codigo_barra"
-        placeholder="Digite o código de barras"
-      />
-      <div *ngIf="formulario.get('codigo_barra')?.invalid && formulario.get('codigo_barra')?.touched" class="text-danger">
-        O código de barras é obrigatório e deve ter no máximo 100 caracteres.
-      </div>
-    </div>
-
     <div class="text-end">
+      <button type="button" class="btn btn-secondary mx-2" routerLink="/materiais">Cancelar</button>
       <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">Salvar</button>
-      <button type="button" class="btn btn-secondary" routerLink="/produtos">Cancelar</button>
     </div>
   </form>
 </div>

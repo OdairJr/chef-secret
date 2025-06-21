@@ -24,7 +24,7 @@ export class ListagemProdutosComponent implements OnInit {
   }
 
   public adicionarProduto(): void {
-    this.router.navigate(['/produtos/cadastro']);
+    this.router.navigate(['/materiais/cadastro']);
   }
 
   // crie a funcao excluir produto

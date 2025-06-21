@@ -27,8 +27,9 @@ export class CadastroProdutoComponent implements OnInit {
       nome: ['', [Validators.required, Validators.maxLength(100)]],
       codigo_barra: ['', [Validators.required, Validators.maxLength(100)]],
       id_categoria: ['', Validators.required],
+      quantidade: [0, [Validators.required, Validators.min(1)]],
       unidade_medida: ['', [Validators.required, Validators.maxLength(50)]],
-      quantidade_embalagem: ['', [Validators.required]]
+      preco_padrao: [0, [Validators.required, Validators.min(0)]],
     });
 
     this.carregarCategorias();
