@@ -45,7 +45,7 @@ export class CadastroProdutoComponent implements OnInit {
     if (this.formulario.valid) {
       const novoProduto: Material = this.formulario.value;
       this.produtosService.criarProduto(novoProduto).subscribe(() => {
-        this.router.navigate(['/produtos']);
+        this.router.navigate(['/materiais']);
       });
     }
   }
