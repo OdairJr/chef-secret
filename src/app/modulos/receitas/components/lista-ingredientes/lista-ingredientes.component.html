@@ -11,7 +11,7 @@
     <tbody>
       <tr *ngFor="let ingrediente of ingredientes; let i = index">
         <td>{{ ingrediente.produto?.nome }}</td>
-        <td>{{ ingrediente.quantidade }} {{ ingrediente.unidade }}</td>
+        <td>{{ transformToNumber(ingrediente.quantidade) }} {{ ingrediente.unidade }}</td>
         <td>{{ ingrediente.produto?.preco_padrao ?? 0 | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
         <td>
           <div class="d-flex gap-2">

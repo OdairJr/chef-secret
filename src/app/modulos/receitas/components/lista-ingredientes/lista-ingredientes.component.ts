@@ -11,6 +11,11 @@ export class ListaIngredientesComponent {
   @Output() editar = new EventEmitter<number>();
   @Output() excluir = new EventEmitter<number>();
 
+  public transformToNumber(value: string): number {
+    const numberValue = parseFloat(value);
+    return isNaN(numberValue) ? 0 : numberValue;
+  }
+
   editarIngrediente(index: number): void {
     this.editar.emit(index);
   }
