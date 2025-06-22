@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ListaDeComprasService } from '../../services/lista-de-compras.service';
 import { ListaDeCompras } from 'src/app/models/lista-de-compras.model';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { DetalheProdutoEventoCompra, EventoCompra } from '../../models/evento-compra.model';
 
 @Component({
   selector: 'app-comprar-lista',
@@ -31,20 +32,38 @@ export class ComprarListaComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.formLista.valid) {
-      const dadosLista = this.listaDeCompras?.itens?.map((item, index) => ({
-        nome: item.produto?.nome,
-        selecionado: this.formLista.get(`selecionado_${index}`)?.value,
-        preco: this.formLista.get(`preco_${index}`)?.value,
-      }));
+    if (this.formLista.valid && this.listaDeCompras) {
+      const detalhes_produtos: DetalheProdutoEventoCompra[] =
+        this.listaDeCompras.itens?.map((item, index) => {
+          const selecionado = this.formLista.get(`selecionado_${index}`)?.value;
+          if (!selecionado) {
+            return null;
+          }
+          if (item.produto?.id === undefined) {
+            throw new Error(`Produto sem ID no índice ${index}`);
+          }
+          return {
+            id_produto: item.produto.id,
+            preco_unitario: this.formLista.get(`preco_${index}`)?.value,
+            desconto: this.formLista.get(`desconto_${index}`)?.value || 0,
+          };
+        }).filter((detalhe) => detalhe !== null) as DetalheProdutoEventoCompra[] || [];
 
-      console.log('Dados para salvar:', {
-        nomeLista: this.listaDeCompras?.nome_lista,
-        itens: dadosLista,
-        notaFiscal: this.notaFiscalPreview,
+      const eventoCompra: EventoCompra = {
+        id_lista_compra: Number(this.listaDeCompras.id),
+        detalhes_produtos,
+      };
+
+      this.listaDeComprasService.registrarEventoCompra(eventoCompra).subscribe({
+        next: () => {
+          // Sucesso: redirecione ou mostre mensagem
+          console.log('Evento de compra registrado com sucesso!');
+        },
+        error: (err) => {
+          // Erro: trate conforme necessário
+          console.error('Erro ao registrar evento de compra:', err);
+        },
       });
-
-      // Aqui você pode enviar os dados para a API, etc.
     }
   }
 

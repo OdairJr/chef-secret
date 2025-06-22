@@ -18,6 +18,7 @@ export const API_ENDPOINTS = {
   receitaTags: () => `${API_URL}/api/receita-tags`,
   imagens: () => `${API_URL}/api/imagens`,
   listaDeCompras: () => `${API_URL}/api/listas-compra`,
+  registrarEvento: () => `${API_URL}/api/compras/registrar-evento`,
   usuarios: () => `${API_URL}/api/admin/usuarios`,
   grantAdmin: (id: number) => `${API_URL}/api/admin/usuarios/grant-admin/${id}`,
   revokeAdmin: (id: number) => `${API_URL}/api/admin/usuarios/revoke-admin/${id}`,

@@ -5,6 +5,7 @@ import { ListaDeCompras } from 'src/app/models/lista-de-compras.model';
 import { Material } from 'src/app/models/material.model';
 import { API_ENDPOINTS } from 'src/app/config/api.config';
 import { map } from 'rxjs/operators';
+import { EventoCompra } from '../models/evento-compra.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,11 +20,11 @@ export class ListaDeComprasService {
       created_at: new Date(lista.created_at),
       updated_at: new Date(lista.updated_at),
       itens: lista.itens
-      ? lista.itens.map((item: any) => ({
-        ...item,
-        quantidade: item.quantidade !== undefined ? Number(item.quantidade) : item.quantidade,
-        }))
-      : [],
+        ? lista.itens.map((item: any) => ({
+            ...item,
+            quantidade: item.quantidade !== undefined ? Number(item.quantidade) : item.quantidade,
+          }))
+        : [],
     };
   }
 
@@ -43,36 +44,25 @@ export class ListaDeComprasService {
   criarLista(lista: Partial<ListaDeCompras>): Observable<ListaDeCompras> {
     const listaFormatada = {
       ...this.toIsoFields(lista),
-      produtos: lista.itens
+      produtos: lista.itens,
     };
-    return this.http
-      .post<ListaDeCompras>(API_ENDPOINTS.listaDeCompras(), listaFormatada)
-      .pipe(map(this.toDateFields));
+    return this.http.post<ListaDeCompras>(API_ENDPOINTS.listaDeCompras(), listaFormatada).pipe(map(this.toDateFields));
   }
 
   listarListas(): Observable<ListaDeCompras[]> {
-    return this.http
-      .get<ListaDeCompras[]>(API_ENDPOINTS.listaDeCompras())
-      .pipe(map(listas => this.toDateFieldsArray(listas)));
+    return this.http.get<ListaDeCompras[]>(API_ENDPOINTS.listaDeCompras()).pipe(map((listas) => this.toDateFieldsArray(listas)));
   }
 
   buscarListaPorId(id: string): Observable<ListaDeCompras> {
-    return this.http
-      .get<ListaDeCompras>(`${API_ENDPOINTS.listaDeCompras()}/${id}`)
-      .pipe(map(this.toDateFields));
+    return this.http.get<ListaDeCompras>(`${API_ENDPOINTS.listaDeCompras()}/${id}`).pipe(map(this.toDateFields));
   }
 
-  atualizarLista(
-    id: string,
-    lista: Partial<ListaDeCompras>
-  ): Observable<ListaDeCompras> {
+  atualizarLista(id: string, lista: Partial<ListaDeCompras>): Observable<ListaDeCompras> {
     const listaFormatada = {
       ...this.toIsoFields(lista),
-      produtos: lista.itens
+      produtos: lista.itens,
     };
-    return this.http
-      .put<ListaDeCompras>(`${API_ENDPOINTS.listaDeCompras()}/${id}`, listaFormatada)
-      .pipe(map(this.toDateFields));
+    return this.http.put<ListaDeCompras>(`${API_ENDPOINTS.listaDeCompras()}/${id}`, listaFormatada).pipe(map(this.toDateFields));
   }
 
   excluirLista(id: string): Observable<void> {
@@ -82,6 +72,11 @@ export class ListaDeComprasService {
   buscarMateriais(): Observable<Material[]> {
     const materiaisUrl = 'http://localhost:3000/materiais';
     return this.http.get<Material[]>(materiaisUrl);
+  }
+
+  public registrarEventoCompra(evento: EventoCompra): Observable<void> {
+    const url = `${API_ENDPOINTS.registrarEvento()}`;
+    return this.http.post<void>(url, evento);
   }
 
   // criarLista(lista: Partial<ListaDeCompras>): Observable<ListaDeCompras> {
