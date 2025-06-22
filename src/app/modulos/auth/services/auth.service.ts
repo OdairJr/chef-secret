@@ -44,4 +44,21 @@ export class AuthService {
     return of(false);
   }
 
+  getCurrentUser(): Usuario | null {
+    const userStr = sessionStorage.getItem('currentUser');
+    if (userStr) {
+      try {
+        return JSON.parse(userStr) as Usuario;
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  }
+
+  isAdmin(): boolean {
+    const user = this.getCurrentUser();
+    return !!user && !!user.is_admin;
+  }
+
 }

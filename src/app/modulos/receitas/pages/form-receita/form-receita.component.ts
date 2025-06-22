@@ -43,8 +43,8 @@ export class FormReceitaComponent implements OnInit {
       descricao: [''],
       rendimento: [''],
       tempo_preparo: [''],
-      custosAdicionais: [0],
-      lucroEsperado: [0],
+      custos_adicionais: [0],
+      lucro_esperado: [0],
     });
 
     this.receitaId = Number(this.route.snapshot.paramMap.get('id'));

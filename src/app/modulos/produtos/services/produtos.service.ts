@@ -21,17 +21,17 @@ export class ProdutosService {
   }
 
   public criarProduto(produto: Material): Observable<Material> {
-    return this.http.post<Material>(API_ENDPOINTS.produtos(), produto);
+    return this.http.post<Material>(API_ENDPOINTS.criarProduto(), produto);
   }
 
   public editarProduto(produto: Material): Observable<Material | undefined> {
     return this.http.put<Material>(
-      API_ENDPOINTS.produtoById(produto.id),
+      API_ENDPOINTS.editarProduto(produto.id),
       produto
     );
   }
 
   public excluirProduto(id: number): Observable<void> {
-    return this.http.delete<void>(API_ENDPOINTS.produtoById(id));
+    return this.http.delete<void>(API_ENDPOINTS.excluirProduto(id));
   }
 }

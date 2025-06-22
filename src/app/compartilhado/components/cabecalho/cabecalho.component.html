@@ -18,6 +18,7 @@
       class="nav-link"
       routerLink="/materiais"
       routerLinkActive="active"
+      *ngIf="authService.isAdmin()"
     >
       Materiais
     </a>
@@ -34,8 +35,18 @@
       class="nav-link"
       routerLink="/categorias"
       routerLinkActive="active"
+      *ngIf="authService.isAdmin()"
     >
       Lista de Categorias
+    </a>
+
+    <a
+      class="nav-link"
+      routerLink="/usuarios"
+      routerLinkActive="active"
+      *ngIf="authService.isAdmin()"
+    >
+      Gestão de Usuários
     </a>
 
     <!-- Dropdown Conta -->

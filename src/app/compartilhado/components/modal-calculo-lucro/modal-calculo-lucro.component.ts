@@ -41,7 +41,7 @@ export class ModalCalculoLucroComponent {
    * @returns {number} Valor dos custos adicionais calculados.
    */
   public get calcularCustoAdicionais(): number {
-    const percentual = this.receita?.custosAdicionais ?? 0;
+    const percentual = this.receita?.custos_adicionais ?? 0;
     const custoMateriais = this.calcularCustoDosMateriais;
     return (custoMateriais * percentual) / 100;
   }
@@ -76,15 +76,15 @@ export class ModalCalculoLucroComponent {
    */
   public get calcularValorSugeridoVenda(): number {
     const custoPorUnidade = this.calcularCustoPorUnidade;
-    const lucroEsperado = this.receita?.lucroEsperado ? this.receita.lucroEsperado : 0;
+    const lucro_esperado = this.receita?.lucro_esperado ? this.receita.lucro_esperado : 0;
 
     // Se o lucro esperado for 0, retorna o custo por unidade
-    if (lucroEsperado === 0) {
+    if (lucro_esperado === 0) {
       return custoPorUnidade;
     }
 
     // Calcula o valor sugerido de venda com base no custo por unidade e no lucro esperado
-    return custoPorUnidade + (custoPorUnidade * lucroEsperado) / 100;
+    return custoPorUnidade + (custoPorUnidade * lucro_esperado) / 100;
   }
 
   /**

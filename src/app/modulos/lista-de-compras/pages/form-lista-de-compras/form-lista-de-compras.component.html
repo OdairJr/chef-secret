@@ -36,6 +36,7 @@
             <th>#</th>
             <th>Nome</th>
             <th>Quantidade</th>
+            <th>Observações</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -57,6 +58,9 @@
                 />
                 <span class="ms-2">{{ item.produto?.unidade_medida }}</span>
               </div>
+            </td>
+            <td>
+              <label class="form-label mb-0">{{ item.observacao }}</label>
             </td>
             <td>
               <button type="button" class="btn btn-danger btn-sm" (click)="removerItem(i)"><i class="bi bi-trash"></i>Remover</button>

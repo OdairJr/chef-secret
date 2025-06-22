@@ -64,7 +64,7 @@ export class EditarProdutoComponent implements OnInit {
       };
 
       this.produtosService.editarProduto(produtoAtualizado).subscribe(() => {
-        this.router.navigate(['/materiaiss']);
+        this.router.navigate(['/materiais']);
       });
     }
   }

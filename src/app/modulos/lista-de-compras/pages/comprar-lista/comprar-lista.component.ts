@@ -65,6 +65,7 @@ export class ComprarListaComponent implements OnInit {
     this.listaDeCompras?.itens?.forEach((item, index) => {
       grupo[`selecionado_${index}`] = new FormControl(item.comprado);
       grupo[`preco_${index}`] = new FormControl(item.produto?.preco_padrao, [Validators.required, Validators.min(0)]);
+      grupo[`desconto_${index}`] = new FormControl(item.produto?.preco_padrao, [Validators.required, Validators.min(0)]);
     });
 
     this.formLista = this.fb.group(grupo);

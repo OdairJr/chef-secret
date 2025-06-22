@@ -1,0 +1,12 @@
+<div class="mb-3">
+  <label class="form-label">{{ label }}</label>
+  <select class="form-select" [formControl]="control">
+    <option value="" disabled selected>{{ placeholder }}</option>
+    <option *ngFor="let unidade of unidades" [value]="unidade.codigo">
+      {{ unidade.nome }}
+    </option>
+  </select>
+  <div *ngIf="control.invalid && control.touched" class="text-danger mt-1">
+    Campo obrigatório.
+  </div>
+</div>

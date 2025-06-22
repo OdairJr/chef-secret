@@ -15,8 +15,8 @@ export interface Receita {
   imagens: number[];
   // etapas: Etapa[];
   ingredientes: Ingrediente[];
-  custosAdicionais?: number;
-  lucroEsperado?: number;
+  custos_adicionais?: number;
+  lucro_esperado?: number;
 }
 
 export interface ReceitaTag {

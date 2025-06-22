@@ -1,0 +1,48 @@
+<div class="container mt-4">
+  <h2 class="titulo-principal text-center mb-4">Gestão de Usuários</h2>
+
+  <div class="table-responsive">
+    <table class="table table-bordered tabela-materiais text-center">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios">
+          <td>{{ usuario.id }}</td>
+          <td class="text-start">{{ usuario.name }}</td>
+          <td>
+            <button
+              class="btn btn-sm btn-outline-primary me-2"
+              *ngIf="!usuario.is_admin"
+              (click)="promover(usuario.id)"
+              title="Promover a Admin"
+            >
+              <i class="bi bi-person-plus"></i>
+            </button>
+
+            <button
+              class="btn btn-sm btn-outline-warning me-2"
+              *ngIf="usuario.is_admin"
+              (click)="removerAdmin(usuario.id)"
+              title="Remover Permissão"
+            >
+              <i class="bi bi-person-dash"></i>
+            </button>
+
+            <button
+              class="btn btn-sm btn-outline-danger"
+              (click)="excluir(usuario.id)"
+              title="Excluir"
+            >
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

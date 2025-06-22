@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProdutosRoutingModule } from './produtos-routing.module';
 import { EditarProdutoComponent } from './pages/editar-produto/editar-produto.component';
+import { CompartilhadoModule } from 'src/app/compartilhado/compartilhado.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { EditarProdutoComponent } from './pages/editar-produto/editar-produto.co
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    CompartilhadoModule
   ]
 })
 export class ProdutosModule { }

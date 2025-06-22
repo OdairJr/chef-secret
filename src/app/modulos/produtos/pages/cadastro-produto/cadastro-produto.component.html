@@ -41,17 +41,7 @@
         </div>
       </div>
       <div class="col-3">
-        <label for="unidade_medida" class="form-label">Unidade de Medida</label>
-        <input
-          type="text"
-          id="unidade_medida"
-          class="form-control"
-          formControlName="unidade_medida"
-          placeholder="Digite a unidade de medida (ex: kg, unidade, etc.)"
-        />
-        <div *ngIf="formulario.get('unidade_medida')?.invalid && formulario.get('unidade_medida')?.touched" class="text-danger">
-          A unidade de medida é obrigatória e deve ter no máximo 50 caracteres.
-        </div>
+        <app-unidade-medida-dropdown [control]="formulario.get('unidade_medida')"></app-unidade-medida-dropdown>
       </div>
       <div class="col-3">
         <label for="preco_padrao" class="form-label">Preço Comercial</label>
