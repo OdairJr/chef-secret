@@ -22,7 +22,7 @@
                 <h5 class="fw-bold text-primary">{{ receita.titulo }}</h5>
                 <p class="card-text"><strong>Descrição:</strong> {{ receita.descricao }}</p>
                 <p class="card-text"><strong>Rendimento:</strong> {{ receita.rendimento }}</p>
-                <p class="mb-2"><strong>Venda:</strong> R$ ?? Un.</p>
+                <p class="mb-2"><strong>Venda:</strong> R$ 18,45 Un.</p>
                 <div class="d-flex gap-2">
                   <button class="btn btn-sm btn-outline-primary" (click)="verDetalhes(receita.id)">
                     <i class="bi bi-eye"></i>
@@ -39,7 +39,7 @@
     </div>
 
     <ng-template #noReceitas>
-      <p class="text-muted">Nenhuma receita encontrada.</p>
+      <p class="text-muted text-center">Nenhuma receita encontrada.</p>
     </ng-template>
   </ng-template>
 </div>

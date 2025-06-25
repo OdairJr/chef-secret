@@ -89,7 +89,6 @@ export class FormListaDeComprasComponent implements OnInit {
       return;
     }
 
-    debugger
     const lista = {
       nome_lista: this.formularioCompras.value.nome_lista,
       descricao: this.formularioCompras.value.descricao,
@@ -114,11 +113,9 @@ export class FormListaDeComprasComponent implements OnInit {
     this.itens.splice(index, 1);
   }
 
-  public adicionarItem(item: Partial<ItemDaLista> = {}): void {
+  public adicionarItem(item: ItemDaLista): void {
     this.itens.push({
       comprado: false,
-      quantidade: 1,
-      valor: 0,
       ...item,
     } as ItemDaLista);
   }
@@ -153,8 +150,10 @@ export class FormListaDeComprasComponent implements OnInit {
         const material = await this.buscarMaterialPorId(ingrediente.id_produto);
         if (material) {
           this.adicionarItem({
+            id_produto: material.id,
             produto: material,
             quantidade: Number(ingrediente.quantidade),
+            unidade_medida: material.unidade_medida!,
           });
         }
       }

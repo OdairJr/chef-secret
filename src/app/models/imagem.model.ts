@@ -2,8 +2,6 @@ import { TipoImagem } from "./tipo-imagem.model";
 
 export interface Imagem {
   id: number;
-  nome: string;
-  url: string;
   id_tipo_imagem: number;
   tipo_imagem?: TipoImagem; // Relacionamento opcional com TipoImagem
   nome_arquivo: string; // Nome do arquivo original
