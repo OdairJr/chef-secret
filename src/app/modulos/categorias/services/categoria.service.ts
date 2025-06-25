@@ -13,7 +13,7 @@ export class CategoriaService {
   ) { }
 
   public listarCategorias(): Observable<Categoria[]> {
-    return this.http.get<Categoria[]>(API_ENDPOINTS.categorias());
+    return this.http.get<Categoria[]>(API_ENDPOINTS.listarCategorias());
   }
 
   public obterCategoriaPorId(id: number): Observable<Categoria | undefined> {
@@ -21,14 +21,14 @@ export class CategoriaService {
   }
 
   public criarCategoria(categoria: Categoria): Observable<Categoria> {
-    return this.http.post<Categoria>(API_ENDPOINTS.categorias(), categoria);
+    return this.http.post<Categoria>(API_ENDPOINTS.criarCategoria(), categoria);
   }
 
   public editarCategoria(categoria: Categoria): Observable<Categoria | undefined> {
-    return this.http.put<Categoria>(API_ENDPOINTS.categoriaById(categoria.id), categoria);
+    return this.http.put<Categoria>(API_ENDPOINTS.editarCategoria(categoria.id), categoria);
   }
 
   public excluirCategoria(id: number): Observable<boolean> {
-    return this.http.delete<boolean>(API_ENDPOINTS.categoriaById(id));
+    return this.http.delete<boolean>(API_ENDPOINTS.deletarCategoria(id));
   }
 }

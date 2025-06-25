@@ -153,6 +153,7 @@ export class FormListaDeComprasComponent implements OnInit {
             id_produto: material.id,
             produto: material,
             quantidade: Number(ingrediente.quantidade),
+            observacao: ingrediente.observacoes || '',
             unidade_medida: material.unidade_medida!,
           });
         }
