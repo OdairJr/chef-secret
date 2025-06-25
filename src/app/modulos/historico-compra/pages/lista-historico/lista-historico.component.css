@@ -1,0 +1,40 @@
+.tabela-materiais {
+  background-color: #fff;
+
+  th,
+  td {
+    vertical-align: middle;
+    font-size: 0.95rem;
+  }
+
+  thead th {
+    background-color: #985e5b !important;
+    color: #fff !important;
+    border-color: #985e5b;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  tbody td {
+    text-align: center;
+  }
+
+  .btn-outline-primary,
+  .btn-outline-danger,
+  .btn-outline-secondary {
+    border-width: 1px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+.btn-salvar {
+  background-color: #985e5b;
+  color: white;
+  font-weight: 500;
+  border: none;
+
+  &:hover {
+    background-color: darken(#985e5b, 10%);
+  }
+}

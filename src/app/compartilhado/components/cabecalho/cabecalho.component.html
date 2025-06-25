@@ -33,6 +33,14 @@
 
     <a
       class="nav-link"
+      routerLink="/historico-de-compras"
+      routerLinkActive="active"
+    >
+      Histórico de Compras
+    </a>
+
+    <a
+      class="nav-link"
       routerLink="/categorias"
       routerLinkActive="active"
       *ngIf="authService.isAdmin()"
