@@ -119,7 +119,7 @@ export class FormReceitaComponent implements OnInit {
       const file = input.files[0];
       const formData = new FormData();
       formData.append('image_file', file);
-      formData.append('nome', file.name); // Nome do arquivo
+      formData.append('nome_arquivo', file.name); // Nome do arquivo
       formData.append('id_tipo_imagem', '2'); // Tipo da imagem fixo como 2
       formData.append('is_publico', '1'); // Definido como público por padrão
 

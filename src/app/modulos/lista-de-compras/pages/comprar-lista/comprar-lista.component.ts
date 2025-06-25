@@ -83,13 +83,12 @@ export class ComprarListaComponent implements OnInit {
       const file = input.files[0];
       const formData = new FormData();
       formData.append('image_file', file);
-      formData.append('nome', file.name);
+      formData.append('nome_arquivo', file.name);
       formData.append('id_tipo_imagem', '4'); // Tipo de imagem 4
       formData.append('is_publico', '1'); // ou '0' se não for público
 
       this.imagensService.criarImagem(formData).subscribe({
         next: (imagem) => {
-          debugger;
           // this.imagemNotaFiscal = imagem;
           // this.notaFiscalPreview = imagem.url;
         },

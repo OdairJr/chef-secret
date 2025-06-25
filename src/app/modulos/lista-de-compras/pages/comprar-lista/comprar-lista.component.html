@@ -37,7 +37,7 @@
       <label class="input-upload">
         <input type="file" (change)="onFileChange($event)" hidden />
         <ng-container *ngIf="notaFiscalPreview; else uploadIcon">
-          <img [src]="notaFiscalPreview" class="img-fluid rounded shadow" width="200" />
+          <img [src]="notaFiscalPreview" class="preview-img img-fluid rounded shadow" />
         </ng-container>
         <ng-template #uploadIcon>
           <i class="bi bi-cloud-arrow-up fs-2 d-block mb-2"></i>
