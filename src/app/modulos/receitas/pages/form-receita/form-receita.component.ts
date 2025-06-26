@@ -74,14 +74,15 @@ export class FormReceitaComponent implements OnInit {
       this.formulario.patchValue(receita);
       this.ingredientes = receita.ingredientes;
       this.tagsSelecionadas = receita.tags || [];
-      this.imagens = receita.imagens.map((id) => ({
-        id,
-        nome: '',
-        url: `/imagens/${id}`,
-        id_tipo_imagem: 0,
-        nome_arquivo: '',
-        is_publico: true,
-      })) as Imagem[];
+
+      // this.imagens = receita.imagens.map((id) => ({
+      //   id,
+      //   nome: '',
+      //   url: `/imagens/${id}`,
+      //   id_tipo_imagem: 0,
+      //   nome_arquivo: '',
+      //   is_publico: true,
+      // })) as Imagem[];
 
       this.carregarInformacoesDosProdutos(receita.ingredientes);
     });
@@ -124,7 +125,7 @@ export class FormReceitaComponent implements OnInit {
       formData.append('is_publico', '1'); // Definido como público por padrão
 
       this.imagensService.criarImagem(formData).subscribe((imagem) => {
-        this.imagens.push(imagem);
+        this.imagens.push(imagem.imagem);
       });
     }
   }

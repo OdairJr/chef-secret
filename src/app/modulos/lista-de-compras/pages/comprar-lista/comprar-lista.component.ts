@@ -6,6 +6,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { DetalheProdutoEventoCompra, EventoCompra } from '../../models/evento-compra.model';
 import { ImagensService } from 'src/app/core/services/imagens.service';
 import { Imagem } from 'src/app/models/imagem.model';
+import { forkJoin } from 'rxjs';
+import { HistoricoCompraService } from 'src/app/core/services/historico-compra.service';
+import { API_ENDPOINTS } from 'src/app/config/api.config';
 
 @Component({
   selector: 'app-comprar-lista',
@@ -19,12 +22,14 @@ export class ComprarListaComponent implements OnInit {
   formLista!: FormGroup;
   notaFiscalPreview: string | ArrayBuffer | null = null;
   imagemNotaFiscal?: Imagem;
+  historicosProdutos: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private listaDeComprasService: ListaDeComprasService,
     private fb: FormBuilder,
-    private imagensService: ImagensService
+    private imagensService: ImagensService,
+    private historicoCompraService: HistoricoCompraService
   ) {}
 
   ngOnInit(): void {
@@ -84,17 +89,57 @@ export class ComprarListaComponent implements OnInit {
       const formData = new FormData();
       formData.append('image_file', file);
       formData.append('nome_arquivo', file.name);
-      formData.append('id_tipo_imagem', '4'); // Tipo de imagem 4
-      formData.append('is_publico', '1'); // ou '0' se não for público
+      formData.append('id_tipo_imagem', '3');
+      formData.append('is_publico', '1');
 
       this.imagensService.criarImagem(formData).subscribe({
         next: (imagem) => {
           // this.imagemNotaFiscal = imagem;
-          // this.notaFiscalPreview = imagem.url;
+          this.notaFiscalPreview = `/backend/api/imagens/${imagem.imagem.id}/view`;
+
+          const imagemId = imagem.imagem.id;
+
+          this.imagensService.viewImagem(imagemId).subscribe({
+            next: (blob) => {
+              const reader = new FileReader();
+              reader.onload = () => {
+                this.notaFiscalPreview = reader.result;
+              };
+              reader.readAsDataURL(blob);
+            },
+            error: (err) => {
+              console.error('Erro ao carregar imagem autenticada:', err);
+            },
+          });
+
+          // Verifica se há idProdutosHistorico no retorno
+          if (imagem.resultadoProcessamentoCupom?.idProdutosHistorico?.length) {
+            const ids: number[] = imagem.resultadoProcessamentoCupom.idProdutosHistorico;
+            // Busca o histórico de cada produto
+            forkJoin(ids.map((id) => this.historicoCompraService.obterHistoricoCompraPorId(id))).subscribe({
+              next: (historicos) => {
+                this.historicosProdutos = historicos;
+                // Atualiza os valores do formulário com base no histórico retornado
+                historicos.forEach((historico) => {
+                  // Procura o índice do item na lista de compras pelo id_produto
+                  const index = this.listaDeCompras?.itens?.findIndex((item) => item.produto?.id === Number(historico.id_produto));
+                  if (index !== undefined && index !== -1) {
+                    // Atualiza os campos do formulário
+                    this.formLista.get(`preco_${index}`)?.setValue(Number(historico.preco_unitario));
+                    this.formLista.get(`desconto_${index}`)?.setValue(Number(historico.desconto));
+                  }
+                });
+                console.log('Históricos dos produtos:', historicos);
+              },
+              error: (err) => {
+                console.error('Erro ao buscar históricos dos produtos:', err);
+              },
+            });
+          }
         },
         error: (err) => {
           console.error('Erro ao fazer upload da nota fiscal:', err);
-        }
+        },
       });
     }
   }
@@ -105,7 +150,7 @@ export class ComprarListaComponent implements OnInit {
     this.listaDeCompras?.itens?.forEach((item, index) => {
       grupo[`selecionado_${index}`] = new FormControl(item.comprado);
       grupo[`preco_${index}`] = new FormControl(item.produto?.preco_padrao, [Validators.required, Validators.min(0)]);
-      grupo[`desconto_${index}`] = new FormControl(item.produto?.preco_padrao, [Validators.required, Validators.min(0)]);
+      grupo[`desconto_${index}`] = new FormControl(0, [Validators.required, Validators.min(0)]);
     });
 
     this.formLista = this.fb.group(grupo);

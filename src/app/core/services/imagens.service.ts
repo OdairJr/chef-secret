@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Imagem } from 'src/app/models/imagem.model';
+import { Imagem, ImagemApiResponse } from 'src/app/models/imagem.model';
 import { API_ENDPOINTS } from 'src/app/config/api.config';
 
 @Injectable({
@@ -22,8 +22,8 @@ export class ImagensService {
   }
 
   // Criar uma nova imagem
-  public criarImagem(imagem: FormData): Observable<Imagem> {
-    return this.http.post<Imagem>(API_ENDPOINTS.imagens(), imagem);
+  public criarImagem(imagem: FormData): Observable<ImagemApiResponse> {
+    return this.http.post<ImagemApiResponse>(API_ENDPOINTS.imagens(), imagem);
   }
 
   // Editar uma imagem existente
@@ -34,5 +34,9 @@ export class ImagensService {
   // Excluir uma imagem
   public excluirImagem(id: number): Observable<void> {
     return this.http.delete<void>(`${API_ENDPOINTS.imagens()}/${id}`);
+  }
+
+  public viewImagem(id: number): Observable<Blob> {
+    return this.http.get(`${API_ENDPOINTS.viewImagem(id)}`, { responseType: 'blob' });
   }
 }

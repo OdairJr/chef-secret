@@ -20,10 +20,12 @@ export const API_ENDPOINTS = {
   receitaById: (id: number) => `${API_URL}/api/receitas/${id}`,
   receitaTags: () => `${API_URL}/api/receita-tags`,
   imagens: () => `${API_URL}/api/imagens`,
+  viewImagem: (imagemId: number) => `${API_URL}/api/imagens/${imagemId}/view`,
   listaDeCompras: () => `${API_URL}/api/listas-compra`,
   registrarEvento: () => `${API_URL}/api/compras/registrar-evento`,
   usuarios: () => `${API_URL}/api/admin/usuarios`,
   grantAdmin: (id: number) => `${API_URL}/api/admin/usuarios/grant-admin/${id}`,
   revokeAdmin: (id: number) => `${API_URL}/api/admin/usuarios/revoke-admin/${id}`,
   produtoHistorico: (idUsuario: number) => `${API_URL}/api/produto-historicos?id_usuario=${idUsuario}`,
+  produtoHistoricoById: (idProduto: number) => `${API_URL}/api/produto-historicos/${idProduto}`,
 };

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HistoricoCompraService } from '../../services/historico-compra.service';
+import { HistoricoCompraService } from 'src/app/core/services/historico-compra.service';
 
 @Component({
   selector: 'app-lista-historico',
