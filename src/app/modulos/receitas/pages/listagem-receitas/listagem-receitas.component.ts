@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Receita } from 'src/app/models/receita.model';
 import { ReceitasService } from '../../services/receitas.service';
 import { Router } from '@angular/router';
+import { ImagensService } from 'src/app/core/services/imagens.service';
 
 @Component({
   selector: 'app-listagem-receitas',
   templateUrl: './listagem-receitas.component.html',
-  styleUrls: ['./listagem-receitas.component.scss'],
+  styleUrls: ['./listagem-receitas.component.scss']
 })
 export class ListagemReceitasComponent implements OnInit {
-  receitas: Receita[] = [];
+  receitas: any[] = [];
   erroCarregamento: string | null = null;
 
-  constructor(private receitasService: ReceitasService, private router: Router) {}
+  constructor(private receitasService: ReceitasService, private router: Router, private imagensService: ImagensService) {}
 
   ngOnInit(): void {
     this.carregarReceitas();
@@ -20,8 +21,18 @@ export class ListagemReceitasComponent implements OnInit {
 
   carregarReceitas(): void {
     this.receitasService.listarReceitas().subscribe({
-      next: (dados) => {
+      next: async (dados) => {
         this.receitas = dados;
+        for (const receita of this.receitas) {
+          if (receita.imagens && receita.imagens.length > 0) {
+            receita.imagemUrl = await this.viewImagem$(receita.imagens);
+          } else {
+            receita.imagemUrl = null;
+          }
+          receita.valorUnitarioVendaSugerido = this.calcularValorUnitarioVendaSugerido(receita);
+        }
+        this.erroCarregamento = null; // Limpa a mensagem de erro se a
+
       },
       error: (erro) => {
         console.error('Erro ao carregar receitas:', erro);
@@ -77,5 +88,25 @@ export class ListagemReceitasComponent implements OnInit {
       return custoPorUnidade;
     }
     return custoPorUnidade + (custoPorUnidade * lucro_esperado) / 100;
+  }
+
+  async viewImagem$(id?: any[]): Promise<string | null> {
+    if (!id) {
+      return null;
+    }
+    try {
+      const blob = await this.imagensService.viewImagem(id[0].id).toPromise();
+      return await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          resolve(reader.result as string);
+
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(blob!);
+      });
+    } catch {
+      return null;
+    }
   }
 }

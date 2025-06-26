@@ -28,6 +28,9 @@ export class FormReceitaComponent implements OnInit {
   @ViewChild('modal_detalhes_produto')
   modalDetalhesProduto!: ModalDetalhesProdutoComponent;
 
+  imagemId?: number;
+  imagemUrl?: string;
+
   constructor(
     private formBuilder: FormBuilder,
     private receitasService: ReceitasService,
@@ -90,13 +93,13 @@ export class FormReceitaComponent implements OnInit {
 
   public construirObjetoReceita(): Receita {
     return {
-        ...this.receitaOriginal, // Preserva os valores originais
-        ...this.formulario.value, // Sobrescreve apenas os campos editados
-        ingredientes: this.ingredientes,
-        tags: this.tagsSelecionadas,
-        imagens: this.imagens.map((img) => img.id), // Apenas os IDs das imagens
-      }
-    }
+      ...this.receitaOriginal, // Preserva os valores originais
+      ...this.formulario.value, // Sobrescreve apenas os campos editados
+      ingredientes: this.ingredientes,
+      tags: this.tagsSelecionadas,
+      imagens: [this.imagemId], // Apenas os IDs das imagens
+    };
+  }
 
   public salvarReceita(): void {
     if (this.formulario.valid) {
@@ -120,19 +123,24 @@ export class FormReceitaComponent implements OnInit {
       const file = input.files[0];
       const formData = new FormData();
       formData.append('image_file', file);
-      formData.append('nome_arquivo', file.name); // Nome do arquivo
-      formData.append('id_tipo_imagem', '2'); // Tipo da imagem fixo como 2
-      formData.append('is_publico', '1'); // Definido como público por padrão
+      formData.append('nome_arquivo', file.name);
+      formData.append('id_tipo_imagem', '2');
+      formData.append('is_publico', '1');
 
-      this.imagensService.criarImagem(formData).subscribe((imagem) => {
-        this.imagens.push(imagem.imagem);
+      this.imagensService.criarImagem(formData).subscribe((res) => {
+        this.imagemId = res.imagem.id;
+        this.carregarImagemUrl(this.imagemId);
       });
     }
   }
 
-  public onRemoverImagem(id: number): void {
-    this.imagensService.excluirImagem(id).subscribe(() => {
-      this.imagens = this.imagens.filter((img) => img.id !== id);
+  private carregarImagemUrl(id: number): void {
+    this.imagensService.viewImagem(id).subscribe((blob) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagemUrl = reader.result as string;
+      };
+      reader.readAsDataURL(blob);
     });
   }
 

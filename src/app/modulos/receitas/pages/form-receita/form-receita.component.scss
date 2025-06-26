@@ -1,0 +1,35 @@
+.input-upload {
+  display: inline-block;
+  width: 220px;
+  height: 220px;
+  border: 2px dashed #ccc;
+  border-radius: 0.5rem;
+  background-color: #fdfdfd;
+  color: #444;
+  text-align: center;
+  padding: 2rem 1rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden; /* NOVO! */
+
+  &:hover {
+    border-color: #985e5b;
+    background-color: #fef6f6;
+  }
+
+  i {
+    color: #985e5b;
+  }
+
+  .preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Corta e preenche todo o quadrado */
+    object-position: center;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 6px #0001;
+    display: block;
+    /* Remove qualquer margem/espacamento extra */
+    margin: 0 auto;
+  }
+}
