@@ -17,4 +17,8 @@ export class HistoricoCompraService {
   obterHistoricoCompraPorId(idProduto: number): Observable<ProutoHistorico> {
     return this.http.get<ProutoHistorico>(API_ENDPOINTS.produtoHistoricoById(idProduto));
   }
+
+  opterPrecoPadraoPorId(idProduto: number): Observable<number> {
+    return this.http.get<number>(API_ENDPOINTS.produtoPrecoPadrao(idProduto));
+  }
 }

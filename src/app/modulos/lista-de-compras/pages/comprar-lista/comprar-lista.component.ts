@@ -145,16 +145,37 @@ export class ComprarListaComponent implements OnInit {
   }
 
   private inicializarFormulario(): void {
-    const grupo: { [key: string]: FormControl } = {};
+  const grupo: { [key: string]: FormControl } = {};
 
-    this.listaDeCompras?.itens?.forEach((item, index) => {
-      grupo[`selecionado_${index}`] = new FormControl(item.comprado);
-      grupo[`preco_${index}`] = new FormControl(item.produto?.preco_padrao, [Validators.required, Validators.min(0)]);
-      grupo[`desconto_${index}`] = new FormControl(0, [Validators.required, Validators.min(0)]);
+  // Inicializa todos os campos necessários
+  this.listaDeCompras?.itens?.forEach((item, index) => {
+    grupo[`selecionado_${index}`] = new FormControl(item.comprado);
+    grupo[`desconto_${index}`] = new FormControl(0, [Validators.required, Validators.min(0)]);
+    grupo[`preco_${index}`] = new FormControl(0, [Validators.required, Validators.min(0)]); // já adiciona o campo preco
+  });
+
+  this.formLista = this.fb.group(grupo);
+
+  // Busca o preço padrão de cada produto via API e atualiza o form
+  if (this.listaDeCompras?.itens?.length) {
+    const requisicoes = this.listaDeCompras.itens.map((item, index) =>
+      this.historicoCompraService
+        .opterPrecoPadraoPorId(item.produto?.id!)
+        .toPromise()
+        .then((res: any) => ({
+          index,
+          precoPadrao: Number(res?.preco_unitario) || 0,
+        }))
+        .catch(() => ({ index, precoPadrao: 0 }))
+    );
+
+    Promise.all(requisicoes).then((results) => {
+      results.forEach(({ index, precoPadrao }) => {
+        this.formLista.get(`preco_${index}`)?.setValue(precoPadrao);
+      });
     });
-
-    this.formLista = this.fb.group(grupo);
   }
+}
 
   private carregarLista(id: string): void {
     this.carregando = true;

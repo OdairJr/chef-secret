@@ -28,4 +28,5 @@ export const API_ENDPOINTS = {
   revokeAdmin: (id: number) => `${API_URL}/api/admin/usuarios/revoke-admin/${id}`,
   produtoHistorico: (idUsuario: number) => `${API_URL}/api/produto-historicos?id_usuario=${idUsuario}`,
   produtoHistoricoById: (idProduto: number) => `${API_URL}/api/produto-historicos/${idProduto}`,
+  produtoPrecoPadrao: (idProduto: number) => `${API_URL}/api/preco/${idProduto}`,
 };
