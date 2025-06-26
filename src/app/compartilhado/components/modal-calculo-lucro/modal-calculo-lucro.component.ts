@@ -29,7 +29,11 @@ export class ModalCalculoLucroComponent {
   public get calcularCustoDosMateriais(): number {
     return (
       this.receita?.ingredientes.reduce((total, ingrediente) => {
-        return total + Number(ingrediente.quantidade) * (ingrediente.produto?.preco_padrao ?? 0);
+        const custoDoIngrediente =
+        (Number(ingrediente.quantidade) / (ingrediente.produto?.quantidade || 1)) *
+        (ingrediente.produto?.preco_padrao ?? 0);
+
+      return total + custoDoIngrediente;
       }, 0) ?? 0
     );
   }
