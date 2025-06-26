@@ -23,6 +23,7 @@ export class FormListaDeComprasComponent implements OnInit {
   notasFiscais: File[] = [];
   itens: ItemDaLista[] = [];
   public ingredienteSendoAdicionado?: Partial<Ingrediente>;
+  carregando = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -73,12 +74,14 @@ export class FormListaDeComprasComponent implements OnInit {
   }
 
   private carregarLista(id: string): void {
+    this.carregando = true;
     this.listaDeComprasService.buscarListaPorId(id).subscribe((lista) => {
       if (lista) {
         this.formularioCompras.patchValue({ nome_lista: lista.nome_lista, descricao: lista.descricao });
         this.itens = lista.itens || [];
 
         this.carregarInformacoesDosProdutos(lista.itens!);
+        this.carregando = false;
       }
     });
   }
@@ -89,6 +92,7 @@ export class FormListaDeComprasComponent implements OnInit {
       return;
     }
 
+    this.carregando = true;
     const lista = {
       nome_lista: this.formularioCompras.value.nome_lista,
       descricao: this.formularioCompras.value.descricao,
@@ -100,10 +104,13 @@ export class FormListaDeComprasComponent implements OnInit {
 
     if (this.listaId) {
       this.listaDeComprasService.atualizarLista(this.listaId, lista).subscribe(() => {
+        this.carregando = false;
         this.router.navigate(['/lista-de-compras']);
       });
     } else {
       this.listaDeComprasService.criarLista(lista).subscribe(() => {
+        this.carregando = false;
+
         this.router.navigate(['/lista-de-compras']);
       });
     }

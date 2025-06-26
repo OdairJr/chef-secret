@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register-page.component.scss'],
 })
 export class RegisterPageComponent {
+  carregando = false;
   constructor(private authService: AuthService, private router: Router) {}
 
   onRegisterSubmit(userData: {
@@ -17,6 +18,7 @@ export class RegisterPageComponent {
     password: string;
     password_confirmation: string;
   }) {
+    this.carregando = true;
     const usuario = {
       name: userData.name,
       email: userData.email,
@@ -32,6 +34,7 @@ export class RegisterPageComponent {
         } else {
           console.log('Email já registrado.');
         }
+        this.carregando = false;
       },
       error: (err) => {
         if (err.status === 422 && err.error?.errors?.email) {
@@ -39,6 +42,7 @@ export class RegisterPageComponent {
         } else {
           console.error('Erro ao registrar:', err);
         }
+        this.carregando = false;
       },
     });
   }

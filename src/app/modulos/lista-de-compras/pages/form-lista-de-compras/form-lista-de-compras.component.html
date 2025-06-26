@@ -81,3 +81,5 @@
 <app-modal-detalhes-produto #modal_detalhes_produto (confirmarDetalhes)="onConfirmarDetalhesIngrediente($event)"></app-modal-detalhes-produto>
 
 <app-modal-selecao-receita #modal_selecao_receita (receitaSelecionada)="onSelecionarReceita($event)"></app-modal-selecao-receita>
+
+<app-loading-overlay [show]="carregando"></app-loading-overlay>

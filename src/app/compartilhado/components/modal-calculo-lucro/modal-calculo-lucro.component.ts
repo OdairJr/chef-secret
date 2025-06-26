@@ -20,6 +20,10 @@ export class ModalCalculoLucroComponent {
     this.cdr.markForCheck();
   }
 
+  public atribuirReceita(receita: Receita) {
+    this.receita = receita;
+  }
+
   public fechar() {
     this.mostrarModal = false;
     this.fecharModal.emit();

@@ -7,11 +7,12 @@ import { ImagensService } from 'src/app/core/services/imagens.service';
 @Component({
   selector: 'app-listagem-receitas',
   templateUrl: './listagem-receitas.component.html',
-  styleUrls: ['./listagem-receitas.component.scss']
+  styleUrls: ['./listagem-receitas.component.scss'],
 })
 export class ListagemReceitasComponent implements OnInit {
   receitas: any[] = [];
   erroCarregamento: string | null = null;
+  carregando = false;
 
   constructor(private receitasService: ReceitasService, private router: Router, private imagensService: ImagensService) {}
 
@@ -20,6 +21,7 @@ export class ListagemReceitasComponent implements OnInit {
   }
 
   carregarReceitas(): void {
+    this.carregando = true;
     this.receitasService.listarReceitas().subscribe({
       next: async (dados) => {
         this.receitas = dados;
@@ -32,9 +34,10 @@ export class ListagemReceitasComponent implements OnInit {
           receita.valorUnitarioVendaSugerido = this.calcularValorUnitarioVendaSugerido(receita);
         }
         this.erroCarregamento = null; // Limpa a mensagem de erro se a
-
+        this.carregando = false;
       },
       error: (erro) => {
+        this.carregando = false;
         console.error('Erro ao carregar receitas:', erro);
         this.erroCarregamento = 'Não foi possível carregar as receitas. Tente novamente mais tarde.';
       },
@@ -56,11 +59,16 @@ export class ListagemReceitasComponent implements OnInit {
       return;
     }
 
+    this.carregando = true;
+
     this.receitasService.excluirReceita(id).subscribe({
       next: () => {
         this.carregarReceitas();
+        this.carregando = false;
       },
       error: (erro) => {
+        this.carregando = false;
+
         console.error('Erro ao deletar receita:', erro);
         this.erroCarregamento = 'Não foi possível deletar a receita. Tente novamente mais tarde.';
       },
@@ -94,13 +102,16 @@ export class ListagemReceitasComponent implements OnInit {
     if (!id) {
       return null;
     }
+    this.carregando = true;
+
     try {
       const blob = await this.imagensService.viewImagem(id[0].id).toPromise();
       return await new Promise<string>((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = () => {
-          resolve(reader.result as string);
+          this.carregando = false;
 
+          resolve(reader.result as string);
         };
         reader.onerror = reject;
         reader.readAsDataURL(blob!);

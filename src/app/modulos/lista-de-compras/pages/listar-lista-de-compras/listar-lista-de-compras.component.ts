@@ -10,6 +10,7 @@ import { ListaDeComprasService } from '../../services/lista-de-compras.service';
 })
 export class ListarListaDeComprasComponent implements OnInit {
   listas: ListaDeCompras[] = [];
+  carregando = false;
 
   constructor(
     private router: Router,
@@ -21,12 +22,15 @@ export class ListarListaDeComprasComponent implements OnInit {
   }
 
   carregarListas(): void {
+    this.carregando = true;
     this.listaDeComprasService.listarListas().subscribe({
       next: (listas) => {
         this.listas = listas;
+        this.carregando = false;
       },
       error: (error) => {
         console.error('Erro ao carregar listas:', error);
+        this.carregando = false;
       },
     });
   }
@@ -36,11 +40,14 @@ export class ListarListaDeComprasComponent implements OnInit {
   }
 
   excluirLista(id: string): void {
+    this.carregando = true;
     this.listaDeComprasService.excluirLista(id).subscribe({
       next: () => {
+        this.carregando = false;
         this.listas = this.listas.filter((lista) => lista.id !== id);
       },
       error: (error) => {
+        this.carregando = false;
         console.error('Erro ao excluir lista:', error);
       },
     });

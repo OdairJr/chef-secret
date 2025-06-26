@@ -83,6 +83,7 @@ export class ComprarListaComponent implements OnInit {
   }
 
   onFileChange(event: Event): void {
+    this.carregando = true;
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const file = input.files[0];
@@ -94,6 +95,12 @@ export class ComprarListaComponent implements OnInit {
 
       this.imagensService.criarImagem(formData).subscribe({
         next: (imagem) => {
+          if (!imagem.resultadoProcessamentoCupom.sucesso) {
+            alert('Erro ao processar a nota fiscal. Verifique o arquivo enviado.');
+
+            this.carregando = false;
+            return;
+          }
           // this.imagemNotaFiscal = imagem;
           this.notaFiscalPreview = `/backend/api/imagens/${imagem.imagem.id}/view`;
 
@@ -130,15 +137,19 @@ export class ComprarListaComponent implements OnInit {
                   }
                 });
                 console.log('Históricos dos produtos:', historicos);
+
+                this.carregando = false;
               },
               error: (err) => {
                 console.error('Erro ao buscar históricos dos produtos:', err);
+                this.carregando = false;
               },
             });
           }
         },
         error: (err) => {
           console.error('Erro ao fazer upload da nota fiscal:', err);
+          this.carregando = false;
         },
       });
     }
@@ -172,6 +183,7 @@ export class ComprarListaComponent implements OnInit {
     Promise.all(requisicoes).then((results) => {
       results.forEach(({ index, precoPadrao }) => {
         this.formLista.get(`preco_${index}`)?.setValue(precoPadrao);
+        this.carregando = false;
       });
     });
   }
@@ -182,7 +194,6 @@ export class ComprarListaComponent implements OnInit {
     this.listaDeComprasService.buscarListaPorId(id).subscribe({
       next: (lista) => {
         this.listaDeCompras = lista;
-        this.carregando = false;
         this.inicializarFormulario();
       },
       error: (err) => {

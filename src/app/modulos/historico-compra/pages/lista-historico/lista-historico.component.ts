@@ -7,19 +7,25 @@ import { HistoricoCompraService } from 'src/app/core/services/historico-compra.s
   styleUrls: ['./lista-historico.component.css'],
 })
 export class ListaHistoricoComponent implements OnInit {
+  carregando = false;
   public historico: any;
 
   constructor(private historicoCompraService: HistoricoCompraService) {}
 
   ngOnInit(): void {
+    this.carregando = true;
+
     this.historicoCompraService
       .listarHistoricoCompras(this.getUserId()) // Substitua 1 pelo ID do usuário real
       .subscribe({
         next: (data) => {
+          this.carregando = false;
+
           this.historico = data;
         },
         error: (error) => {
           console.error('Erro ao carregar histórico de compras:', error);
+          this.carregando = false;
         },
       });
   }

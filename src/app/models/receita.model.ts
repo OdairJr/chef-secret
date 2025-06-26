@@ -17,6 +17,7 @@ export interface Receita {
   ingredientes: Ingrediente[];
   custos_adicionais?: number;
   lucro_esperado?: number;
+  valor_recomendado?: number;
 }
 
 export interface ReceitaTag {

@@ -7,10 +7,27 @@ import { ModalSelecaoReceitaComponent } from './components/modal-selecao-receita
 import { ModalDetalhesProdutoComponent } from './components/modal-detalhes-produto/modal-detalhes-produto.component';
 import { ModalCalculoLucroComponent } from './components/modal-calculo-lucro/modal-calculo-lucro.component';
 import { UnidadeMedidaDropdownComponent } from './components/unidade-medida-dropdown/unidade-medida-dropdown.component';
+import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 
 @NgModule({
-  declarations: [ModalSelecaoMaterialComponent, ModalComponent, ModalSelecaoReceitaComponent, ModalDetalhesProdutoComponent, ModalCalculoLucroComponent, UnidadeMedidaDropdownComponent],
+  declarations: [
+    ModalSelecaoMaterialComponent,
+    ModalComponent,
+    ModalSelecaoReceitaComponent,
+    ModalDetalhesProdutoComponent,
+    ModalCalculoLucroComponent,
+    UnidadeMedidaDropdownComponent,
+    LoadingOverlayComponent,
+  ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  exports: [ModalSelecaoMaterialComponent, ModalComponent, ModalSelecaoReceitaComponent, ModalDetalhesProdutoComponent, ModalCalculoLucroComponent, UnidadeMedidaDropdownComponent],
+  exports: [
+    ModalSelecaoMaterialComponent,
+    ModalComponent,
+    ModalSelecaoReceitaComponent,
+    ModalDetalhesProdutoComponent,
+    ModalCalculoLucroComponent,
+    UnidadeMedidaDropdownComponent,
+    LoadingOverlayComponent,
+  ],
 })
 export class CompartilhadoModule {}

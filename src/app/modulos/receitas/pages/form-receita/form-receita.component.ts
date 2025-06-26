@@ -10,6 +10,7 @@ import { Material } from 'src/app/models/material.model';
 import { ModalDetalhesProdutoComponent, DetalhesProduto } from '../../../../compartilhado/components/modal-detalhes-produto/modal-detalhes-produto.component';
 import { forkJoin, map } from 'rxjs';
 import { ProdutosService } from 'src/app/modulos/produtos/services/produtos.service';
+import { ModalCalculoLucroComponent } from 'src/app/compartilhado/components/modal-calculo-lucro/modal-calculo-lucro.component';
 
 @Component({
   selector: 'app-form-receita',
@@ -27,6 +28,9 @@ export class FormReceitaComponent implements OnInit {
 
   @ViewChild('modal_detalhes_produto')
   modalDetalhesProduto!: ModalDetalhesProdutoComponent;
+
+  @ViewChild('model_calculo_lucro')
+  modalCalculoLucro!: ModalCalculoLucroComponent;
 
   imagemId?: number;
   imagemUrl?: string;
@@ -97,13 +101,16 @@ export class FormReceitaComponent implements OnInit {
       ...this.formulario.value, // Sobrescreve apenas os campos editados
       ingredientes: this.ingredientes,
       tags: this.tagsSelecionadas,
-      imagens: [this.imagemId], // Apenas os IDs das imagens
+      imagens: this.imagemId ? [this.imagemId] : [], // Apenas os IDs das imagens se existir
     };
   }
 
   public salvarReceita(): void {
     if (this.formulario.valid) {
       const receitaAtualizada = this.construirObjetoReceita();
+
+      this.modalCalculoLucro.atribuirReceita(receitaAtualizada);
+      receitaAtualizada.valor_recomendado = this.modalCalculoLucro.calcularCustoPorUnidade;
 
       if (this.receitaId) {
         this.receitasService.editarReceita(receitaAtualizada).subscribe(() => {
